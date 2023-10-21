@@ -1,0 +1,19 @@
+<header class='header'>
+    <a href="#">Home</a>
+    {% if request.user.is_authenticated %}
+        <p>Hey {{request.user.username}}</p>
+        <p><a href="{% url "logout" %}">Logout</a></p>
+    {% else %}
+        <a href="{% url "login" %}">Login</a>
+    {% endif %}
+    
+    <nav class="nav">
+        <ul class="nav-list">
+            <li class="nav-details"><a href="{% url "editprofile" %}">Setting</a></li>
+            <li class="nav-details"><a href="#">message</a></li>
+            <li class="nav-details"><a href="#">Logout</a></li>
+            <li class="nav-details"><a href="{% url 'profile' %}">profile</a></li>
+            <li class="nav-details"><a href="{% url "notifications" %}">Notification</a></li>
+        </ul>
+    </nav>
+</header>

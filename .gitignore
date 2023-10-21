@@ -1,0 +1,10 @@
+env
+.vscode
+
+*.log
+__pycache__/
+*.pyc
+
+.idea
+*.pyo
+local_settings.py

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+
+    
+ 
+</head>
+<body>
+    {% comment %} {% include "navbar.html" %} {% endcomment %}
+    {% block content %}
+
+    {% endblock content %}
+</body>
+</html>

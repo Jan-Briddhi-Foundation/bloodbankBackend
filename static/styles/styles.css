@@ -1,0 +1,44 @@
+.header,
+.nav-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-list {
+  gap: 2.4rem;
+  list-style-type: none;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-template--3 {
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 1.4rem;
+}
+
+.grid-template--5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.grid-template--6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.profile_pic {
+  width: 4rem;
+  height: 4rem;
+  background-color: #a82a2a;
+}
+
+.profile_pic img {
+  width: 100%;
+}
+
+.grid img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
