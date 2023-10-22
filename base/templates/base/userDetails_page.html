@@ -1,0 +1,10 @@
+{% extends "main.html" %}
+    {% block content %}
+        <form action="" method="post">
+            {% csrf_token %}
+
+            {{form}}
+            <input type="button" value="Create Account">
+        </form>
+
+    {% endblock content %}

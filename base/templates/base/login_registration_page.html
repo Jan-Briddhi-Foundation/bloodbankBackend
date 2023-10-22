@@ -1,12 +1,68 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DONE</title>
-</head>
-<body>
-    <p>LOGIN_REGISTRATTION PAGE</p>
-</body>
-</html>
+
+
+{% extends "main.html" %}
+{% block content %}
+
+    <div class="home">
+        <form action="" method="post">
+            {% csrf_token %}
+            {% if page == "login" %}
+                <h1>Login</h1>
+                  <label for="email">Email:</label>
+                    <input id="email" name="email" class="email" type="email" />
+
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" class="password" id="password" />
+                    <input type="submit" value="Login" />
+
+                    <p>Don't have an account <a href=" {% url "registration" %}">Register</a></p>
+                    
+                
+                {% comment %} {% for message in messages %}
+                    {{message}}
+                {% endfor %} {% endcomment %}
+
+
+            {% else %} 
+                <h1>Registration</h1>
+                {{form.as_p}}
+
+                {% comment %} {{form.errors}} {% endcomment %}
+                
+                <input type="submit" value="Next">
+                <p>Already have an account <a href=" {% url "login" %}">Login</a></p>
+
+            {% endif %}
+            
+        </form>
+
+    </div>
+{% endblock content %}
+
+
+
+
+{% comment %} 
+{% extends "main.html" %}
+
+    {% block content %}
+        <form action="" method="post">
+
+            {% if page == 'login' %}
+
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="button" value="Login">
+            {% else %}
+
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="button" value="Register">
+
+            {% endif %}
+
+        </form>
+
+    {% endblock content %}
+ {% endcomment %}
