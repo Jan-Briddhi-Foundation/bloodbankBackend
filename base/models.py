@@ -37,8 +37,8 @@ class Profile(models.Model):
     city = models.CharField(max_length=250, null=True)
     address = models.CharField(max_length=250, null=True)
 
-    # profile_pic = models.ImageField(
-    #     default="avatar.svg", null=True, blank=True)
+    profile_pic = models.ImageField(
+        default="avatar.svg", null=True, blank=True)
 
     profile_type = models.CharField(max_length=255, null=True, choices=ACCOUNT)
     date_created = models.DateTimeField(auto_now_add=True, null=True)

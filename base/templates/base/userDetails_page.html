@@ -1,10 +1,12 @@
 {% extends "main.html" %}
     {% block content %}
+
+    <p><a href="{% url "logout" %}">{{request.user}}</a></p> 
         <form action="" method="post">
             {% csrf_token %}
 
-            {{form}}
-            <input type="button" value="Create Account">
+            {{form.as_p}}
+            <input type="submit" value="Create Account">
         </form>
 
     {% endblock content %}
