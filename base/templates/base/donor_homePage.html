@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+{% block content %}
+<p>{{request.user}} <a href="{% url "logout" %}">Logout</a></p>
+     
+
+
+        <div class="home">
+            <h1>Donate blood</h1>
+            <h4>Every blood saves upto 3 </h4>
+
+            <ul>
+                {% comment %} {% for blood_request in blood_requests %}
+                <a href=" {% url "donation_form" %}">
+                    <li class="grid grid-template--5" >
+                        <p>blood type: {{blood_request.profile.bloodgroup}}</p>
+                        <p>Before Date:{{blood_request.date_needed}} </p>
+                        <p>City: {{blood_request.profile.city}}</p>
+                        <p>Share: </p>
+                        <p>Checkbox: </p>
+                        
+                    </li>
+                    </a>
+                {% endfor %} {% endcomment %}
+
+                <p>DONOR WOrking PAGE</p>
+
+               
+            </ul>
+        </div>
+{% endblock content %}
