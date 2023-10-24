@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,7 +39,6 @@ INSTALLED_APPS = [
 
     'base.apps.BaseConfig',
 
-    # 'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -155,46 +153,6 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # SITE_ID = 1
-
-
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'APP': {
-            'client_id': '970642135249-2g7no54pd7mh95hosasvsmpucpfvb8im.apps.googleusercontent.com',
-            'secret': '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',
-            'key': ''
-        },
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        'EMAIL_AUTHENTICATION': True
-    },
-    'facebook': {
-        'APP': {
-            'client_id': 'YOUR_FACEBOOK_APP_ID',
-            'secret': 'YOUR_FACEBOOK_APP_SECRET'
-        },
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        'EMAIL_AUTHENTICATION': True
-    },
-    'apple': {
-        'APP': {
-            'client_id': 'YOUR_APPLE_CLIENT_ID',
-            'secret': 'YOUR_APPLE_CLIENT_SECRET'
-        },
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        'EMAIL_AUTHENTICATION': True
-    }
-}
-
-SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
 
 
 SOCIALACCOUNT_PROVIDERS = {
