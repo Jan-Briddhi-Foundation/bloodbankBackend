@@ -1,2 +1,3 @@
 Django==3.6 
 Pillow==10.1.0
+django-allauth==0.57.0

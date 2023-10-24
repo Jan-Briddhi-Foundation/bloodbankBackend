@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-!fx$$elcvo-thrv&mb-m63*e6q)2rl(a9fysscq&@(el$r!6!g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -39,6 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'base.apps.BaseConfig',
+
+    # 'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.apple',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
 ]
 
 AUTH_USER_MODEL = 'base.User'
@@ -52,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'bloodbank.urls'
@@ -118,6 +128,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+AUTHENTICATION_BACKENDS = [
+
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -137,3 +153,89 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# SITE_ID = 1
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '970642135249-2g7no54pd7mh95hosasvsmpucpfvb8im.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        'EMAIL_AUTHENTICATION': True
+    },
+    'facebook': {
+        'APP': {
+            'client_id': 'YOUR_FACEBOOK_APP_ID',
+            'secret': 'YOUR_FACEBOOK_APP_SECRET'
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        'EMAIL_AUTHENTICATION': True
+    },
+    'apple': {
+        'APP': {
+            'client_id': 'YOUR_APPLE_CLIENT_ID',
+            'secret': 'YOUR_APPLE_CLIENT_SECRET'
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        'EMAIL_AUTHENTICATION': True
+    }
+}
+
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '970642135249-2g7no54pd7mh95hosasvsmpucpfvb8im.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        'EMAIL_AUTHENTICATION': True
+    },
+    'facebook': {
+        'APP': {
+            'client_id': 'YOUR_FACEBOOK_APP_ID',
+            'secret': 'YOUR_FACEBOOK_APP_SECRET'
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        'EMAIL_AUTHENTICATION': True
+    },
+    'apple': {
+        'APP': {
+            'client_id': 'YOUR_APPLE_CLIENT_ID',
+            'secret': 'YOUR_APPLE_CLIENT_SECRET'
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        'EMAIL_AUTHENTICATION': True
+    }
+}
+
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT: True
+
+
+# 970642135249-2g7no54pd7mh95hosasvsmpucpfvb8im.apps.googleusercontent.com
+# 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

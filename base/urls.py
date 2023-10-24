@@ -13,6 +13,4 @@ urlpatterns = [
     path('donor_page/', DonorHome, name='donor_home'),
 
     path('Personal details/', UserDetails, name='user_details'),
-
-
 ]
