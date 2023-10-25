@@ -1,3 +1,5 @@
+from allauth.account.views import SignupView
+from .forms import CustomSignupForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -70,6 +72,23 @@ def loginPage(request):
 def logoutPage(request):
     logout(request)
     return redirect('login')
+
+
+class CustomRegistrationView(SignupView):
+    form_class = CustomSignupForm
+
+    def form_valid(self, form):
+        user = self.form.save(self.request)
+        role = self.form.cleaned_data['role']
+
+        # Customize the logic here based on the role (patient or donor)
+
+        if role == 'patient':
+            # Redirect to the patient-specific page
+            return redirect('patient_dashboard')
+        else:
+            # Redirect to the donor-specific page
+            return redirect('donor_dashboard')
 
 
 def UserDetails(request):

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from .views import home, loginPage, logoutPage, registrationPage, UserDetails, PatientHome, DonorHome
+from .views import home, loginPage, logoutPage, registrationPage, UserDetails, PatientHome, DonorHome, CustomRegistrationView
 
 urlpatterns = [
     # path('', home, name='home'),

@@ -1,9 +1,5 @@
-
-
-
 {% extends "main.html" %}
 {% block content %}
-
     <div class="home">
         <form action="" method="post">
             {% csrf_token %}
@@ -36,6 +32,14 @@
             {% endif %}
             
         </form>
+
+        <p>OR</p>
+
+        {% comment %} DOnt run like you are being chased, run like you want to cross the finishing line first {% endcomment %}
+{% load socialaccount %}
+
+{% comment %} <a href="{% provider_login_url "goggle" %}">Google</a> {% endcomment %}
+{% comment %} <a href="{% provider_login_url "twitter" %}">Twitter</a> {% endcomment %}
 
     </div>
 {% endblock content %}
