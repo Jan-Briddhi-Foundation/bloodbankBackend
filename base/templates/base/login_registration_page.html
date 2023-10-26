@@ -36,10 +36,18 @@
         <p>OR</p>
 
         {% comment %} DOnt run like you are being chased, run like you want to cross the finishing line first {% endcomment %}
-{% load socialaccount %}
+        {% comment %} {% providers_media_js %} {% endcomment %}
 
-{% comment %} <a href="{% provider_login_url "goggle" %}">Google</a> {% endcomment %}
-{% comment %} <a href="{% provider_login_url "twitter" %}">Twitter</a> {% endcomment %}
+        {% load socialaccount %}
+
+        
+        <a href="{% provider_login_url 'google' %}">Google</a>
+
+
+         {% comment %} <p> <a href="{% provider_login_url 'google' %}">Login with Google</a></p>
+         <p> <a href="{% provider_login_url 'google' process='connect' %}">Login with Google</a></p> {% endcomment %}
+         <p> <a href="{% provider_login_url 'apple' %}">Apple</a></p>
+         <p> <a href="{% provider_login_url 'facebook' %}">Facebook</a></p>
 
     </div>
 {% endblock content %}
