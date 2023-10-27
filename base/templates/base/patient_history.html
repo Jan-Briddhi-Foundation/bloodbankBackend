@@ -1,0 +1,19 @@
+
+{% extends "main.html" %}
+    {% block content %}
+    <h1>Request history</h1>
+    <h4>Overview of all requests you submitted</h4>
+
+    <ul>
+    {% for donation in history %}
+        <li class="grid grid-template--5" >
+            <p>blood type: {{donation.profile.bloodgroup}}</p>
+            <p>Location: {{donation.profile.city}}</p>
+            <p>Before Date:{{donation.date_needed}} </p>
+            <p>Share: </p>
+            <a href="{% url 'delete_request' donation.id %}">Delete</a>
+        </li>
+    {% endfor %}
+
+   </ul>
+    {% endblock content %}

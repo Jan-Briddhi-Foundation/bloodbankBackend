@@ -1,0 +1,23 @@
+
+{% extends "main.html" %}
+    {% block content %}
+    <h1>Blood request</h1>
+    <h4>Let people around you help you</h4>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <p>Patient name: {{user_profile.name}}</p>
+        <p>Blood Group: {{user_profile.bloodgroup}}</p>
+        <p>Phone: {{user_profile.phone}}</p>
+        <p>Address: {{user_profile.address}}</p>
+        <p>Location: {{user_profile.city}}</p>
+
+        {{form.as_p}}
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+
+    {% endblock content %}

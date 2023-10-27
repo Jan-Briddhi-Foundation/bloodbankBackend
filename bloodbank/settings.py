@@ -190,7 +190,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
 SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT: True
 
-LOGIN_REDIRECT_URL = 'patient_home'
+LOGIN_REDIRECT_URL = 'home'
 
 
 # 970642135249-2g7no54pd7mh95hosasvsmpucpfvb8im.apps.googleusercontent.com

@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+{% block content %}
+       <h1>Donation Creteria</h1>
+       <h4>Be sure to be eligible to donate our blood</h4>
+
+       <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Check">
+       </form>
+
+{% endblock content %}

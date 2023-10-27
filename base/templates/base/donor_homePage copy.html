@@ -1,6 +1,5 @@
 {% extends "main.html" %}
 {% block content %}
-<p>{{request.user}} <a href="{% url "logout" %}">Logout</a></p>
      
 
 
@@ -17,10 +16,11 @@
                         <p>City: {{blood_request.profile.city}}</p>
                         <p>Share: </p>
                         <p>Checkbox: </p>
-                        
+                        {% comment %} <a href="{% url "delete_request" blood_request.id %}">Delete</a> {% endcomment %}
                     </li>
                     </a>
-                {% endfor %} 
+                {% endfor %}
+
                
             </ul>
         </div>
