@@ -7,15 +7,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
-
 from .models import Profile, User
+from .decorators import unauthenticated_user
 from .forms import CreateUserForm, UserDetailsForm
 # Create your views here.
 
 
+@unauthenticated_user
 def registrationPage(request):
     form = CreateUserForm()
-
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
@@ -24,16 +24,31 @@ def registrationPage(request):
             instance.save()
 
             user = form.instance
-
             Profile.objects.create(user=user)
-            login(request, user)
-
+            # login(request, user)
             return redirect('user_details')
-
     context = {"form": form}
     return render(request, 'base/login_registration_page.html', context)
 
 
+# @unauthenticated_user
+# def registrationPage(request):
+#     form = CreateUserForm()
+
+#     if request.method == 'POST':
+#         form = CreateUserForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             user.username = form.cleaned_data.get('email')
+#             Profile.objects.create(user=user)
+#             login(request, user)
+#             return redirect('user_details')
+
+#     context = {"form": form}
+#     return render(request, 'base/login_registration_page.html', context)
+
+
+@unauthenticated_user
 def loginPage(request):
     page = 'login'
 
@@ -54,14 +69,13 @@ def loginPage(request):
             messages.info(request, "Login successful")
 
             profile_type = request.user.profile.profile_type
-            print(profile_type)
 
             if profile_type == 'donor':
                 return redirect('donor_home')
             elif profile_type == 'patient':
-                return redirect('home')
+                return redirect('patient_home')
             else:
-                return redirect('donor_home')
+                return redirect('user_details')
         else:
             messages.error(request, "Email or Password is incorrect")
 
@@ -74,23 +88,7 @@ def logoutPage(request):
     return redirect('login')
 
 
-class CustomRegistrationView(SignupView):
-    form_class = CustomSignupForm
-
-    def form_valid(self, form):
-        user = self.form.save(self.request)
-        role = self.form.cleaned_data['role']
-
-        # Customize the logic here based on the role (patient or donor)
-
-        if role == 'patient':
-            # Redirect to the patient-specific page
-            return redirect('patient_dashboard')
-        else:
-            # Redirect to the donor-specific page
-            return redirect('donor_dashboard')
-
-
+@login_required(login_url='login')
 def UserDetails(request):
     form = UserDetailsForm()
     print(form)
@@ -108,13 +106,23 @@ def UserDetails(request):
 
             user_profile.save()
 
-            return redirect('home')
+            profile_type = request.user.profile.profile_type
+
+            if profile_type == 'donor':
+                return redirect('donor_home')
+            elif profile_type == 'patient':
+                return redirect('patient_home')
+            else:
+                return redirect('user_details')
+
+            # return redirect('home')
 
     context = {"form": form}
 
     return render(request, 'base/userDetails_page.html', context)
 
 
+@login_required(login_url='login')
 def home(request):
     context = {}
     return render(request, 'base/home.html', context)

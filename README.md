@@ -33,28 +33,28 @@ Before getting started, make sure you have the following dependencies installed
 
 ## Installation
 1. Clone this repository to your local machine:
-   * ```git clone https://github.com/Jan-Briddhi-Foundation/bloodbankBackend.git```
+   * `git clone https://github.com/Jan-Briddhi-Foundation/bloodbankBackend.git`
 
 2. Navigate to the project directory:
-   * ``cd blood-donation-backend``
+   * `cd blood-donation-backend`
 
 3. Create and activate a virtual environment (optional but recommended):
-   * ``python -m venv venv``
+   * `python -m venv venv`
    * `# For MacOs: source venv/bin/activate`
    * `# For Windows: venv\Scripts\activate`
 5. Install project dependecies:
-   ``pip install -r requirements.txt``
+   `pip install -r requirements.txt`
 
 6. Run project and check port:
    * Run command `python manage.py runserver`
-   * Check url http://127.0.0.1:8000/
+   * Check url http://localhost:8000/
 
 ## Configuration
 I havent done any configurations yet.
  * Use `admin` and `#Dot9047` for username and password
 
-## Usage
-1. Access the Django admin panel by visiting http://127.0.0.1:8000/admin/ the superuser account created earlier.
+## Usage 
+1. Access the Django admin panel by visiting http://localhost:8000/admin/ the superuser account created earlier.
 2. Use the admin panel to manage users, donors, recipients, appointments, and other data.
 3. To interact with the API, explore the available endpoints (documented below) or use tools like Postman.
 
