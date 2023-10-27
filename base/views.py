@@ -277,7 +277,7 @@ from django.contrib import messages
 
 
 from .models import *
-from .forms import CreateUserForm, UserDetailsForm
+from .forms import CreateUserForm, UserDetailsForm, EditUserForm
 # Create your views here.
 
 
@@ -458,8 +458,9 @@ def profile(request):
 def editprofile(request):
     user = request.user
     user_profile = user.profile
-    form = UserDetailsForm(instance=user)
-    form = ProfileForm(instance=user_profile)
+
+    userForm = EditUserForm(instance=user)
+    profileForm = ProfileForm(instance=user_profile)
 
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=user_profile)
@@ -476,7 +477,7 @@ def editprofile(request):
         else:
             error_message = "Please upload a PNG file."
 
-    context = {"form": form}
+    context = {"userForm": userForm, "profileForm": profileForm}
     return render(request, 'base/edit_profile.html', context)
 
 
