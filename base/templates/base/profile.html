@@ -9,14 +9,14 @@
         <div style='max-width: 4rem; max-height: 4rem;' class="profile_pic" >
             <img src="{{request.user.profile.profile_pic.url}}" alt="Profile pic">
         </div>
-        <p>Patient name {{profile.name}}</p>
-        <p>phone {{profile.phone}}</p>
-        <p>email {{profile.email}}</p>
-        <p>bloodgroup {{profile.bloodgroup}}</p>
-        <p>langauge {{profile.langauge}}</p>
-        <p>address {{profile.address}}</p>
-        <p>city {{profile.city}}</p>
-        <p>country {{profile.country}}</p>
+        <p>Patient name: {{user.name}}</p>
+        <p>phone: {{user.phone}}</p>
+        <p>email: {{user.email}}</p>
+        <p>bloodgroup: {{user.profile.bloodgroup}}</p>
+        <p>langauge: {{user.profile.langauge}}</p>
+        <p>address: {{user.profile.address}}</p>
+        <p>city: {{user.profile.city}}</p>
+        <p>country: {{user.profile.country}}</p>
         
     <p><a href="{% url "editprofile" %}">Edit profile</a></p>
     
