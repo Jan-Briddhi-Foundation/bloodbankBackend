@@ -153,8 +153,6 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# SITE_ID = 1
-
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -165,16 +163,16 @@ SOCIALACCOUNT_PROVIDERS = {
         'EMAIL_AUTHENTICATION': True
     },
     'facebook': {
-        'APP': {
-            'client_id': 'YOUR_FACEBOOK_APP_ID',
-            'secret': 'YOUR_FACEBOOK_APP_SECRET'
-        },
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        'EMAIL_AUTHENTICATION': True
+        'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'EXCHANGE_TOKEN': True,
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v13.0',
+        'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
     },
+
     'apple': {
         'APP': {
             'client_id': 'YOUR_APPLE_CLIENT_ID',
@@ -191,7 +189,3 @@ SOCIALACCOUNT_PROVIDERS = {
 SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT: True
 
 LOGIN_REDIRECT_URL = 'home'
-
-
-# 970642135249-2g7no54pd7mh95hosasvsmpucpfvb8im.apps.googleusercontent.com
-# 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
