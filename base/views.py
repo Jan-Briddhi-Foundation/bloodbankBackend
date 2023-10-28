@@ -277,10 +277,12 @@ from django.contrib import messages
 
 
 from .models import *
+from .decorators import *
 from .forms import CreateUserForm, UserDetailsForm, EditUserForm
 # Create your views here.
 
 
+@unauthenticated_user
 def registrationPage(request):
     form = CreateUserForm()
 
@@ -303,6 +305,7 @@ def registrationPage(request):
     return render(request, 'base/login_registration_page.html', context)
 
 
+@unauthenticated_user
 def loginPage(request):
     page = 'login'
 
@@ -330,8 +333,8 @@ def loginPage(request):
     return render(request, 'base/login_registration_page.html', context)
 
 
+@login_required(login_url='login')
 def homePage(request):
-
     profile_type = request.user.profile.profile_type
     if profile_type == 'donor':
         return redirect('donor_home')
@@ -346,6 +349,7 @@ def logoutPage(request):
     return redirect('login')
 
 
+@login_required(login_url='login')
 def UserDetails(request):
     form = UserDetailsForm()
 
@@ -463,15 +467,25 @@ def editprofile(request):
     profileForm = ProfileForm(instance=user_profile)
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=user_profile)
-        if form.is_valid:
-            profile_pic = form.cleaned_data.get('profile_pic')
+        userForm = EditUserForm(request.POST, instance=user)
+        profileForm = ProfileForm(
+            request.POST, request.FILES, instance=user_profile)
+        # form = ProfileForm(request.POST, request.FILES, instance=user_profile)
+        # if form.is_valid:
+        #     profile_pic = form.cleaned_data.get('profile_pic')
 
-            if profile_pic:
-                if not profile_pic.name.lower().endswith('.png'):
-                    raise ValidationError("Only PNG files are allowed.")
+        #     if profile_pic:
+        #         if not profile_pic.name.lower().endswith('.png'):
+        #             raise ValidationError("Only PNG files are allowed.")
 
-            form.save()
+        #     form.save()
+        #     messages.success(request, "Profile updated")
+        #     return redirect('profile')
+        # else:
+        #     error_message = "Please upload a PNG file."
+        if userForm.is_valid and profileForm.is_valid:
+            userForm.save()
+            profileForm.save()
             messages.success(request, "Profile updated")
             return redirect('profile')
         else:
@@ -514,6 +528,7 @@ def patientHistory(request):
     return render(request, 'base/patient_history.html', context)
 
 
+@login_required(login_url='login')
 def deletePage(request, pk):
     item = Blood_Request.objects.get(id=pk)
 

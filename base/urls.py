@@ -19,7 +19,6 @@ urlpatterns = [
     path('not_eligible/', notEligible, name='not_eligible'),
     path('location_map/', locationMap, name='location_map'),
 
-
     path('delete/<str:pk>/', deletePage, name='delete_request'),
 
     path('profile/', profile, name='profile'),

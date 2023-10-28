@@ -5,10 +5,7 @@
     <h4>All about you</h4>
     <form action="" method="post" enctype="multipart/form-data" >
         {% csrf_token %}
-
         
-
-
         <p>Patient name {{userForm.name}}</p>
         <p>Profile pic {{profileForm.profile_pic}}</p>
         <p>phone {{userForm.phone}}</p>
