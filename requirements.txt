@@ -4,4 +4,4 @@ djangorestframework
 django-cors-headers
 requests
 pyyaml
-django-allauth==0.57.0
+django-allauth
