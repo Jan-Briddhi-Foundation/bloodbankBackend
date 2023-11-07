@@ -22,6 +22,7 @@ def blood_request(request):
         request_blood = Blood_Request.objects.all()
     except request_blood.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
     serializer = Blood_Request_Serializer(request_blood, many=True)
     return Response(serializer.data)
 
@@ -32,5 +33,6 @@ def donate(request):
         donate_blood = Donation_Form.objects.all()
     except donate_blood.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+        
     serializer = Donation_Criteria_Serializer(donate_blood, many=True)
     return Response(serializer.data)
