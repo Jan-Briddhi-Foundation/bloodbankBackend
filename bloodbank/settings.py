@@ -172,18 +172,6 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERIFIED_EMAIL': False,
         'VERSION': 'v13.0',
         'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
-    },
-
-    'apple': {
-        'APP': {
-            'client_id': 'YOUR_APPLE_CLIENT_ID',
-            'secret': 'YOUR_APPLE_CLIENT_SECRET'
-        },
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        'EMAIL_AUTHENTICATION': True
     }
 }
 
