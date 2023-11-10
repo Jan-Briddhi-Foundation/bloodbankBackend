@@ -1,4 +1,4 @@
-Django==3.6 
+django>=4.0.0<4.1.0
 Pillow==10.1.0
 djangorestframework
 django-cors-headers
