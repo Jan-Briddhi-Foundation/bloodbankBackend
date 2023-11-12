@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from .serializers import *
-from .models import User, BloodGroup, Profile, Blood_Request, Donation_Form
+from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Form
 
 from rest_framework import status
 from rest_framework.views import APIView
