@@ -79,6 +79,11 @@ class LogoutAPIView(APIView):
 
 @permission_classes([IsAuthenticated])
 class UserDetailsAPIView(APIView):
+    def get(self, request, *args, **kwargs):
+        serializer = UserDetailsSerializer(data=request.data)
+        if serializer.is_valid():
+            return Response({'message': 'User details', "data": serializer.data}, status=status.HTTP_200_OK)
+
     def post(self, request, *args, **kwargs):
         serializer = UserDetailsSerializer(data=request.data)
         if serializer.is_valid():
@@ -154,6 +159,7 @@ class ThankYouAPIView(APIView):
 # //////////////////////////////////////////////////////////////////
 # 3. PATIENTS PAGES
 # //////////////////////////////////////////////////////////////////
+
 @permission_classes([IsAuthenticated])
 class PatientHomeAPIView(APIView):
     def get(self, request, *args, **kwargs):
@@ -163,8 +169,8 @@ class PatientHomeAPIView(APIView):
 @permission_classes([IsAuthenticated])
 class ProfileAPIView(APIView):
     def get(self, request, *args, **kwargs):
-        user = request.user
-        profile = ProfileFormSerializer(instance=user)
+        user_profile = request.user.profile
+        profile = ProfileFormSerializer(instance=user_profile)
 
         return Response({'profile': profile.data}, status=status.HTTP_200_OK)
 
@@ -201,7 +207,7 @@ class RequestBloodAPIView(APIView):
     def get(self, request, *args, **kwargs):
         user = request.user
         user_profile = user.profile
-        form = RequestBloodFormSerializer(instance=user_profile)
+        form = BloodRequestSerializer(instance=user_profile)
 
         return Response({'user': user, 'user_profile': user_profile, 'form': form.data}, status=status.HTTP_200_OK)
 
@@ -209,7 +215,7 @@ class RequestBloodAPIView(APIView):
         user = request.user
         user_profile = user.profile
 
-        serializer = RequestBloodFormSerializer(data=request.data)
+        serializer = BloodRequestSerializer(data=request.data)
         if serializer.is_valid():
             blood_request = Blood_Request.objects.create(
                 profile=user_profile,

@@ -19,6 +19,18 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         fields = ['city', 'country', 'bloodgroup', 'profile_type']
 
 
+class ProfileFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+
+
+class EditUserFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['name', 'email', 'phone']
+
+
 class DonationCriteriaFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Donation_Form
