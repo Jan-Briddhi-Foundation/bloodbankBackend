@@ -1,25 +1,55 @@
-from django.contrib.auth.models import AbstractUser
+from typing import Any
+from django.contrib.auth.models import AbstractUser,UserManager
 from django.db import models
+from django.db.models.signals import post_save
 
-
+class UserManager(UserManager):
+    def create_user(self, name: str, email: str , password: str , **extra_fields: Any) -> Any:
+        if not email:
+            raise ValueError("Email Is required")
+        email = self.normalize_email(email=email)
+        user = self.model(name=name, email=email,  **extra_fields)
+        
+        user.set_password(password)
+        
+        user.save()
+        return user 
+    def create_superuser(self, name: str, email: str, password: str , **extra_fields: Any) -> Any:
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("is_active", True)
+        if not extra_fields.get("is_staff") == True:
+            raise ValueError("is_staff must be True")
+        if not extra_fields.get("is_superuser") == True:
+            raise ValueError("is_superuser must be True")
+        return self.create_user(name=name, email=email, password=password, **extra_fields)
+        
+        
 class User(AbstractUser):
+    username = models.CharField(max_length=200, unique=False, blank=True, null=True)
     name = models.CharField(max_length=255, null=True)
     email = models.EmailField(unique=True, null=True, max_length=254)
     phone = models.CharField(max_length=255, null=True)
-    date_created = models.DateTimeField(auto_now_add=True, null=True)
-
+    date_joined = models.DateTimeField(auto_now_add=True, null=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
-
+    objects = UserManager()
     def __str__(self):
         return self.email
 
 
-class BloodGroup(models.Model):
-    name = models.CharField(max_length=255, null=True)
-
-    def __str__(self):
-        return self.name
+class BloodGroup(models.TextChoices):
+    A_POSITIVE = 'A+', 'A+'
+    A_NEGATIVE = 'A-', 'A-'
+    B_POSITIVE = 'B+', 'B+'
+    B_NEGATIVE = 'B-', 'B-'
+    AB_POSITIVE = 'AB+', 'AB+'
+    AB_NEGATIVE = 'AB-', 'AB-'
+    O_POSITIVE = 'O+', 'O+'
+    O_NEGATIVE = 'O-', 'O-'
 
 
 class Profile(models.Model):
@@ -29,9 +59,8 @@ class Profile(models.Model):
     )
 
     user = models.OneToOneField(
-        User, null=True, blank=True, on_delete=models.CASCADE)
-    bloodgroup = models.ForeignKey(
-        BloodGroup, on_delete=models.SET_NULL, null=True)
+        User, null=True, blank=True, on_delete=models.CASCADE, related_name="profile")
+    bloodgroup = models.CharField(max_length=3, choices=BloodGroup.choices)
     langauge = models.CharField(max_length=255, null=True)
     country = models.CharField(max_length=250, null=True)
     city = models.CharField(max_length=250, null=True)
@@ -78,3 +107,11 @@ class Donation_Form(models.Model):
 
     def __str__(self):
         return self.profile.user.name
+
+
+#creates profile after any user is saved 
+def create_user_profile(sender, instance : User, *args, **kwargs):
+    profile = Profile.objects.create(user = instance)
+
+
+post_save.connect(create_user_profile, sender=User)

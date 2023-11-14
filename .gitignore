@@ -1,6 +1,6 @@
 env
 .vscode
-
+.env
 *.log
 __pycache__/
 *.pyc
@@ -8,3 +8,7 @@ __pycache__/
 .idea
 *.pyo
 local_settings.py
+Lib
+Scripts
+db.sqlite3
+migrations

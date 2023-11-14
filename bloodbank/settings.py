@@ -15,17 +15,18 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+from decouple import config
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!fx$$elcvo-thrv&mb-m63*e6q)2rl(a9fysscq&@(el$r!6!g'
+SECRET_KEY =config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', "127.0.0.1"]
 
 # Application definition
 
@@ -45,7 +46,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.apple',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
-    'rest_framework'
+    'rest_framework',
+        'djoser',
+  'knox',
+
 ]
 
 AUTH_USER_MODEL = 'base.User'
@@ -178,3 +182,33 @@ SOCIALACCOUNT_PROVIDERS = {
 SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT: True
 
 LOGIN_REDIRECT_URL = 'home'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    # 'DEFAULT_FILTER_BACKENDS': (
+    #     'django_filters.rest_framework.DjangoFilterBackend',
+    # ),
+}
+
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    "REGISTER_SERIALIZER": "base.api.serializers.UserSerializer",
+    
+}
+REST_AUTH_TOKEN_CREATOR = 'base.utils.create_knox_token'
+
+REST_AUTH_SERIALIZERS = {
+    "USER_DETAILS_SERIALIZER": "base.api.serializers.UserDetailsSerializer",
+        'TOKEN_SERIALIZER': 'base.api.serializers.KnoxSerializer',
+
+}
+
+DJOSER = {
+    'SERIALIZERS': {
+         'user_create': 'base.api.serializers.UserSerializer'
+    }
+}

@@ -59,7 +59,123 @@ I havent done any configurations yet.
 3. To interact with the API, explore the available endpoints (documented below) or use tools like Postman.
 
 ## API Endpoints
-No API endpoints so far. But will be developed soon
+# AUTHENTICATION ENDPOINTS
+
+### 1. Login
+- **Endpoint:** `/api/auth/token/` (POST)
+- **Description:** User authentication endpoint.
+- **Parameters:**
+  - `email`
+  - `password`
+- **Response:** Returns an authentication token.
+
+### 2. Logout
+- **Endpoint:** `/api/auth/logout/` (POST)
+- **Description:** User logout endpoint.
+- **Parameters:** None
+- **Response:** Logs out the user and invalidates the token.
+
+### 3. User Registration
+- **Endpoint:** `/api/auth/register/` (POST)
+- **Description:** User registration endpoint.
+- **Parameters:**
+  - `email`
+  - `email`
+  - `password`
+- **Response:** Confirms user registration.
+
+### 4. Password Change
+- **Endpoint:** `/api/auth/change-password/` (POST)
+- **Description:** Password change endpoint.
+- **Parameters:**
+  - `old_password`
+  - `new_password`
+- **Response:** Confirms the password change.
+
+### 5. Password Reset
+- **Endpoint:** `/api/auth/reset-password/` (POST)
+- **Description:** Password reset request endpoint.
+- **Parameters:**
+  - `email`
+- **Response:** Sends an email with instructions to reset the password.
+
+---
+
+### 1. User Registration
+- **Endpoint:** `/api/auth/users/` (POST)
+- **Description:** User registration endpoint.
+- **Required Parameters:**
+  - `name`
+  - `email`
+  - `password`
+- **Example:**
+  ```json
+  {
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "phone": "+123456789",
+    "password": "password",
+    "profile": {
+      "bloodgroup": "A+",
+      "language": "English",
+      "country": "USA",
+      "city": "New York",
+      "address": "123 Main St",
+      "profile_pic": "profile.jpg",
+      "profile_type": "donor"
+    }
+  }
+  
+- **profile_types**
+  - donor
+  - patient
+
+- **bloodgroups**
+  -  A+
+  -  A-
+  -  B+
+  -  B-'
+  -  AB+
+  -  AB-
+  -  O+
+  -  O-
+- **Response:** Sends a confirmation email with an activation link.
+
+### 2. User Activation
+- **Endpoint:** `/api/auth/users/activate/` (POST)
+- **Description:** User activation endpoint.
+- **Parameters:**
+  - `uid` (user id)
+  - `token` (activation token)
+- **Response:** Activates the user account.
+
+### 3. User Details
+- **Endpoint:** `/api/auth/users/me/` (GET, PUT, PATCH)
+- **Description:** User details endpoint.
+- **Parameters:** None (GET), User data (PUT, PATCH)
+- **Response:** Retrieves or updates user details.
+
+### 4. User Deletion
+- **Endpoint:** `/api/auth/users/me/` (DELETE)
+- **Description:** User deletion endpoint.
+- **Parameters:** None
+- **Response:** Deletes the user account.
+
+### 5. Password Change
+- **Endpoint:** `/api/auth/users/set_password/` (POST)
+- **Description:** Password change endpoint.
+- **Parameters:**
+  - `new_password`
+  - `re_new_password`
+- **Response:** Confirms the password change.
+
+### 6. Password Reset
+- **Endpoint:** `/api/auth/users/reset_password/` (POST)
+- **Description:** Password reset request endpoint.
+- **Parameters:**
+  - `email`
+- **Response:** Sends an email with instructions to reset the password.
+
 
 ## Contributing
 We welcome contributions to improve this blood donation system. If you'd like to contribute, please follow Contribution Guidelines.
