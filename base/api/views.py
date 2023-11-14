@@ -10,7 +10,6 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 # Create your views here.
 
 
-# @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 @permission_classes([AllowAny])
 class RegistrationAPIView(APIView):
     def post(self, request, *args, **kwargs):
