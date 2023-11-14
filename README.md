@@ -111,10 +111,10 @@ I havent done any configurations yet.
 - **Example:**
   ```json
   {
-    "username": "john_doe",
     "name": "John Doe",
     "email": "john.doe@example.com",
     "phone": "+123456789",
+    "password": "password",
     "profile": {
       "bloodgroup": "A+",
       "language": "English",
@@ -127,18 +127,18 @@ I havent done any configurations yet.
   }
   
 - **profile_types**
-    - donor 
-    - patient
+  - donor
+  - patient
 
 - **bloodgroups**
-    -  'A+'
-    -  'A-'
-    -  'B+'
-    -  'B-'
-    -  'AB+'
-    -  'AB-'
-    -  'O+'
-    -  'O-'
+  -  A+
+  -  A-
+  -  B+
+  -  B-'
+  -  AB+
+  -  AB-
+  -  O+
+  -  O-
 - **Response:** Sends a confirmation email with an activation link.
 
 ### 2. User Activation
