@@ -212,3 +212,7 @@ DJOSER = {
         'user_create': 'base.api.serializers.UserSerializer'
     }
 }
+#
+#
+#
+#
