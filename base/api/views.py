@@ -1,55 +1,37 @@
 from rest_framework.response import Response
 from .serializers import *
 from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Form
+from django.contrib.auth import authenticate
+from knox.auth import AuthToken
+from knox.views import LoginView, LogoutView
 
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from base.utils import create_knox_token
 # Create your views here.
 
 
-@permission_classes([AllowAny])
-class RegistrationAPIView(APIView):
+class LoginAPIView(generics.GenericAPIView):
+
     def post(self, request, *args, **kwargs):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save(username=request.data.get('email'))
-            Profile.objects.create(user=user)
-
-            user.backend = 'django.contrib.auth.backends.ModelBackend'
-            login(request, user)
-
-            return Response({'message': 'User registered successfully'}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@permission_classes([AllowAny])
-class LoginAPIView(APIView):
-    def post(self, request, *args, **kwargs):
-        serializer = LoginSerializer(data=request.data)
-        if serializer.is_valid():
-            email = serializer.validated_data['email']
-            password = serializer.validated_data['password']
-
-            try:
-                user = User.objects.get(email=email)
-            except User.DoesNotExist:
-                return Response({'message': 'User does not exist'}, status=status.HTTP_400_BAD_REQUEST)
-
-            user = authenticate(request, email=email, password=password)
-
-            if user is not None:
-                login(request, user)
-                return Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
-            else:
-                return Response({'message': 'Email or password is incorrect'}, status=status.HTTP_401_UNAUTHORIZED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        email = request.data.get("email")
+        password = request.data.get("password")
+        user = authenticate(email=email, password=password)
+        if user is not None:
+            return Response({
+                "user": UserSerializer(user).data,
+                "token": create_knox_token(user=user)[1]
+            }, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"error": "Invalid credentials"},  status=status.HTTP_400_BAD_REQUEST)
 
 
-@permission_classes([IsAuthenticated])
 class HomePageAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         try:
             profile = request.user.profile
@@ -69,39 +51,17 @@ class HomePageAPIView(APIView):
             return Response({'redirect': 'user_details'}, status=status.HTTP_302_FOUND)
 
 
-@permission_classes([IsAuthenticated])
-class LogoutAPIView(APIView):
-    def post(self, request, *args, **kwargs):
-        logout(request)
-        return Response({'message': 'Logout successful'}, status=status.HTTP_200_OK)
-
-
-@permission_classes([IsAuthenticated])
-class UserDetailsAPIView(APIView):
-    def get(self, request, *args, **kwargs):
-        serializer = UserDetailsSerializer(data=request.data)
-        if serializer.is_valid():
-            return Response({'message': 'User details', "data": serializer.data}, status=status.HTTP_200_OK)
-
-    def post(self, request, *args, **kwargs):
-        serializer = UserDetailsSerializer(data=request.data)
-        if serializer.is_valid():
-            profile = request.user.profile
-            profile.city = serializer.validated_data['city']
-            profile.country = serializer.validated_data['country']
-            profile.bloodgroup = serializer.validated_data['bloodgroup']
-            profile.profile_type = serializer.validated_data['profile_type']
-            profile.save()
-            return Response({'message': 'User details updated successfully'}, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+class LogoutAPIView(LogoutView):
+    permission_classes = [IsAuthenticated]
 
 # //////////////////////////////////////////////////////////////////
 # 2. DONORS PAGES
 # //////////////////////////////////////////////////////////////////
 
-@permission_classes([IsAuthenticated])
+
 class DonorHomeAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         blood_requests = Blood_Request.objects.all()
         serializer = BloodRequestSerializer(blood_requests, many=True)
@@ -123,8 +83,9 @@ def donation_comparison_form(user_form_data):
     return True
 
 
-@permission_classes([IsAuthenticated])
 class DonationCriteriaAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request, *args, **kwargs):
         serializer = DonationCriteriaFormSerializer(data=request.data)
         if serializer.is_valid():
@@ -137,20 +98,23 @@ class DonationCriteriaAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@permission_classes([IsAuthenticated])
 class LocationMapAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         return Response({'message': 'Render location_map.html'}, status=status.HTTP_200_OK)
 
 
-@permission_classes([IsAuthenticated])
 class NotEligibleAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         return Response({'message': 'Render not_eligible.html'}, status=status.HTTP_200_OK)
 
 
-@permission_classes([IsAuthenticated])
 class ThankYouAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         return Response({'message': 'Render thank_you.html'}, status=status.HTTP_200_OK)
 
@@ -159,14 +123,16 @@ class ThankYouAPIView(APIView):
 # 3. PATIENTS PAGES
 # //////////////////////////////////////////////////////////////////
 
-@permission_classes([IsAuthenticated])
 class PatientHomeAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         return Response({'page': 'home_patient_page'}, status=status.HTTP_200_OK)
 
 
-@permission_classes([IsAuthenticated])
 class ProfileAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         user_profile = request.user.profile
         profile = ProfileFormSerializer(instance=user_profile)
@@ -174,8 +140,9 @@ class ProfileAPIView(APIView):
         return Response({'profile': profile.data}, status=status.HTTP_200_OK)
 
 
-@permission_classes([IsAuthenticated])
 class EditProfileAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         user = request.user
         user_profile = user.profile
@@ -201,8 +168,9 @@ class EditProfileAPIView(APIView):
         return Response({'error_message': 'Please upload a PNG file.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-@permission_classes([IsAuthenticated])
 class RequestBloodAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         user = request.user
         user_profile = user.profile
@@ -225,14 +193,16 @@ class RequestBloodAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@permission_classes([IsAuthenticated])
 class RequestSentAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         return Response({'message': 'Render request_sent.html'}, status=status.HTTP_200_OK)
 
 
-@permission_classes([IsAuthenticated])
 class PatientHistoryAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         user = request.user
         history = Blood_Request.objects.filter(profile__user=user)
@@ -241,8 +211,9 @@ class PatientHistoryAPIView(APIView):
         return Response({'history': serializer.data}, status=status.HTTP_200_OK)
 
 
-@permission_classes([IsAuthenticated])
 class DeletePageAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, pk, *args, **kwargs):
         item = Blood_Request.objects.get(id=pk)
         return Response({'item': item}, status=status.HTTP_200_OK)
@@ -253,19 +224,22 @@ class DeletePageAPIView(APIView):
         return Response({'message': 'Item deleted successfully'}, status=status.HTTP_200_OK)
 
 
-@permission_classes([IsAuthenticated])
 class NotificationsAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         return Response({'message': 'Render notifications.html'}, status=status.HTTP_200_OK)
 
 
-@permission_classes([IsAuthenticated])
 class BloodMatchSuccessAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         return Response({'message': 'Render blood_match_success.html'}, status=status.HTTP_200_OK)
 
 
-@permission_classes([IsAuthenticated])
 class Error404APIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         return Response({'message': 'Render error404.html'}, status=status.HTTP_200_OK)
