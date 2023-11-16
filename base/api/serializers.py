@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Form
+from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -87,7 +87,7 @@ class EditUserFormSerializer(serializers.ModelSerializer):
 
 class DonationCriteriaFormSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Donation_Form
+        model = Donation_Criteria_Form
         fields = '__all__'
 
 

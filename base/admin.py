@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import User, Profile,  Blood_Request, Donation_Form
+from .models import User, Profile,  Blood_Request, Donation_Criteria_Form
 from django.contrib.auth.admin import UserAdmin
 admin.site.register(Profile)
 admin.site.register(Blood_Request)
-admin.site.register(Donation_Form)
+admin.site.register(Donation_Criteria_Form)
 
 
 class CustomUserAdmin(UserAdmin):

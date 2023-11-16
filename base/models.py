@@ -63,7 +63,7 @@ class Profile(models.Model):
     )
 
     user = models.OneToOneField(
-        User, null=True, blank=True, on_delete=models.CASCADE, related_name="profile")
+        User, blank=True, on_delete=models.CASCADE, unique=True, related_name="profile")
     bloodgroup = models.CharField(max_length=3, choices=BloodGroup.choices)
     langauge = models.CharField(max_length=255, null=True)
     country = models.CharField(max_length=250, null=True)
@@ -91,7 +91,7 @@ class Blood_Request(models.Model):
         return self.profile.user.name
 
 
-class Donation_Form(models.Model):
+class Donation_Criteria_Form(models.Model):
     profile = models.ForeignKey(
         Profile, on_delete=models.SET_NULL, null=True)
     rabis_hepatitis_past_1_year = models.BooleanField(null=True)
@@ -113,9 +113,9 @@ class Donation_Form(models.Model):
         return self.profile.user.name
 
 
-# creates profile after any user is saved
-def create_user_profile(sender, instance: User, *args, **kwargs):
-    profile = Profile.objects.create(user=instance)
+# # creates profile after any user is saved
+# def create_user_profile(sender, instance: User, *args, **kwargs):
+#     profile = Profile.objects.create(user=instance)
 
 
-post_save.connect(create_user_profile, sender=User)
+# post_save.connect(create_user_profile, sender=User)

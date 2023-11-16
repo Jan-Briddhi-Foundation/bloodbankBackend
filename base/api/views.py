@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from .serializers import *
-from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Form
+from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
 from django.contrib.auth import authenticate
 from knox.auth import AuthToken
 from knox.views import LoginView, LogoutView

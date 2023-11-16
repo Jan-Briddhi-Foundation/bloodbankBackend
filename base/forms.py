@@ -39,6 +39,6 @@ class RequestBloodForm(forms.ModelForm):
 
 class Donation_CriteriaForm(forms.ModelForm):
     class Meta:
-        model = Donation_Form
+        model = Donation_Criteria_Form
         fields = '__all__'
         exclude = ['profile']
