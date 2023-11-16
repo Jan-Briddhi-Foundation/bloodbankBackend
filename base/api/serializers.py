@@ -4,8 +4,14 @@ from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = "__all__"
         model = Profile
+        fields = "__all__"
+
+
+class UserDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['city', 'country', 'bloodgroup', 'profile_type']
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -46,37 +52,38 @@ class KnoxSerializer(serializers.Serializer):
     user = UserSerializer()
 
 
-class UserDetailsSerializer(serializers.ModelSerializer):
-    city = serializers.SerializerMethodField()
-    full_name = serializers.SerializerMethodField()
-    country = serializers.SerializerMethodField()
-    bloodgroup = serializers.SerializerMethodField()
-    profile_type = serializers.SerializerMethodField()
+# class UserDetailsSerializer(serializers.ModelSerializer):
+#     city = serializers.SerializerMethodField()
+#     full_name = serializers.SerializerMethodField()
+#     country = serializers.SerializerMethodField()
+#     bloodgroup = serializers.SerializerMethodField()
+#     profile_type = serializers.SerializerMethodField()
 
-    class Meta:
-        model = User
-        fields = ["name", 'email']
+#     class Meta:
+#         model = User
+#         fields = ["name", 'email']
 
-    def get_city(self, obj):
-        return obj.profile.city
+#     def get_city(self, obj):
+#         return obj.profile.city
 
-    def get_full_name(self, obj):
-        return f"{obj.last_name} {obj.first_name}"
+#     def get_full_name(self, obj):
+#         return f"{obj.last_name} {obj.first_name}"
 
-    def get_country(self, obj):
-        return obj.profile.country
+#     def get_country(self, obj):
+#         return obj.profile.country
 
-    def get_bloodgroup(self, obj):
-        return obj.profile.bloodgroup
+#     def get_bloodgroup(self, obj):
+#         return obj.profile.bloodgroup
 
-    def get_profile_type(self, obj):
-        return obj.profile.profile_type
+#     def get_profile_type(self, obj):
+#         return obj.profile.profile_type
 
 
 class ProfileFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = '__all__'
+        exclude = ['user', 'profile_type']
 
 
 class EditUserFormSerializer(serializers.ModelSerializer):
@@ -85,13 +92,15 @@ class EditUserFormSerializer(serializers.ModelSerializer):
         fields = ['name', 'email', 'phone']
 
 
-class DonationCriteriaFormSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Donation_Criteria_Form
-        fields = '__all__'
-
-
 class BloodRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blood_Request
         fields = '__all__'
+        exclude = ['profile']
+
+
+class DonationCriteriaFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Donation_Criteria_Form
+        fields = '__all__'
+        exclude = ['profile']

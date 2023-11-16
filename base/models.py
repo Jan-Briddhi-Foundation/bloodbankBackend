@@ -2,6 +2,7 @@ from typing import Any
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class UserManager(UserManager):
@@ -33,7 +34,7 @@ class User(AbstractUser):
     name = models.CharField(max_length=255, null=True)
     email = models.EmailField(unique=True, null=True, max_length=254)
     phone = models.CharField(max_length=255, null=True)
-    date_joined = models.DateTimeField(auto_now_add=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -113,9 +114,9 @@ class Donation_Criteria_Form(models.Model):
         return self.profile.user.name
 
 
-# # creates profile after any user is saved
-# def create_user_profile(sender, instance: User, *args, **kwargs):
-#     profile = Profile.objects.create(user=instance)
-
-
-# post_save.connect(create_user_profile, sender=User)
+# Check if a profile already exists for the user
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        if not Profile.objects.filter(user=instance).exists():
+            Profile.objects.create(user=instance)

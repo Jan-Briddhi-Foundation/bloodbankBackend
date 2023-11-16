@@ -5,7 +5,12 @@ urlpatterns = [
     path('auth/login/', LoginAPIView.as_view(), name='login_api'),
     path('auth/logout/', LogoutAPIView.as_view(), name='logout_api'),
 
+
+
     path('home/', HomePageAPIView.as_view(), name='home_api'),
+
+    path('personal-details//', UserDetailsAPIView.as_view(), name='user_details'),
+
 
 
     path('donor-home/', DonorHomeAPIView.as_view(), name='donor_home'),

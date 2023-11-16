@@ -1,14 +1,16 @@
-from rest_framework.response import Response
-from .serializers import *
+
 from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
 from django.contrib.auth import authenticate
+from django.urls import reverse
+
+from .serializers import *
 from knox.auth import AuthToken
 from knox.views import LoginView, LogoutView
 
 from rest_framework import status, generics
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view
-from rest_framework.decorators import permission_classes
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from base.utils import create_knox_token
 # Create your views here.
@@ -29,6 +31,10 @@ class LoginAPIView(generics.GenericAPIView):
             return Response({"error": "Invalid credentials"},  status=status.HTTP_400_BAD_REQUEST)
 
 
+class LogoutAPIView(LogoutView):
+    permission_classes = [IsAuthenticated]
+
+
 class HomePageAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -44,15 +50,33 @@ class HomePageAPIView(APIView):
         profile_type = request.user.profile.profile_type
 
         if profile_type == 'donor':
-            return Response({'redirect': 'donor_home'}, status=status.HTTP_302_FOUND)
+            redirect_url = reverse('donor_home')
+
         elif profile_type == 'patient':
-            return Response({'redirect': 'patient_home'}, status=status.HTTP_302_FOUND)
+            redirect_url = reverse('patient_home')
+
         else:
-            return Response({'redirect': 'user_details'}, status=status.HTTP_302_FOUND)
+            redirect_url = reverse('user_details')
+
+        return Response({'redirect_url': redirect_url}, status=status.HTTP_200_OK)
 
 
-class LogoutAPIView(LogoutView):
+class UserDetailsAPIView(APIView):
     permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        serializer = UserDetailsSerializer(data=request.data)
+        if serializer.is_valid():
+            profile = request.user.profile
+            profile.city = serializer.validated_data['city']
+            profile.country = serializer.validated_data['country']
+            profile.bloodgroup = serializer.validated_data['bloodgroup']
+            profile.profile_type = serializer.validated_data['profile_type']
+            profile.save()
+
+            return Response({'message': 'User details updated successfully'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 # //////////////////////////////////////////////////////////////////
 # 2. DONORS PAGES
@@ -65,7 +89,7 @@ class DonorHomeAPIView(APIView):
     def get(self, request, *args, **kwargs):
         blood_requests = Blood_Request.objects.all()
         serializer = BloodRequestSerializer(blood_requests, many=True)
-        return Response({'page': 'home_donor_page', 'blood_requests': serializer.data}, status=status.HTTP_200_OK)
+        return Response({'blood_requests': serializer.data}, status=status.HTTP_200_OK)
 
 
 def donation_comparison_form(user_form_data):
@@ -102,21 +126,21 @@ class LocationMapAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        return Response({'message': 'Render location_map.html'}, status=status.HTTP_200_OK)
+        return Response({'message': 'Location_map render'}, status=status.HTTP_200_OK)
 
 
 class NotEligibleAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        return Response({'message': 'Render not_eligible.html'}, status=status.HTTP_200_OK)
+        return Response({'message': 'Not Eligible'}, status=status.HTTP_200_OK)
 
 
 class ThankYouAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        return Response({'message': 'Render thank_you.html'}, status=status.HTTP_200_OK)
+        return Response({'message': 'Thank you'}, status=status.HTTP_200_OK)
 
 
 # //////////////////////////////////////////////////////////////////
@@ -127,7 +151,7 @@ class PatientHomeAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        return Response({'page': 'home_patient_page'}, status=status.HTTP_200_OK)
+        return Response({'message': 'Patient Home page'}, status=status.HTTP_200_OK)
 
 
 class ProfileAPIView(APIView):
@@ -197,7 +221,7 @@ class RequestSentAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        return Response({'message': 'Render request_sent.html'}, status=status.HTTP_200_OK)
+        return Response({'message': 'Request Sent Successfully'}, status=status.HTTP_200_OK)
 
 
 class PatientHistoryAPIView(APIView):
@@ -221,7 +245,7 @@ class DeletePageAPIView(APIView):
     def post(self, request, pk, *args, **kwargs):
         item = Blood_Request.objects.get(id=pk)
         item.delete()
-        return Response({'message': 'Item deleted successfully'}, status=status.HTTP_200_OK)
+        return Response({'message': 'Request deleted successfully'}, status=status.HTTP_200_OK)
 
 
 class NotificationsAPIView(APIView):
