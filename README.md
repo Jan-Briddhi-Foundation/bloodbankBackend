@@ -60,7 +60,8 @@ I havent done any configurations yet.
 3. To interact with the API, explore the available endpoints (documented below) or use tools like Postman.
 
 ## API Endpoints
-# AUTHENTICATION ENDPOINTS
+
+## i.) Authenication Endpoints
 
 ### 1. Login
 - **Endpoint:** `/api/auth/token/` (POST)
@@ -176,6 +177,230 @@ I havent done any configurations yet.
 - **Parameters:**
   - `email`
 - **Response:** Sends an email with instructions to reset the password.
+
+---
+
+## ii.) Social Authenication Endpoints
+
+### 1. Facebook
+- **Endpoint:** `/api/auth/facebook/` (POST)
+- **Description:** Authenticate users via Facebook
+- **Parameters:** None (GET), User data (PUT, PATCH)
+- **Response:** Returns an authentication token.
+
+### 2. Twitter
+- **Endpoint:** `/api/auth/twitter/` (POST)
+- **Description:** Authenticate users via Twitter
+- **Parameters:** None (GET), User data (PUT, PATCH)
+- **Response:** Returns an authentication token.
+
+### 3. Google
+- **Endpoint:** `/api/auth/google/` (POST)
+- **Description:** Authenticate users via Google
+- **Parameters:** None (GET), User data (PUT, PATCH)
+- **Response:** Returns an authentication token.
+
+
+## iii.) Home Endpoints
+
+### 1. Home Page
+- **Endpoint:** `/api/home/` (GET)
+- **Description:** Retrieves user's home page details.
+- **Permissions:** User must be authenticated.
+  
+### Response
+- **Success (200 OK):**
+    - Returns user's home page details.
+        - For donors: Redirects to 'donor_home'.
+        - For patients: Redirects to 'patient_home'.
+        - For other profiles: Redirects to 'user_details'.
+- **User Details Update (200 OK):**
+    - If user's profile doesn't exist, creates a profile, updates user details, and returns a success message.
+
+
+### 2. User Details
+- **Endpoint:** `/api/personal-details/` (POST)
+- **Description:** Updates user's personal details.
+- **Permissions:** User must be authenticated.
+
+### Request
+- **Method:** POST
+- **Parameters:** User details in the request body.
+
+### Response
+- **Success (200 OK):**
+    - Returns a success message if user details are updated successfully.
+
+- **Bad Request (400):**
+    - Returns validation errors if the provided data is invalid.
+
+
+### 3. ## Donor Home
+- **Endpoint:** `/api/donor-home/` (GET)
+- **Description:** Retrieves blood donation requests for donors.
+- **Permissions:** User must be authenticated.
+
+### Response
+- **Success (200 OK):**
+    - Returns a list of blood donation requests.
+
+
+### 4. ## Donation Criteria
+- **Endpoint:** `/api/donation-criteria/` (POST)
+- **Description:** Validates and processes user's donation criteria form.
+- **Permissions:** User must be authenticated.
+
+### Request
+- **Method:** POST
+- **Parameters:** Donation criteria form data in the request body.
+
+### Response
+- **Success (200 OK):**
+    - Returns a success message if the user is eligible for donation.
+
+- **Bad Request (400):**
+    - Returns a message indicating ineligibility if the criteria are not met
+
+### 5. ## Location Map
+- **Endpoint:** `/api/location-map/` (GET)
+- **Description:** Retrieves and renders the location map.
+- **Permissions:** User must be authenticated.
+
+### Response
+- **Success (200 OK):**
+    - Returns a message indicating the rendering of the location map.
+
+### 6. ## Not Eligible
+- **Endpoint:** `/api/not-eligible/` (GET)
+- **Description:** Notifies the user of ineligibility.
+- **Permissions:** User must be authenticated.
+
+### Response
+- **Success (200 OK):**
+    - Returns a message indicating user ineligibility.
+
+### 7. ## Thank You
+- **Endpoint:** `/api/thank-you/` (GET)
+- **Description:** Displays a thank-you message.
+- **Permissions:** User must be authenticated.
+
+### Response
+- **Success (200 OK):**
+    - Returns a thank-you message.
+
+### 8. ## Patient Home
+- **Endpoint:** `/api/patient-home/` (GET)
+- **Description:** Retrieves the patient's home page.
+- **Permissions:** User must be authenticated.
+
+### Response
+- **Success (200 OK):**
+    - Returns a message indicating the patient's home page.
+
+### 9. ## Profile
+- **Endpoint:** `/api/profile/` (GET)
+- **Description:** Retrieves the user's profile information.
+- **Permissions:** User must be authenticated.
+
+### Response
+- **Success (200 OK):**
+    - Returns the user's profile information.
+
+### 10. ## Edit Profile
+- **Endpoint:** `/api/edit-profile/` 
+    - **GET:** Retrieves user's edit profile forms.
+    - **POST:** Updates user's profile information.
+- **Description:** Allows users to view and edit their profile details.
+- **Permissions:** User must be authenticated.
+
+### GET Request
+- **Response (200 OK):**
+    - Returns user's edit profile forms.
+
+### POST Request
+- **Request:**
+    - User data and profile data in the request body.
+- **Response:**
+    - Returns a success message if the profile is updated successfully.
+    - Returns an error message if the provided data is invalid.
+
+### 11. ## Request Blood
+- **Endpoint:** `/api/request-blood/` 
+    - **GET:** Retrieves user's blood request form.
+    - **POST:** Submits a blood request.
+- **Description:** Allows users to request blood donations.
+- **Permissions:** User must be authenticated.
+
+### GET Request
+- **Response (200 OK):**
+    - Returns user's blood request form.
+
+### POST Request
+- **Request:**
+    - Blood request data in the request body.
+- **Response:**
+    - Returns a success message if the blood request is sent successfully.
+    - Returns an error message if the provided data is invalid.
+
+### 12. ## Request Sent
+- **Endpoint:** `/api/request-sent/` (GET)
+- **Description:** Notifies the user of a successful blood request submission.
+- **Permissions:** User must be authenticated.
+
+### Response
+- **Success (200 OK):**
+    - Returns a message indicating successful blood request submission.
+
+### 13. ## Patient History
+- **Endpoint:** `/api/patient-history/` (GET)
+- **Description:** Retrieves the blood donation history for the patient.
+- **Permissions:** User must be authenticated.
+
+### Response
+- **Success (200 OK):**
+    - Returns a list of blood donation history for the patient.
+
+### 14. ## Delete Page
+- **Endpoint:** `/api/delete-page/<int:pk>/` 
+    - **GET:** Retrieves the item to be deleted.
+    - **POST:** Deletes the specified item.
+- **Description:** Allows users to view and delete specific items.
+- **Permissions:** User must be authenticated.
+
+### GET Request
+- **Response (200 OK):**
+    - Returns the item to be deleted.
+
+### POST Request
+- **Response (200 OK):**
+    - Returns a success message if the item is deleted successfully.
+
+### 15. ## Notifications
+- **Endpoint:** `/api/notifications/` (GET)
+- **Description:** Retrieves and renders the notifications page.
+- **Permissions:** User must be authenticated.
+
+### Response
+- **Success (200 OK):**
+    - Returns a message indicating the rendering of the notifications page.
+
+### 16. Blood Match Success
+- **Endpoint:** `/api/blood-match-success/` (GET)
+- **Description:** Retrieves and renders the blood match success page.
+- **Permissions:** User must be authenticated.
+
+### Response
+- **Success (200 OK):**
+    - Returns a message indicating the rendering of the blood match success page
+
+### 17. Error 404
+- **Endpoint:** `/api/error404/` (GET)
+- **Description:** Retrieves and renders the error 404 page.
+- **Permissions:** User must be authenticated.
+
+### Response
+- **Success (200 OK):**
+    - Returns a message indicating the rendering of the error 404 page.
 
 
 ## Contributing

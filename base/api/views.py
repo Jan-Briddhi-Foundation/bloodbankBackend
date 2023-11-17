@@ -102,7 +102,7 @@ class TwitterLogin(SocialLoginView):
 
 class GoogleLogin(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
-    callback_url = CALLBACK_URL_YOU_SET_ON_GOOGLE
+    callback_url = 'http://localhost:8000/accounts/google/login/callback/'
     client_class = OAuth2Client
 
 # //////////////////////////////////////////////////////////////////
