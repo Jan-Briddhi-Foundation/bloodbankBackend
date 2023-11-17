@@ -178,7 +178,9 @@ I havent done any configurations yet.
   - `email`
 - **Response:** Sends an email with instructions to reset the password.
 
+
 ---
+
 
 ## ii.) Social Authenication Endpoints
 
