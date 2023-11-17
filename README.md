@@ -202,6 +202,8 @@ I havent done any configurations yet.
 - **Parameters:** None (GET), User data (PUT, PATCH)
 - **Response:** Returns an authentication token.
 
+---
+
 
 ## iii.) Home Endpoints
 
