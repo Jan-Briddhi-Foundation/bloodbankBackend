@@ -63,7 +63,7 @@ I havent done any configurations yet.
 # AUTHENTICATION ENDPOINTS
 
 ### 1. Login
-- **Endpoint:** `/api/auth/token/` (POST)
+- **Endpoint:** `/api/auth/login/` (POST)
 - **Description:** User authentication endpoint.
 - **Parameters:**
   - `email`
