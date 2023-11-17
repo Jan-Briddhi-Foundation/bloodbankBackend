@@ -2,6 +2,12 @@ from rest_framework import serializers
 from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = "__all__"
+
+
 class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer(required=False)
 
@@ -36,12 +42,6 @@ class UserDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['city', 'country', 'bloodgroup', 'profile_type']
-
-
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = "__all__"
 
 
 class BloodRequestSerializer(serializers.ModelSerializer):

@@ -40,17 +40,32 @@ INSTALLED_APPS = [
 
     'base.apps.BaseConfig',
 
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.apple',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.google',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.apple',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.google',
+
     'rest_framework',
     'djoser',
     'knox',
 
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'dj_rest_auth.registration',
+
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
 ]
+
+SITE_ID = 1
 
 AUTH_USER_MODEL = 'base.User'
 
@@ -82,6 +97,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },
@@ -136,7 +152,6 @@ AUTHENTICATION_BACKENDS = [
 
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
-
 ]
 
 # Static files (CSS, JavaScript, Images)
@@ -167,6 +182,11 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
         'EMAIL_AUTHENTICATION': True
     },
+
+
+    # App secret = il0yty9ec4rIjl6FW2O3p6i4V
+    # App ID = 4EP2kFU3L0O0kdrgsBIMzr4p8S4mcJVF9Q4J3jvm1LCTr9R5WR
+
     'facebook': {
         'METHOD': 'oauth2',
         'SCOPE': ['email', 'public_profile'],
@@ -176,6 +196,8 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERIFIED_EMAIL': False,
         'VERSION': 'v13.0',
         'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
+        # App secret = 1b95d147c125b1618aade67eea0706c0
+        # App ID = 1050696209683610
     }
 }
 
@@ -185,7 +207,9 @@ LOGIN_REDIRECT_URL = 'home'
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': ['knox.auth.TokenAuthentication'],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'knox.auth.TokenAuthentication',
+    ],
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     ),
@@ -199,6 +223,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {
     "REGISTER_SERIALIZER": "base.api.serializers.UserSerializer",
 
 }
+
 REST_AUTH_TOKEN_CREATOR = 'base.utils.create_knox_token'
 
 REST_AUTH_SERIALIZERS = {

@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include
-
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -11,6 +10,10 @@ urlpatterns = [
 
     path('api/', include('base.api.urls')),
     # path('accounts/', include('allauth.urls')),
+
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls'))
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

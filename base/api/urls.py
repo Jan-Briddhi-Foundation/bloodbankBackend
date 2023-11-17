@@ -5,6 +5,10 @@ urlpatterns = [
     path('auth/login/', LoginAPIView.as_view(), name='login_api'),
     path('auth/logout/', LogoutAPIView.as_view(), name='logout_api'),
 
+    path('dj-rest-auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
+    path('dj-rest-auth/twitter/', TwitterLogin.as_view(), name='twitter_login'),
+    path('dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
+
 
     path('home/', HomePageAPIView.as_view(), name='home'),
 

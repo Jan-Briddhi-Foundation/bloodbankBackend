@@ -1,4 +1,3 @@
-
 from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
 from django.contrib.auth import authenticate
 from django.urls import reverse
@@ -13,6 +12,15 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from base.utils import create_knox_token
+
+
+from dj_rest_auth.registration.views import SocialLoginView
+from dj_rest_auth.social_serializers import TwitterLoginSerializer
+from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+
 # Create your views here.
 
 
@@ -77,6 +85,25 @@ class UserDetailsAPIView(APIView):
             return Response({'message': 'User details updated successfully'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+# //////////////////////////////////////////////////////////////////
+# SOCIAL AUTH
+# //////////////////////////////////////////////////////////////////
+
+
+class FacebookLogin(SocialLoginView):
+    adapter_class = FacebookOAuth2Adapter
+
+
+class TwitterLogin(SocialLoginView):
+    serializer_class = TwitterLoginSerializer
+    adapter_class = TwitterOAuthAdapter
+
+
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+    callback_url = CALLBACK_URL_YOU_SET_ON_GOOGLE
+    client_class = OAuth2Client
 
 # //////////////////////////////////////////////////////////////////
 # 2. DONORS PAGES
