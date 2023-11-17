@@ -2,18 +2,6 @@ from rest_framework import serializers
 from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
 
 
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = "__all__"
-
-
-class UserDetailsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['city', 'country', 'bloodgroup', 'profile_type']
-
-
 class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer(required=False)
 
@@ -44,52 +32,16 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
 
-class KnoxSerializer(serializers.Serializer):
-    """
-    Serializer for Knox authentication.
-    """
-    token = serializers.CharField()
-    user = UserSerializer()
-
-
-# class UserDetailsSerializer(serializers.ModelSerializer):
-#     city = serializers.SerializerMethodField()
-#     full_name = serializers.SerializerMethodField()
-#     country = serializers.SerializerMethodField()
-#     bloodgroup = serializers.SerializerMethodField()
-#     profile_type = serializers.SerializerMethodField()
-
-#     class Meta:
-#         model = User
-#         fields = ["name", 'email']
-
-#     def get_city(self, obj):
-#         return obj.profile.city
-
-#     def get_full_name(self, obj):
-#         return f"{obj.last_name} {obj.first_name}"
-
-#     def get_country(self, obj):
-#         return obj.profile.country
-
-#     def get_bloodgroup(self, obj):
-#         return obj.profile.bloodgroup
-
-#     def get_profile_type(self, obj):
-#         return obj.profile.profile_type
-
-
-class ProfileFormSerializer(serializers.ModelSerializer):
+class UserDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = '__all__'
-        exclude = ['user', 'profile_type']
+        fields = ['city', 'country', 'bloodgroup', 'profile_type']
 
 
-class EditUserFormSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['name', 'email', 'phone']
+        model = Profile
+        fields = "__all__"
 
 
 class BloodRequestSerializer(serializers.ModelSerializer):
@@ -104,3 +56,24 @@ class DonationCriteriaFormSerializer(serializers.ModelSerializer):
         model = Donation_Criteria_Form
         fields = '__all__'
         exclude = ['profile']
+
+
+class EditUserFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['name', 'email', 'phone']
+
+
+class ProfileFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+        exclude = ['user', 'profile_type']
+
+
+class KnoxSerializer(serializers.Serializer):
+    """
+    Serializer for Knox authentication.
+    """
+    token = serializers.CharField()
+    user = UserSerializer()
