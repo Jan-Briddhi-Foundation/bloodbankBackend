@@ -178,7 +178,9 @@ I havent done any configurations yet.
   - `email`
 - **Response:** Sends an email with instructions to reset the password.
 
+
 ---
+
 
 ## ii.) Social Authenication Endpoints
 
@@ -199,6 +201,8 @@ I havent done any configurations yet.
 - **Description:** Authenticate users via Google
 - **Parameters:** None (GET), User data (PUT, PATCH)
 - **Response:** Returns an authentication token.
+
+---
 
 
 ## iii.) Home Endpoints
