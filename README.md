@@ -283,14 +283,14 @@ I havent done any configurations yet.
 - **Success (200 OK):**
     - Returns a message indicating user ineligibility.
 
-### 7. Thank You
+<!-- ### 7. Thank You
 - **Endpoint:** `/api/thank-you/` (GET)
 - **Description:** Displays a thank-you message.
 - **Permissions:** User must be authenticated.
 
 #### Response
 - **Success (200 OK):**
-    - Returns a thank-you message.
+    - Returns a thank-you message. -->
 
 ### 8. Patient Home
 - **Endpoint:** `/api/patient-home/` (GET)

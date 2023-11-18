@@ -21,7 +21,7 @@ urlpatterns = [
          name='donation_criteria'),
     path('location-map/', LocationMapAPIView.as_view(), name='location_map'),
     path('not-eligible/', NotEligibleAPIView.as_view(), name='not_eligible'),
-    path('thank-you/', ThankYouAPIView.as_view(), name='thank_you'),
+    #     path('thank-you/', ThankYouAPIView.as_view(), name='thank_you'),
 
 
     path('patient-home/', PatientHomeAPIView.as_view(), name='patient_home'),

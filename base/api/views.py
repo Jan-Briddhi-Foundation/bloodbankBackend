@@ -163,11 +163,11 @@ class NotEligibleAPIView(APIView):
         return Response({'message': 'Not Eligible'}, status=status.HTTP_200_OK)
 
 
-class ThankYouAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+# class ThankYouAPIView(APIView):
+#     permission_classes = [IsAuthenticated]
 
-    def get(self, request, *args, **kwargs):
-        return Response({'message': 'Thank you'}, status=status.HTTP_200_OK)
+#     def get(self, request, *args, **kwargs):
+#         return Response({'message': 'Thank you'}, status=status.HTTP_200_OK)
 
 
 # //////////////////////////////////////////////////////////////////
