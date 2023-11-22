@@ -134,9 +134,8 @@ class HospitalAddress(models.Model):
 class Donation(models.Model):
     profile = models.ForeignKey(
         Profile, on_delete=models.SET_NULL, null=True)
-    address = models.ForeignKey(HospitalAddress, on_delete=models.CASCADE)
-
-
+    hospitalAddress = models.ForeignKey(
+        HospitalAddress, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
