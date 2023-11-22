@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'knox',
-
+    "corsheaders",
     'rest_framework.authtoken',
     'dj_rest_auth',
 
@@ -73,6 +73,7 @@ AUTH_USER_MODEL = 'base.User'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+        "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -237,3 +238,9 @@ DJOSER = {
         'user_create': 'base.api.serializers.UserSerializer'
     }
 }
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]

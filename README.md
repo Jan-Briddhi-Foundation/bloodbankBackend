@@ -82,7 +82,7 @@ I havent done any configurations yet.
 - **Description:** User registration endpoint.
 - **Parameters:**
   - `email`
-  - `email`
+  - `name`
   - `password`
 - **Response:** Confirms user registration.
 
