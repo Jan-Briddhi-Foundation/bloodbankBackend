@@ -114,7 +114,37 @@ class Donation_Criteria_Form(models.Model):
         return self.profile.user.name
 
 
+class HospitalAddress(models.Model):
+    name = models.CharField(max_length=150)
+    address = models.CharField(max_length=250)
+    country = models.CharField(null=True, blank=True, max_length=150)
+    states = models.CharField(null=True, blank=True, max_length=150)
+    contact = models.CharField(null=True, blank=True, max_length=50)
+    website = models.URLField(null=True, blank=True, max_length=200)
+    email = models.EmailField(null=True, blank=True, max_length=254)
+    location_longitude = models.CharField(null=True, blank=True, max_length=50)
+    location_latitude = models.CharField(null=True, blank=True, max_length=50)
+    date_created = models.DateTimeField(auto_now=True, null=True)
+    date_modified = models.DateField(auto_now_add=False, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Donation(models.Model):
+    profile = models.ForeignKey(
+        Profile, on_delete=models.SET_NULL, null=True)
+    address = models.ForeignKey(HospitalAddress, on_delete=models.CASCADE)
+
+
+    date_created = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        return self.profile.user.name
+
 # Check if a profile already exists for the user
+
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
