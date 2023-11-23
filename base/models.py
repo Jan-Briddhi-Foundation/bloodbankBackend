@@ -74,7 +74,7 @@ class Profile(models.Model):
     profile_pic = models.ImageField(
         default="avatar.svg", null=True, blank=True)
 
-    profile_type = models.CharField(max_length=255, null=True, choices=ACCOUNT)
+    profile_type = models.CharField(max_length=255, null=True, default="donor", choices=ACCOUNT)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -135,8 +135,8 @@ class DonationCriteriaFormField(models.Model):
                 return False 
             return True
         return self.value
-        
-donation_creteriaForm = DonationCriteriaFormField.objects.all() # Only GET method is expected
+         
+    # Only GET method is expected
 
 class DonorCriteriaFormFieldData(models.Model):
     field = models.ForeignKey(DonationCriteriaFormField, on_delete=models.PROTECT, blank=True, null=True)
