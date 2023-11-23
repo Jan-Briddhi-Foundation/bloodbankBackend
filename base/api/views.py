@@ -78,7 +78,7 @@ class UserDetailsAPIView(APIView):
             profile = request.user.profile
             profile.city = serializer.validated_data['city']
             profile.country = serializer.validated_data['country']
-            profile.bloodgroup = serializer.validated_data['bloodgroup']
+            profile.bloodGroup = serializer.validated_data['bloodGroup']
             profile.profile_type = serializer.validated_data['profile_type']
             profile.save()
 

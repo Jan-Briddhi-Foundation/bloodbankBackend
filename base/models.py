@@ -65,7 +65,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(
         User, blank=True, on_delete=models.CASCADE, unique=True, related_name="profile")
-    bloodgroup = models.CharField(max_length=3, choices=BloodGroup.choices)
+    bloodGroup = models.CharField(max_length=3, choices=BloodGroup.choices)
     langauge = models.CharField(max_length=255, null=True)
     country = models.CharField(max_length=250, null=True)
     city = models.CharField(max_length=250, null=True)
@@ -117,12 +117,13 @@ class Donation_Criteria_Form(models.Model):
 # a form model for the admins to create criteria forms for rendering in the frontend for  the donor to fill.
 
 class DonationCriteriaFormField(models.Model):
-    creator = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
-    name =  models.CharField(max_length=255, )
-    value = models.TextField()
-    type = models.CharField(max_length=255,help_text="Field Types Includes : text, checkbox, number, textarea" )
-    required = models.BooleanField(default=True)
-    hidden = models.BooleanField(default=False)
+    creator = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL) # Creator of the field
+    name =  models.CharField(max_length=255, ) # Name of the field
+    value = models.TextField() #value of the field used to validate the user eligibility
+    type = models.CharField(max_length=255,help_text="Field Types Includes : text, checkbox, number, textarea" )  # for the html field type
+    required = models.BooleanField(default=True) # if field is required or not 
+    hidden = models.BooleanField(default=False) # if field would be hidden or not (they should use this instead of delete the field)
+    
     
     
     def __str__(self) -> str:
@@ -134,6 +135,8 @@ class DonationCriteriaFormField(models.Model):
                 return False 
             return True
         return self.value
+        
+donation_creteriaForm = DonationCriteriaFormField.objects.all() # Only GET method is expected
 
 class DonorCriteriaFormFieldData(models.Model):
     field = models.ForeignKey(DonationCriteriaFormField, on_delete=models.PROTECT, blank=True, null=True)

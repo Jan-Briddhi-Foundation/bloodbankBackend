@@ -11,7 +11,7 @@
                 {% for blood_request in blood_requests %}
                 <a href=" {% url "donation_form" %}">
                     <li class="grid grid-template--5" >
-                        <p>blood type: {{blood_request.profile.bloodgroup}}</p>
+                        <p>blood type: {{blood_request.profile.bloodGroup}}</p>
                         <p>Before Date:{{blood_request.date_needed}} </p>
                         <p>City: {{blood_request.profile.city}}</p>
                         <p>Share: </p>

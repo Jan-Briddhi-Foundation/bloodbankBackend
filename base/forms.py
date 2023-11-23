@@ -14,7 +14,7 @@ class CreateUserForm(UserCreationForm):
 class UserDetailsForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['city', 'country', 'bloodgroup', 'profile_type']
+        fields = ['city', 'country', 'bloodGroup', 'profile_type']
 
 
 class EditUserForm(forms.ModelForm):

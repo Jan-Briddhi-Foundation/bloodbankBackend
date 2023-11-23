@@ -41,7 +41,7 @@ class LoginSerializer(serializers.Serializer):
 class UserDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['city', 'country', 'bloodgroup', 'profile_type']
+        fields = ['city', 'country', 'bloodGroup', 'profile_type']
 
 
 class BloodRequestSerializer(serializers.ModelSerializer):
