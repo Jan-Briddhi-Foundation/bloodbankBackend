@@ -65,7 +65,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(
         User, blank=True, on_delete=models.CASCADE, unique=True, related_name="profile")
-    bloodgroup = models.CharField(max_length=3, choices=BloodGroup.choices)
+    bloodGroup = models.CharField(max_length=3, choices=BloodGroup.choices)
     langauge = models.CharField(max_length=255, null=True)
     country = models.CharField(max_length=250, null=True)
     city = models.CharField(max_length=250, null=True)
@@ -74,7 +74,7 @@ class Profile(models.Model):
     profile_pic = models.ImageField(
         default="avatar.svg", null=True, blank=True)
 
-    profile_type = models.CharField(max_length=255, null=True, choices=ACCOUNT)
+    profile_type = models.CharField(max_length=255, null=True, default="donor", choices=ACCOUNT)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -114,6 +114,67 @@ class Donation_Criteria_Form(models.Model):
         return self.profile.user.name
 
 
+# <<<<<<< dev
+# a form model for the admins to create criteria forms for rendering in the frontend for  the donor to fill.
+
+class DonationCriteriaFormField(models.Model):
+    creator = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL) # Creator of the field
+    name =  models.CharField(max_length=255, ) # Name of the field
+    value = models.TextField() #value of the field used to validate the user eligibility
+    type = models.CharField(max_length=255,help_text="Field Types Includes : text, checkbox, number, textarea" )  # for the html field type
+    required = models.BooleanField(default=True) # if field is required or not 
+    hidden = models.BooleanField(default=False) # if field would be hidden or not (they should use this instead of delete the field)
+    
+    
+    
+    def __str__(self) -> str:
+        return self.name
+    
+    def get_value(self):
+        if self.type == "checkbox":
+            if  ["false", "False", False].__contains__("".join(self.value.split(" "))):
+                return False 
+            return True
+        return self.value
+         
+    # Only GET method is expected
+
+class DonorCriteriaFormFieldData(models.Model):
+    field = models.ForeignKey(DonationCriteriaFormField, on_delete=models.PROTECT, blank=True, null=True)
+    value = models.TextField()
+    donor_form = models.ForeignKey("DonorCriteriaFormSubmission", on_delete=models.CASCADE)
+    
+    date_created = models.DateTimeField(auto_now=True, null=True)
+    
+    date_modified = models.DateField(auto_now_add=False, null=True)
+    
+class DonorCriteriaFormSubmission(models.Model):
+    donor = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
+    fields = models.ManyToManyField(DonationCriteriaFormField, through=DonorCriteriaFormFieldData, blank=True)
+    def __str__(self) -> str:
+        return self.donor.user.name
+    
+    def get_fields():
+        return self.donorcriteriaformfielddata.all()
+
+
+class HospitalAddress(models.Model):
+    name  = models.CharField(max_length = 150)
+    state = models.CharField(max_length = 150)
+    country = models.CharField(max_length = 150)
+    
+    
+    
+class Donation(models.Model):
+    donor = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
+    eligibilityForm = models.ForeignKey(DonorCriteriaFormSubmission, null=True,  on_delete=models.SET_NULL)
+    hospital_address = models.ForeignKey(HospitalAddress, on_delete=models.SET_NULL, null=True)
+    
+    date_created = models.DateTimeField(auto_now=True, null=True)
+    date_modified = models.DateField(auto_now_add=False, null=True)
+
+
+# =======
 class HospitalAddress(models.Model):
     name = models.CharField(max_length=150)
     address = models.CharField(max_length=250)
@@ -140,6 +201,7 @@ class Donation(models.Model):
 
     def __str__(self):
         return self.profile.user.name
+# >>>>>>> main
 
 # Check if a profile already exists for the user
 

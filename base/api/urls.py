@@ -4,6 +4,7 @@ from .views import *
 urlpatterns = [
     path('auth/login/', LoginAPIView.as_view(), name='login_api'),
     path('auth/logout/', LogoutAPIView.as_view(), name='logout_api'),
+    path('auth/validate/', userValidateAPI, name='user_validate'),
 
 
     path('auth/facebook/', FacebookLogin.as_view(), name='fb_login'),

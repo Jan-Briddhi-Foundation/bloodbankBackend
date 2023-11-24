@@ -8,13 +8,13 @@ from .models import *
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['name', 'phone', 'email']
+        fields = ['name', 'phone', 'email', "password"]
 
 
 class UserDetailsForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['city', 'country', 'bloodgroup', 'profile_type']
+        fields = ['city', 'country', 'bloodGroup', 'profile_type']
 
 
 class EditUserForm(forms.ModelForm):

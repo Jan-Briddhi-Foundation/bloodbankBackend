@@ -1,9 +1,13 @@
 from django.contrib import admin
 
-from .models import User, Profile,  Blood_Request, Donation_Criteria_Form
+from .models import User, Profile,  Blood_Request, Donation_Criteria_Form,DonationCriteriaFormField, DonorCriteriaFormSubmission, DonorCriteriaFormFieldData, Donation
 from django.contrib.auth.admin import UserAdmin
 admin.site.register(Profile)
 admin.site.register(Blood_Request)
+admin.site.register(DonationCriteriaFormField)
+admin.site.register(Donation)
+admin.site.register(DonorCriteriaFormFieldData)
+admin.site.register(DonorCriteriaFormSubmission)
 admin.site.register(Donation_Criteria_Form)
 
 

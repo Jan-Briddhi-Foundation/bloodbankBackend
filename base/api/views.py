@@ -20,7 +20,7 @@ from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-
+from ..forms import CreateUserForm
 # Create your views here.
 
 
@@ -78,7 +78,7 @@ class UserDetailsAPIView(APIView):
             profile = request.user.profile
             profile.city = serializer.validated_data['city']
             profile.country = serializer.validated_data['country']
-            profile.bloodgroup = serializer.validated_data['bloodgroup']
+            profile.bloodGroup = serializer.validated_data['bloodGroup']
             profile.profile_type = serializer.validated_data['profile_type']
             profile.save()
 
@@ -294,3 +294,17 @@ class Error404APIView(APIView):
 
     def get(self, request, *args, **kwargs):
         return Response({'message': 'Render error404.html'}, status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+def userValidateAPI(request):
+    
+    userForm = CreateUserForm(**request.data)
+    print(userForm)
+    if userForm.is_valid():
+        return Response({"message":"Form Valid"}, status=status.HTTP_200_OK)
+    
+    return Response(userForm.error_messages, status=status.HTTP_401_UNAUTHORIZED)
+    
+    
+    

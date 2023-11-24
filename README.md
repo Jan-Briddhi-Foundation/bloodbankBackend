@@ -82,7 +82,7 @@ I havent done any configurations yet.
 - **Description:** User registration endpoint.
 - **Parameters:**
   - `email`
-  - `email`
+  - `name`
   - `password`
 - **Response:** Confirms user registration.
 
@@ -118,7 +118,7 @@ I havent done any configurations yet.
     "phone": "+123456789",
     "password": "password",
     "profile": {
-      "bloodgroup": "A+",
+      "bloodGroup": "A+",
       "language": "English",
       "country": "USA",
       "city": "New York",
@@ -132,7 +132,7 @@ I havent done any configurations yet.
   - donor
   - patient
 
-- **bloodgroups**
+- **bloodGroups**
   -  A+
   -  A-
   -  B+

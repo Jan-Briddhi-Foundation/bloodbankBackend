@@ -100,7 +100,7 @@ def UserDetails(request):
 
             profile.city = form.cleaned_data['city']
             profile.country = form.cleaned_data['country']
-            profile.bloodgroup = form.cleaned_data['bloodgroup']
+            profile.bloodGroup = form.cleaned_data['bloodGroup']
             profile.profile_type = form.cleaned_data['profile_type']
 
             profile.save()
