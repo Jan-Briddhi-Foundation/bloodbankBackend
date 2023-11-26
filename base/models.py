@@ -153,7 +153,8 @@ class DonationCriteriaFormField(models.Model):
         max_length=10, choices=QUESTION_TYPES, default='boolean')
     is_required = models.BooleanField(default=True)
     hidden = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now=True, null=True)
+    date_modified = models.DateTimeField(auto_now_add=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.admin.is_staff:
@@ -162,7 +163,7 @@ class DonationCriteriaFormField(models.Model):
             raise PermissionError("Only admin users can create questions.")
 
     def __str__(self) -> str:
-        return self.name
+        return self.question
 
 
 class DonorCriteriaFormSubmission(models.Model):
