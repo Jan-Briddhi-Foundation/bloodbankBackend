@@ -22,7 +22,10 @@ urlpatterns = [
          name='donation_criteria'),
     path('location-map/', LocationMapAPIView.as_view(), name='location_map'),
     path('not-eligible/', NotEligibleAPIView.as_view(), name='not_eligible'),
+
+
     path('donation/', DonationAgreement.as_view(), name='donation_agreement'),
+    path('hospital-address/', HospitalAddress.as_view(), name='hospital_address'),
 
 
     path('patient-home/', PatientHomeAPIView.as_view(), name='patient_home'),

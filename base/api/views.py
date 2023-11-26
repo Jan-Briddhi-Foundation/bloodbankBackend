@@ -305,31 +305,16 @@ class DonationAgreement(APIView):
 #     return render(request, 'base/donation_form.html', context)
 
 
-# class HospitalAddress(APIView):
-#     permission_classes = [IsAuthenticated]
+class HospitalAddress(APIView):
+    permission_classes = [IsAuthenticated]
 
-#     def get(self, request, *args, **kwargs):
-#         user = request.user
-#         user_profile = user.profile
+    def post(self, request, *args, **kwargs):
+        serializer = HospitalAddressSerializer(data=request.data)
+        if serializer.is_valid():
+            instance = serializer.save()
+            return Response({'message': 'Hopsital added successfully'}, status=status.HTTP_200_OK)
 
-#         serializer = HospitalAddressSerializer()
-
-#         return Response({'userForm': userForm.data, 'profileForm': profileForm.data}, status=status.HTTP_200_OK)
-
-#     def post(self, request, *args, **kwargs):
-#         user = request.user
-#         user_profile = user.profile
-
-#         userForm = EditUserFormSerializer(
-#             data=request.data, instance=user)
-#         profileForm = ProfileFormSerializer(
-#             data=request.data, instance=user_profile)
-
-#         if userForm.is_valid() and profileForm.is_valid():
-#             userForm.save()
-#             profileForm.save()
-#             return Response({'message': 'Profile updated successfully'}, status=status.HTTP_200_OK)
-#         return Response({'error_message': 'Please upload a PNG file.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class NotificationsAPIView(APIView):
