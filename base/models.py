@@ -171,8 +171,9 @@ class HospitalAddress(models.Model):
     contact = models.CharField(null=True, blank=True, max_length=50)
     website = models.URLField(null=True, blank=True, max_length=200)
     email = models.EmailField(null=True, blank=True, max_length=254)
-    location_longitude = models.CharField(null=True, blank=True, max_length=50)
-    location_latitude = models.CharField(null=True, blank=True, max_length=50)
+    location_longitude = models.CharField(
+        null=True, blank=True, max_length=254)
+    location_latitude = models.CharField(null=True, blank=True, max_length=254)
     date_created = models.DateTimeField(auto_now=True, null=True)
     date_modified = models.DateField(auto_now_add=False, null=True)
 
@@ -191,7 +192,7 @@ class Donation(models.Model):
         DonorCriteriaFormSubmission, null=True,  on_delete=models.SET_NULL)
 
     date_created = models.DateTimeField(auto_now=True, null=True)
-    date_modified = models.DateField(auto_now_add=False, null=True)
+    date_modified = models.DateTimeField(auto_now_add=False, null=True)
 
     def __str__(self):
         return self.profile.user.name

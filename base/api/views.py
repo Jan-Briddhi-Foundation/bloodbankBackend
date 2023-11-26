@@ -163,13 +163,6 @@ class NotEligibleAPIView(APIView):
         return Response({'message': 'Not Eligible'}, status=status.HTTP_200_OK)
 
 
-# class ThankYouAPIView(APIView):
-#     permission_classes = [IsAuthenticated]
-
-#     def get(self, request, *args, **kwargs):
-#         return Response({'message': 'Thank you'}, status=status.HTTP_200_OK)
-
-
 # //////////////////////////////////////////////////////////////////
 # 3. PATIENTS PAGES
 # //////////////////////////////////////////////////////////////////
@@ -272,7 +265,71 @@ class DeletePageAPIView(APIView):
     def post(self, request, pk, *args, **kwargs):
         item = Blood_Request.objects.get(id=pk)
         item.delete()
-        return Response({'message': 'Request deleted successfully'}, status=status.HTTP_200_OK)
+        return Response({'message': 'Deleted successfully'}, status=status.HTTP_200_OK)
+
+
+class DonationAgreement(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        user_profile = user.profile
+        form = DonationAgreementSerializer(instance=user_profile)
+
+    return Response({'user': user, 'user_profile': user_profile, 'form': form.data}, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        user_profile = user.profile
+
+        serializer = DonationAgreementSerializer(data=request.data)
+        if serializer.is_valid():
+            donationAgreement = Donation.objects.create(
+                profile=user_profile,
+                hospital_address=serializer.validated_data['hospital_address'],
+                eligibilityForm=serializer.validated_data['eligibilityForm']
+            )
+            return Response({'message': 'Request successfully sent'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# @login_required(login_url='login')
+# def hospitalAddress(request):
+#     form = Donation_CriteriaForm()
+#     if request.method == "POST":
+#         form = Donation_CriteriaForm(request.POST)
+#         if form.is_valid:
+#             instance.save()
+
+#     context = {"form": form}
+#     return render(request, 'base/donation_form.html', context)
+
+
+# class HospitalAddress(APIView):
+#     permission_classes = [IsAuthenticated]
+
+#     def get(self, request, *args, **kwargs):
+#         user = request.user
+#         user_profile = user.profile
+
+#         serializer = HospitalAddressSerializer()
+
+#         return Response({'userForm': userForm.data, 'profileForm': profileForm.data}, status=status.HTTP_200_OK)
+
+#     def post(self, request, *args, **kwargs):
+#         user = request.user
+#         user_profile = user.profile
+
+#         userForm = EditUserFormSerializer(
+#             data=request.data, instance=user)
+#         profileForm = ProfileFormSerializer(
+#             data=request.data, instance=user_profile)
+
+#         if userForm.is_valid() and profileForm.is_valid():
+#             userForm.save()
+#             profileForm.save()
+#             return Response({'message': 'Profile updated successfully'}, status=status.HTTP_200_OK)
+#         return Response({'error_message': 'Please upload a PNG file.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class NotificationsAPIView(APIView):
@@ -298,13 +355,9 @@ class Error404APIView(APIView):
 
 @api_view(["POST"])
 def userValidateAPI(request):
-    
+
     userForm = CreateUserForm(**request.data)
-    print(userForm)
     if userForm.is_valid():
-        return Response({"message":"Form Valid"}, status=status.HTTP_200_OK)
-    
+        return Response({"message": "Form Valid"}, status=status.HTTP_200_OK)
+
     return Response(userForm.error_messages, status=status.HTTP_401_UNAUTHORIZED)
-    
-    
-    
