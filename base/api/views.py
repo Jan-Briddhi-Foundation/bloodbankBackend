@@ -293,18 +293,6 @@ class DonationAgreement(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# @login_required(login_url='login')
-# def hospitalAddress(request):
-#     form = Donation_CriteriaForm()
-#     if request.method == "POST":
-#         form = Donation_CriteriaForm(request.POST)
-#         if form.is_valid:
-#             instance.save()
-
-#     context = {"form": form}
-#     return render(request, 'base/donation_form.html', context)
-
-
 class HospitalAddress(APIView):
     permission_classes = [IsAuthenticated]
 
