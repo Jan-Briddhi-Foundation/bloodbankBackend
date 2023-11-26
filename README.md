@@ -282,15 +282,24 @@ I havent done any configurations yet.
 #### Response
 - **Success (200 OK):**
     - Returns a message indicating user ineligibility.
+    
 
-<!-- ### 7. Thank You
-- **Endpoint:** `/api/thank-you/` (GET)
-- **Description:** Displays a thank-you message.
+### 7. Hospital Address
+- **Endpoint:** `/api/hospital-address/` (POST)
+- **Description:** Adds a hospital address.
 - **Permissions:** User must be authenticated.
+
+#### Request
+- **Method:** POST
+- **Parameters:** Hospital address data in the request body.
 
 #### Response
 - **Success (200 OK):**
-    - Returns a thank-you message. -->
+    - Returns a success message if the hospital is added successfully.
+
+- **Bad Request (400):**
+    - Returns validation errors if the provided data is invalid.
+
 
 ### 8. Patient Home
 - **Endpoint:** `/api/patient-home/` (GET)
