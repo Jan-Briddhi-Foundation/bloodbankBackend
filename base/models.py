@@ -115,27 +115,54 @@ class Donation_Criteria_Form(models.Model):
         return self.profile.user.name
 
 
+# class DonationCriteriaFormField(models.Model):
+    # creator = models.ForeignKey(
+    #     User, null=True, blank=True, on_delete=models.SET_NULL)
+    # name = models.CharField(max_length=355)
+    # value = models.TextField()
+    # quiz_type = models.CharField(
+    #     max_length=255, help_text="Field Types Includes : text, checkbox, number, textarea")
+    # is_required = models.BooleanField(default=True)
+    # hidden = models.BooleanField(default=False)
+
+    # def __str__(self) -> str:
+    #     return self.name
+
+    # def get_value(self):
+    #     if self.quiz_type == "checkbox":
+    #         if ["false", "False", False].__contains__("".join(self.value.split(" "))):
+    #             return False
+    #         return True
+    #     return self.value
+
+    # # Only GET method is expected
+
 class DonationCriteriaFormField(models.Model):
+    QUESTION_TYPES = [
+        ('boolean', 'Boolean'),
+        ('string', 'String'),
+        ('number', 'Number'),
+    ]
+
     creator = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL)
-    name = models.CharField(max_length=255, )
-    value = models.TextField()
+    question = models.CharField(max_length=355)
+    admin_answer = models.CharField(
+        max_length=355)
     quiz_type = models.CharField(
-        max_length=255, help_text="Field Types Includes : text, checkbox, number, textarea")
+        max_length=10, choices=QUESTION_TYPES, default='boolean')
     is_required = models.BooleanField(default=True)
     hidden = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if self.admin.is_staff:
+            super().save(*args, **kwargs)
+        else:
+            raise PermissionError("Only admin users can create questions.")
 
     def __str__(self) -> str:
         return self.name
-
-    def get_value(self):
-        if self.quiz_type == "checkbox":
-            if ["false", "False", False].__contains__("".join(self.value.split(" "))):
-                return False
-            return True
-        return self.value
-
-    # Only GET method is expected
 
 
 class DonorCriteriaFormSubmission(models.Model):
