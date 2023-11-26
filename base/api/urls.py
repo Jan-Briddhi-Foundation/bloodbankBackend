@@ -24,7 +24,8 @@ urlpatterns = [
     path('not-eligible/', NotEligibleAPIView.as_view(), name='not_eligible'),
 
 
-    path('donation/', DonationAgreement.as_view(), name='donation_agreement'),
+    path('donation-agreement/', DonationAgreement.as_view(),
+         name='donation_agreement'),
     path('hospital-address/', HospitalAddress.as_view(), name='hospital_address'),
 
 

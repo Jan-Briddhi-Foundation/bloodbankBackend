@@ -282,7 +282,8 @@ class DonationAgreement(APIView):
         user = request.user
         user_profile = user.profile
 
-        serializer = DonationAgreementSerializer(data=request.data)
+        serializer = DonationAgreementSerializer(
+            data=request.data, instance=user_profile)
         if serializer.is_valid():
             donationAgreement = Donation.objects.create(
                 profile=user_profile,
