@@ -36,7 +36,7 @@ Before getting started, make sure you have the following dependencies installed
    * `git clone https://github.com/Jan-Briddhi-Foundation/bloodbankBackend.git`
 
 2. Navigate to the project directory:
-   * `cd blood-donation-backend`
+   * `cd bloodbankBackend`
 
 3. Create and activate a virtual environment (optional but recommended):
    * `python -m venv venv`
@@ -44,7 +44,7 @@ Before getting started, make sure you have the following dependencies installed
    * `# For Windows: venv\Scripts\activate`
 
 5. Install project dependecies:
-   `pip install -r requirements.txt`
+   `pip install -r requirements.txt` or `python -m pip install -r requirements.txt`
 
 6. Run project and check port:
    * Run command `python manage.py runserver`
@@ -52,7 +52,7 @@ Before getting started, make sure you have the following dependencies installed
 
 ## Configuration
 I havent done any configurations yet.
- * Use `admin` and `#Dot9047` for username and password
+ * Use `admin@gmail.com` and `#Dot9047` for email and password
 
 ## Usage 
 1. Access the Django admin panel by visiting http://localhost:8000/admin/ the superuser account created earlier.
