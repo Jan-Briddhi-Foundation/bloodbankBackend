@@ -76,7 +76,9 @@ class Profile(models.Model):
 
     profile_type = models.CharField(
         max_length=255, null=True, default="donor", choices=ACCOUNT)
+
     date_created = models.DateTimeField(auto_now_add=True, null=True)
+    date_modified = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
         return self.user.name
@@ -153,8 +155,9 @@ class DonationCriteriaFormField(models.Model):
         max_length=10, choices=QUESTION_TYPES, default='boolean')
     is_required = models.BooleanField(default=True)
     hidden = models.BooleanField(default=False)
-    date_created = models.DateTimeField(auto_now=True, null=True)
-    date_modified = models.DateTimeField(auto_now_add=True, null=True)
+
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    date_modified = models.DateTimeField(auto_now=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.admin.is_staff:
@@ -186,9 +189,8 @@ class DonorCriteriaFormFieldData(models.Model):
     donor_form = models.ForeignKey(
         DonorCriteriaFormSubmission, on_delete=models.CASCADE)
 
-    date_created = models.DateTimeField(auto_now=True, null=True)
-
-    date_modified = models.DateField(auto_now_add=False, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    date_modified = models.DateTimeField(auto_now=True, null=True)
 
 
 class HospitalAddress(models.Model):
@@ -202,8 +204,9 @@ class HospitalAddress(models.Model):
     location_longitude = models.CharField(
         null=True, blank=True, max_length=254)
     location_latitude = models.CharField(null=True, blank=True, max_length=254)
-    date_created = models.DateTimeField(auto_now=True, null=True)
-    date_modified = models.DateField(auto_now_add=False, null=True)
+
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    date_modified = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
         return self.name
@@ -219,8 +222,8 @@ class Donation(models.Model):
     eligibilityForm = models.ForeignKey(
         DonorCriteriaFormSubmission, null=True,  on_delete=models.SET_NULL)
 
-    date_created = models.DateTimeField(auto_now=True, null=True)
-    date_modified = models.DateTimeField(auto_now_add=False, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    date_modified = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
         return self.profile.user.name
