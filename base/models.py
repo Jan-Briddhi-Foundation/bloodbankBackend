@@ -170,7 +170,7 @@ class DonorCriteriaFormSubmission(models.Model):
     donor = models.ForeignKey(
         Profile, null=True, blank=True, on_delete=models.SET_NULL)
     fields = models.ManyToManyField(
-        DonationCriteriaFormField, through=DonorCriteriaFormFieldData, blank=True)
+        DonationCriteriaFormField, through='DonorCriteriaFormFieldData', blank=True)
 
     def __str__(self) -> str:
         return self.donor.user.name

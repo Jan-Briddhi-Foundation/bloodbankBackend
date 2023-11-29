@@ -276,7 +276,7 @@ class DonationAgreement(APIView):
         user_profile = user.profile
         form = DonationAgreementSerializer(instance=user_profile)
 
-    return Response({'user': user, 'user_profile': user_profile, 'form': form.data}, status=status.HTTP_200_OK)
+        return Response({'user': user, 'user_profile': user_profile, 'form': form.data}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
         user = request.user

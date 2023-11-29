@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import User, Profile,  Blood_Request, Donation_Criteria_Form, DonationCriteriaFormField, DonorCriteriaFormSubmission, DonorCriteriaFormFieldData, HospitalAddress, Donation
 from django.contrib.auth.admin import UserAdmin
 
-admin.site.register(User)
+# admin.site.register(User)
 admin.site.register(Profile)
 admin.site.register(Blood_Request)
 admin.site.register(Donation_Criteria_Form)
