@@ -77,6 +77,8 @@ I havent done any configurations yet.
 - **Parameters:** None
 - **Response:** Logs out the user and invalidates the token.
 
+<!-- 
+
 ### 3. User Registration
 - **Endpoint:** `/api/auth/register/` (POST)
 - **Description:** User registration endpoint.
@@ -84,22 +86,32 @@ I havent done any configurations yet.
   - `email`
   - `name`
   - `password`
-- **Response:** Confirms user registration.
+- **Response:** Confirms user registration. 
+
+-->
+
 <!-- 
+
 ### 4. Password Change
 - **Endpoint:** `/api/auth/change-password/` (POST)
 - **Description:** Password change endpoint.
 - **Parameters:**
   - `old_password`
   - `new_password`
-- **Response:** Confirms the password change. -->
+- **Response:** Confirms the password change. 
 
-<!-- ### 5. Password Reset
+-->
+
+<!--
+
+ ### 5. Password Reset
 - **Endpoint:** `/api/auth/reset-password/` (POST)
 - **Description:** Password reset request endpoint.
 - **Parameters:**
   - `email`
-- **Response:** Sends an email with instructions to reset the password. -->
+- **Response:** Sends an email with instructions to reset the password. 
+
+-->
 
 ---
 
