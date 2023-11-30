@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import User, Profile,  Blood_Request, Donation_Criteria_Form, DonationCriteriaFormField, DonorCriteriaFormSubmission, DonorCriteriaFormFieldData, HospitalAddress, Donation
+from .models import (User, Profile,  Blood_Request, Donation_Criteria_Form, DonationCriteriaFormField, 
+                     DonorCriteriaFormSubmission, DonorCriteriaFormFieldData, HospitalAddress, Donation)
 from django.contrib.auth.admin import UserAdmin
 
 

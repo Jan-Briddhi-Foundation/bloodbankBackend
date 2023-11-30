@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form, Donation, DonorCriteriaFormSubmission, HospitalAddress, DonationCriteriaFormField, DonorCriteriaFormFieldData
+from ..models import (User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form, Donation, 
+                      DonorCriteriaFormSubmission, HospitalAddress, DonationCriteriaFormField, DonorCriteriaFormFieldData)
 
 
 class ProfileSerializer(serializers.ModelSerializer):
