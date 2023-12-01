@@ -62,7 +62,7 @@ I havent done any configurations yet.
 ## API Endpoints
 
 ## i.) Authenication Endpoints
-
+<!-- 
 ### 1. Login
 - **Endpoint:** `/api/auth/login/` (POST)
 - **Description:** User authentication endpoint.
@@ -75,7 +75,7 @@ I havent done any configurations yet.
 - **Endpoint:** `/api/auth/logout/` (POST)
 - **Description:** User logout endpoint.
 - **Parameters:** None
-- **Response:** Logs out the user and invalidates the token.
+- **Response:** Logs out the user and invalidates the token. -->
 
 <!-- 
 
@@ -115,7 +115,24 @@ I havent done any configurations yet.
 
 ---
 
-### 1. User Registration
+
+### 1. Login
+- **Endpoint:** `/api/auth/login/` (POST)
+- **Description:** User authentication endpoint.
+- **Parameters:**
+  - `email`
+  - `password`
+- **Response:** Returns an authentication token.
+
+### 2. Logout
+- **Endpoint:** `/api/auth/logout/` (POST)
+- **Description:** User logout endpoint.
+- **Parameters:** None
+- **Response:** Logs out the user and invalidates the token.
+
+<!--  -->
+
+### 3. User Registration
 - **Endpoint:** `/api/auth/users/` (POST)
 - **Description:** User registration endpoint.
 - **Required Parameters:**
@@ -155,7 +172,7 @@ I havent done any configurations yet.
   -  O-
 - **Response:** Sends a confirmation email with an activation link.
 
-### 2. User Activation
+### 4. User Activation
 - **Endpoint:** `/api/auth/users/activate/` (POST)
 - **Description:** User activation endpoint.
 - **Parameters:**
@@ -163,19 +180,19 @@ I havent done any configurations yet.
   - `token` (activation token)
 - **Response:** Activates the user account.
 
-### 3. User Details
+### 5. User Details
 - **Endpoint:** `/api/auth/users/me/` (GET, PUT, PATCH)
 - **Description:** User details endpoint.
 - **Parameters:** None (GET), User data (PUT, PATCH)
 - **Response:** Retrieves or updates user details.
 
-### 4. User Deletion
+### 6. User Deletion
 - **Endpoint:** `/api/auth/users/me/` (DELETE)
 - **Description:** User deletion endpoint.
 - **Parameters:** None
 - **Response:** Deletes the user account.
 
-### 5. Password Change
+### 7. Password Change
 - **Endpoint:** `/api/auth/users/set_password/` (POST)
 - **Description:** Password change endpoint.
 - **Parameters:**
@@ -183,7 +200,7 @@ I havent done any configurations yet.
   - `re_new_password`
 - **Response:** Confirms the password change.
 
-### 6. Password Reset
+### 8. Password Reset
 - **Endpoint:** `/api/auth/users/reset_password/` (POST)
 - **Description:** Password reset request endpoint.
 - **Parameters:**
