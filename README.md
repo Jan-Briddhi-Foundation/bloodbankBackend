@@ -59,9 +59,6 @@ I havent done any configurations yet.
 2. Use the admin panel to manage users, donors, recipients, appointments, and other data.
 3. To interact with the API, explore the available endpoints (documented below) or use tools like Postman.
 
-## API Endpoints
-
-## i.) Authenication Endpoints
 <!-- 
 ### 1. Login
 - **Endpoint:** `/api/auth/login/` (POST)
@@ -94,8 +91,7 @@ I havent done any configurations yet.
 - **Parameters:**
   - `old_password`
   - `new_password`
-- **Response:** Confirms the password change. 
-
+- **Response:** Confirms the password change.
 
 
  ### 5. Password Reset
@@ -106,7 +102,9 @@ I havent done any configurations yet.
 - **Response:** Sends an email with instructions to reset the password. 
 
 -->
+## API Endpoints
 
+## i.) Authenication Endpoints
 ---
 
 
