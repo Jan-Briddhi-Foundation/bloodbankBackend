@@ -101,6 +101,11 @@ I havent done any configurations yet.
   - `email`
 - **Response:** Sends an email with instructions to reset the password. 
 
+<!--  -->
+<!-- DON’T Make These 5 Coding Mistakes… -->
+<!-- 5 IMPRESSIVE Python Resume Projects (You Can Finish in A Weekend) -->
+<!-- I tried 50 Programming Courses. Here are Top 5. -->
+
 -->
 ## API Endpoints
 
