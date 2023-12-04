@@ -5,12 +5,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('base/', include('base.urls')),
+    # path('base/', include('base.urls')),
     path('api/auth/', include('djoser.urls')),
 
     path('api/', include('base.api.urls')),
     # path('accounts/', include('allauth.urls')),
-    url('auth-token/', include('djoser.urls.authtoken')),
+    path('auth-token/', include('djoser.urls.authtoken')),
 
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls'))

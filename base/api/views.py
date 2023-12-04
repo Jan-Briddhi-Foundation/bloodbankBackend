@@ -1,3 +1,4 @@
+
 from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
 from django.contrib.auth import authenticate
 from django.urls import reverse
@@ -5,6 +6,9 @@ from django.urls import reverse
 from .serializers import *
 from knox.auth import AuthToken
 from knox.views import LoginView, LogoutView
+
+from rest_framework.authentication import BasicAuthentication
+from knox.views import LoginView as KnoxLoginView
 
 from rest_framework import status, generics
 from rest_framework.views import APIView
@@ -37,6 +41,10 @@ class LoginAPIView(generics.GenericAPIView):
             }, status=status.HTTP_201_CREATED)
         else:
             return Response({"error": "Invalid credentials"},  status=status.HTTP_400_BAD_REQUEST)
+
+
+# class LoginAPIView(KnoxLoginView):
+#     authentication_classes = [BasicAuthentication]
 
 
 class LogoutAPIView(LogoutView):
@@ -327,11 +335,11 @@ class Error404APIView(APIView):
         return Response({'message': 'Render error404.html'}, status=status.HTTP_200_OK)
 
 
-@api_view(["POST"])
-def userValidateAPI(request):
+# @api_view(["POST"])
+# def userValidateAPI(request):
 
-    userForm = CreateUserForm(**request.data)
-    if userForm.is_valid():
-        return Response({"message": "Form Valid"}, status=status.HTTP_200_OK)
+#     userForm = CreateUserForm(**request.data)
+#     if userForm.is_valid():
+#         return Response({"message": "Form Valid"}, status=status.HTTP_200_OK)
 
-    return Response(userForm.error_messages, status=status.HTTP_401_UNAUTHORIZED)
+#     return Response(userForm.error_messages, status=status.HTTP_401_UNAUTHORIZED)

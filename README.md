@@ -117,10 +117,12 @@ I havent done any configurations yet.
 
 ### 1. User Registration
 - **Endpoint:** `/api/auth/users/` (POST)
+
 - **Description:** User registration endpoint.
 - **Required Parameters:**
   - `name`
   - `email`
+  - `phone `
   - `password`
 - **Example:**
   ```json

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import (User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form, Donation, 
+from ..models import (User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form, Donation,
                       DonorCriteriaFormSubmission, HospitalAddress, DonationCriteriaFormField, DonorCriteriaFormFieldData)
 
 
@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["name", "email", "password", "profile"]
+        fields = ["name", "email", "phone", "password", "profile"]
 
     def create(self, validated_data):
         profile_data = validated_data.get("profile")

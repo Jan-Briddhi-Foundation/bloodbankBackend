@@ -61,6 +61,7 @@ class Profile(models.Model):
     ACCOUNT = (
         ('donor', 'I am a donor'),
         ('patient', 'I need a donor'),
+        ('none', 'none'),
     )
 
     user = models.OneToOneField(
@@ -75,7 +76,7 @@ class Profile(models.Model):
         default="avatar.svg", null=True, blank=True)
 
     profile_type = models.CharField(
-        max_length=255, null=True, default="donor", choices=ACCOUNT)
+        max_length=255, null=True, default="none", choices=ACCOUNT)
 
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_modified = models.DateTimeField(auto_now=True, null=True)
