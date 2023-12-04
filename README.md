@@ -47,6 +47,7 @@ Before getting started, make sure you have the following dependencies installed
    `pip install -r requirements.txt` or `python -m pip install -r requirements.txt`
 
 6. Run project and check port:
+   * Run command `python manage.py migrate`
    * Run command `python manage.py runserver`
    * Check url http://localhost:8000/
 
@@ -113,23 +114,8 @@ I havent done any configurations yet.
 ---
 
 
-### 1. Login
-- **Endpoint:** `/api/auth/login/` (POST)
-- **Description:** User authentication endpoint.
-- **Parameters:**
-  - `email`
-  - `password`
-- **Response:** Returns an authentication token.
 
-### 2. Logout
-- **Endpoint:** `/api/auth/logout/` (POST)
-- **Description:** User logout endpoint.
-- **Parameters:** None
-- **Response:** Logs out the user and invalidates the token.
-
-<!--  -->
-
-### 3. User Registration
+### 1. User Registration
 - **Endpoint:** `/api/auth/users/` (POST)
 - **Description:** User registration endpoint.
 - **Required Parameters:**
@@ -168,6 +154,23 @@ I havent done any configurations yet.
   -  O+
   -  O-
 - **Response:** Sends a confirmation email with an activation link.
+
+
+### 2. Login
+- **Endpoint:** `/api/auth/login/` (POST)
+- **Description:** User authentication endpoint.
+- **Parameters:**
+  - `email`
+  - `password`
+- **Response:** Returns an authentication token.
+
+### 3. Logout
+- **Endpoint:** `/api/auth/logout/` (POST)
+- **Description:** User logout endpoint.
+- **Parameters:** None
+- **Response:** Logs out the user and invalidates the token.
+
+<!--  -->
 
 ### 4. User Activation
 - **Endpoint:** `/api/auth/users/activate/` (POST)

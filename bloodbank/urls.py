@@ -10,6 +10,7 @@ urlpatterns = [
 
     path('api/', include('base.api.urls')),
     # path('accounts/', include('allauth.urls')),
+    url('auth-token/', include('djoser.urls.authtoken')),
 
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls'))
