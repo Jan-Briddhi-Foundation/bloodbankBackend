@@ -61,31 +61,6 @@ I havent done any configurations yet.
 3. To interact with the API, explore the available endpoints (documented below) or use tools like Postman.
 
 <!-- 
-### 1. Login
-- **Endpoint:** `/api/auth/login/` (POST)
-- **Description:** User authentication endpoint.
-- **Parameters:**
-  - `email`
-  - `password`
-- **Response:** Returns an authentication token.
-
-### 2. Logout
-- **Endpoint:** `/api/auth/logout/` (POST)
-- **Description:** User logout endpoint.
-- **Parameters:** None
-- **Response:** Logs out the user and invalidates the token. 
-
-
-### 3. User Registration
-- **Endpoint:** `/api/auth/register/` (POST)
-- **Description:** User registration endpoint.
-- **Parameters:**
-  - `email`
-  - `name`
-  - `password`
-- **Response:** Confirms user registration. 
-
-
 ### 4. Password Change
 - **Endpoint:** `/api/auth/change-password/` (POST)
 - **Description:** Password change endpoint.
@@ -111,9 +86,8 @@ I havent done any configurations yet.
 ## API Endpoints
 
 ## i.) Authenication Endpoints
+
 ---
-
-
 
 ### 1. User Registration
 - **Endpoint:** `/api/auth/users/` (POST)
@@ -175,7 +149,7 @@ I havent done any configurations yet.
 <!--  -->
 
 ### 4. User Activation
-- **Endpoint:** `/api/auth/users/activate/` (POST)
+- **Endpoint:** `/api/auth/users/activation/` (POST)
 - **Description:** User activation endpoint.
 - **Parameters:**
   - `uid` (user id)
@@ -199,7 +173,7 @@ I havent done any configurations yet.
 - **Description:** Password change endpoint.
 - **Parameters:**
   - `new_password`
-  - `re_new_password`
+  - `current_password`
 - **Response:** Confirms the password change.
 
 ### 8. Password Reset

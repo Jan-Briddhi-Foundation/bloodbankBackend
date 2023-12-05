@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from decouple import config
 from pathlib import Path
 
+import os
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -229,11 +232,33 @@ REST_AUTH_SERIALIZERS = {
 }
 
 DJOSER = {
+
+    'PASSWORD_RESET_CONFIRM_URL': 'reset_password_confirm/{uid}/{token}',
+
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+
+
+    'SEND_ACTIVATION_EMAIL': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
+
     'SERIALIZERS': {
         'user_create': 'base.api.serializers.UserSerializer'
     }
 }
 
+# EMAIL CONFIGURATION
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USERNAME = "jarvisochieng2018@gmail.com"
+EMAIL_HOST_PASSWORD = 'jlikqdawmwyjnikl'
+
+
+# EMAIL_HOST_USERNAME = os.environ.get('EMAIL_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
