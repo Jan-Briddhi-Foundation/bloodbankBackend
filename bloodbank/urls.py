@@ -8,7 +8,11 @@ urlpatterns = [
     # path('base/', include('base.urls')),
     path('api/auth/', include('djoser.urls')),
 
+    path('api/login/', include('rest_social_auth.urls_token')),
+    path('api/login/', include('rest_social_auth.urls_knox')),
+
     path('api/', include('base.api.urls')),
+    path('social/', include('base.social_auth.urls')),
     # path('accounts/', include('allauth.urls')),
     path('auth-token/', include('djoser.urls.authtoken')),
 

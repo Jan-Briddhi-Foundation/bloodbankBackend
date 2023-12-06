@@ -15,9 +15,9 @@ urlpatterns = [
          name='knox_logoutall'),
 
 
+    path('auth/google/', GoogleLogin.as_view(), name='google_login'),
     path('auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
     path('auth/twitter/', TwitterLogin.as_view(), name='twitter_login'),
-    path('auth/google/', GoogleLogin.as_view(), name='google_login'),
 
 
     path('home/', HomePageAPIView.as_view(), name='home'),

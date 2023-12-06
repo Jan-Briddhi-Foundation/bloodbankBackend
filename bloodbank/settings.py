@@ -62,6 +62,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
+
+    # 'rest_framework',
+    # 'rest_framework.authtoken',  # only if you use token authentication
+    'social_django',  # django social auth
+    'rest_social_auth',  # this package
+    # 'knox',  # Only if you use django-rest-knox
 ]
 
 SITE_ID = 1
@@ -152,6 +158,10 @@ AUTHENTICATION_BACKENDS = [
 
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+
+    'social_core.backends.facebook.FacebookOAuth2',
+    # and maybe some others ...
+    # 'django.contrib.auth.backends.ModelBackend',
 ]
 
 # Static files (CSS, JavaScript, Images)
@@ -183,10 +193,6 @@ SOCIALACCOUNT_PROVIDERS = {
         'EMAIL_AUTHENTICATION': True
     },
 
-
-    # App secret = il0yty9ec4rIjl6FW2O3p6i4V
-    # App ID = 4EP2kFU3L0O0kdrgsBIMzr4p8S4mcJVF9Q4J3jvm1LCTr9R5WR
-
     'facebook': {
         'METHOD': 'oauth2',
         'SCOPE': ['email', 'public_profile'],
@@ -196,8 +202,6 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERIFIED_EMAIL': False,
         'VERSION': 'v13.0',
         'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
-        # App secret = 1b95d147c125b1618aade67eea0706c0
-        # App ID = 1050696209683610
     }
 }
 
@@ -235,11 +239,10 @@ REST_AUTH_SERIALIZERS = {
 }
 
 DJOSER = {
-
-    'PASSWORD_RESET_CONFIRM_URL': 'reset_password_confirm/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'http://localhost:8000/reset_password_confirm/{uid}/{token}',
 
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
-
+    'ACTIVATION_URL': 'http://localhost:8000/activate/{uid}/{token}',
 
     'SEND_ACTIVATION_EMAIL': True,
     'SEND_CONFIRMATION_EMAIL': True,
@@ -259,7 +262,15 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
 
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
+
+
+# LAST SECURITY SECTION
+SOCIAL_AUTH_FACEBOOK_KEY = config('FACEBOOK_CLIENT_ID')
+SOCIAL_AUTH_FACEBOOK_SECRET = config('FACEBOOK_SECRET_KEY')
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'public_profile']  # optional
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'ru_RU'}  # optional

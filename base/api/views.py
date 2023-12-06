@@ -98,6 +98,11 @@ class UserDetailsAPIView(APIView):
 # SOCIAL AUTH
 # //////////////////////////////////////////////////////////////////
 
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+    callback_url = 'http://localhost:8000//api/auth/google/login/'
+    client_class = OAuth2Client
+
 
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter
@@ -107,11 +112,6 @@ class TwitterLogin(SocialLoginView):
     serializer_class = TwitterLoginSerializer
     adapter_class = TwitterOAuthAdapter
 
-
-class GoogleLogin(SocialLoginView):
-    adapter_class = GoogleOAuth2Adapter
-    callback_url = 'http://localhost:8000/accounts/google/login/callback/'
-    client_class = OAuth2Client
 
 # //////////////////////////////////////////////////////////////////
 # 2. DONORS PAGES
