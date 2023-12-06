@@ -190,23 +190,25 @@ I havent done any configurations yet.
 
 ## ii.) Social Authenication Endpoints
 
-### 1. Facebook
+### 1. Google
+- **Endpoint:** `/api/auth/google/` (POST)
+- **Description:** Authenticate users via Google
+- **Parameters:** None (GET), User data (PUT, PATCH)
+- **Response:** Returns an authentication token.
+
+### 2. Facebook
 - **Endpoint:** `/api/auth/facebook/` (POST)
 - **Description:** Authenticate users via Facebook
 - **Parameters:** None (GET), User data (PUT, PATCH)
 - **Response:** Returns an authentication token.
 
-### 2. Twitter
+### 3. Twitter
 - **Endpoint:** `/api/auth/twitter/` (POST)
 - **Description:** Authenticate users via Twitter
 - **Parameters:** None (GET), User data (PUT, PATCH)
 - **Response:** Returns an authentication token.
 
-### 3. Google
-- **Endpoint:** `/api/auth/google/` (POST)
-- **Description:** Authenticate users via Google
-- **Parameters:** None (GET), User data (PUT, PATCH)
-- **Response:** Returns an authentication token.
+
 
 ---
 
