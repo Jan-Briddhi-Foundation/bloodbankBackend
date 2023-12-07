@@ -341,14 +341,14 @@ I havent done any configurations yet.
     - Returns an error message if the provided data is invalid.
 
 
-### 9. Patient Home
+<!-- ### 9. Patient Home
 - **Endpoint:** `/api/patient-home/` (GET)
 - **Description:** Retrieves the patient's home page.
 - **Permissions:** User must be authenticated.
 
 #### Response
 - **Success (200 OK):**
-    - Returns a message indicating the patient's home page.
+    - Returns a message indicating the patient's home page. -->
 
 ### 10. Profile
 - **Endpoint:** `/api/profile/` (GET)
@@ -360,7 +360,7 @@ I havent done any configurations yet.
     - Returns the user's profile information.
 
 ### 11. Edit Profile
-- **Endpoint:** `/api/edit-profile/` 
+- **Endpoint:** `/api/profile-edit/` 
     - **GET:** Retrieves user's edit profile forms.
     - **POST:** Updates user's profile information.
 - **Description:** Allows users to view and edit their profile details.
@@ -368,7 +368,7 @@ I havent done any configurations yet.
 
 #### GET Request
 - **Response (200 OK):**
-    - Returns user's edit profile forms.
+    - Returns user's profile.
 
 #### POST Request
 - **Request:**
@@ -379,14 +379,14 @@ I havent done any configurations yet.
 
 ### 12. Request Blood
 - **Endpoint:** `/api/request-blood/` 
-    - **GET:** Retrieves user's blood request form.
+    <!-- - **GET:** Retrieves user's blood request form. -->
     - **POST:** Submits a blood request.
 - **Description:** Allows users to request blood donations.
 - **Permissions:** User must be authenticated.
 
-#### GET Request
+<!-- #### GET Request
 - **Response (200 OK):**
-    - Returns user's blood request form.
+    - Returns user's blood request form. -->
 
 #### POST Request
 - **Request:**
@@ -394,7 +394,7 @@ I havent done any configurations yet.
 - **Response:**
     - Returns a success message if the blood request is sent successfully.
     - Returns an error message if the provided data is invalid.
-
+<!-- 
 ### 13. Request Sent
 - **Endpoint:** `/api/request-sent/` (GET)
 - **Description:** Notifies the user of a successful blood request submission.
@@ -402,10 +402,10 @@ I havent done any configurations yet.
 
 #### Response
 - **Success (200 OK):**
-    - Returns a message indicating successful blood request submission.
+    - Returns a message indicating successful blood request submission. -->
 
 ### 14. Patient History
-- **Endpoint:** `/api/patient-history/` (GET)
+- **Endpoint:** `/api/patient-request-history/` (GET)
 - **Description:** Retrieves the blood donation history for the patient.
 - **Permissions:** User must be authenticated.
 
@@ -413,7 +413,7 @@ I havent done any configurations yet.
 - **Success (200 OK):**
     - Returns a list of blood donation history for the patient.
 
-### 15. Delete Page
+<!-- ### 15. Delete Page
 - **Endpoint:** `/api/delete-page/<int:pk>/` 
     - **GET:** Retrieves the item to be deleted.
     - **POST:** Deletes the specified item.
@@ -426,8 +426,9 @@ I havent done any configurations yet.
 
 #### POST Request
 - **Response (200 OK):**
-    - Returns a success message if the item is deleted successfully.
+    - Returns a success message if the item is deleted successfully. -->
 
+<!-- 
 ### 16. Notifications
 - **Endpoint:** `/api/notifications/` (GET)
 - **Description:** Retrieves and renders the notifications page.
@@ -435,9 +436,9 @@ I havent done any configurations yet.
 
 #### Response
 - **Success (200 OK):**
-    - Returns a message indicating the rendering of the notifications page.
+    - Returns a message indicating the rendering of the notifications page. -->
 
-### 16. Blood Match Success
+<!-- ### 16. Blood Match Success
 - **Endpoint:** `/api/blood-match-success/` (GET)
 - **Description:** Retrieves and renders the blood match success page.
 - **Permissions:** User must be authenticated.
@@ -449,7 +450,7 @@ I havent done any configurations yet.
 ### 18. Error 404
 - **Endpoint:** `/api/error404/` (GET)
 - **Description:** Retrieves and renders the error 404 page.
-- **Permissions:** User must be authenticated.
+- **Permissions:** User must be authenticated. -->
 
 #### Response
 - **Success (200 OK):**

@@ -35,10 +35,10 @@ urlpatterns = [
 
     path('patient-home/', PatientHomeAPIView.as_view(), name='patient_home'),
     path('profile/', ProfileAPIView.as_view(), name='profile'),
-    path('edit-profile/', EditProfileAPIView.as_view(), name='edit_profile'),
+    path('profile-edit/', EditProfileAPIView.as_view(), name='edit_profile'),
     path('request-blood/', RequestBloodAPIView.as_view(), name='request_blood'),
     path('request-sent/', RequestSentAPIView.as_view(), name='request_sent'),
-    path('patient-history/', PatientHistoryAPIView.as_view(),
+    path('patient-request-history/', PatientHistoryAPIView.as_view(),
          name='patient_history'),
 
     path('delete-page/<int:pk>/',

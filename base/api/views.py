@@ -219,18 +219,22 @@ class EditProfileAPIView(APIView):
 class RequestBloodAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, *args, **kwargs):
-        user = request.user
-        user_profile = user.profile
-        form = BloodRequestSerializer(instance=user_profile)
+    # def get(self, request, *args, **kwargs):
+    #     user = request.user
+    #     user_profile = user.profile
 
-        return Response({'user': user, 'user_profile': user_profile, 'form': form.data}, status=status.HTTP_200_OK)
+    #     blood_requests = Blood_Request.objects.filter(profile=user_profile)
+    #     blood_requests_serializer = BloodRequestSerializer(
+    #         blood_requests, many=True)
+
+    #     return Response({'blood_requests': blood_requests_serializer.data}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
         user = request.user
         user_profile = user.profile
 
-        serializer = BloodRequestSerializer(data=request.data)
+        serializer = BloodRequestSerializer(
+            data=request.data, instance=user_profile)
         if serializer.is_valid():
             blood_request = Blood_Request.objects.create(
                 profile=user_profile,
@@ -278,7 +282,7 @@ class DonationAgreement(APIView):
     def get(self, request, *args, **kwargs):
         user = request.user
         user_profile = user.profile
-        form = DonationAgreementSerializer(instance=user_profile)
+        form = DonationAgreementSerializer(instance=user)
 
         return Response({'user': user, 'user_profile': user_profile, 'form': form.data}, status=status.HTTP_200_OK)
 

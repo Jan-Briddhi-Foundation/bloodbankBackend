@@ -46,6 +46,9 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 
 
 class BloodRequestSerializer(serializers.ModelSerializer):
+    quantity = serializers.FloatField()
+    date_needed = serializers.DateField()
+
     class Meta:
         model = Blood_Request
         fields = '__all__'
@@ -75,8 +78,8 @@ class EditUserFormSerializer(serializers.ModelSerializer):
 class ProfileFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = '__all__'
-        exclude = ['user', 'profile_type']
+        exclude = ['id', 'user', 'profile_type',
+                   'date_created', 'date_modified']
 
 
 class HospitalAddressSerializer(serializers.ModelSerializer):
