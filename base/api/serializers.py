@@ -49,19 +49,20 @@ class BloodRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blood_Request
         fields = '__all__'
-        exclude = ['profile']
+        # exclude = ['profile']
 
 
 class DonationCriteriaFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Donation_Criteria_Form
         fields = '__all__'
-        exclude = ['profile']
+        # exclude = ['profile']
 
 
 class DonationAgreementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Donation
+        fields = '__all__'
         fields = ['hospital_address', 'eligibilityForm']
 
 

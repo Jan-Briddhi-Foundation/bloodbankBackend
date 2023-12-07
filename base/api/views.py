@@ -43,10 +43,6 @@ class LoginAPIView(generics.GenericAPIView):
             return Response({"error": "Invalid credentials"},  status=status.HTTP_400_BAD_REQUEST)
 
 
-# class LoginAPIView(KnoxLoginView):
-#     authentication_classes = [BasicAuthentication]
-
-
 class LogoutAPIView(LogoutView):
     permission_classes = [IsAuthenticated]
 
@@ -90,7 +86,7 @@ class UserDetailsAPIView(APIView):
             profile.profile_type = serializer.validated_data['profile_type']
             profile.save()
 
-            return Response({'message': 'User details updated successfully'}, status=status.HTTP_200_OK)
+            return Response({'message': 'Profile details updated successfully'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

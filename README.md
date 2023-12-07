@@ -194,22 +194,26 @@ I havent done any configurations yet.
 ## ii.) Social Authenication Endpoints
 
 ### 1. Google
-- **Endpoint:** `/api/auth/google/` (POST)
+- **Endpoint:** `/social_auth/google/` (POST)
 - **Description:** Authenticate users via Google
-- **Parameters:** None (GET), User data (PUT, PATCH)
-- **Response:** Returns an authentication token.
+- **Parameters:** 
+    - `auth_token`
+- **Response:** Returns an authenicated user details, username, email and adds them in our database.
 
 ### 2. Facebook
-- **Endpoint:** `/api/auth/facebook/` (POST)
+- **Endpoint:** `/social_auth/facebook/` (POST)
 - **Description:** Authenticate users via Facebook
-- **Parameters:** None (GET), User data (PUT, PATCH)
-- **Response:** Returns an authentication token.
+- **Parameters:** 
+    - `auth_token`
+- **Response:** Returns an authenicated user details, username, email and adds them in our database.
 
 ### 3. Twitter
-- **Endpoint:** `/api/auth/twitter/` (POST)
+- **Endpoint:** `/social_auth/twitter/` (POST)
 - **Description:** Authenticate users via Twitter
-- **Parameters:** None (GET), User data (PUT, PATCH)
-- **Response:** Returns an authentication token.
+- **Parameters:** 
+    - `access_token_key`
+    - `access_token_secret`
+- **Response:** Returns an authenicated user details, username, email and adds them in our database.
 
 
 
@@ -233,14 +237,18 @@ I havent done any configurations yet.
     - If user's profile doesn't exist, creates a profile, updates user details, and returns a success message.
 
 
-### 2. User Details
-- **Endpoint:** `/api/personal-details/` (POST)
-- **Description:** Updates user's personal details.
+### 2. Profile Details
+- **Endpoint:** `/api/profile-details/` (POST)
+- **Description:** Updates user's profile details.
 - **Permissions:** User must be authenticated.
 
 #### Request
 - **Method:** POST
-- **Parameters:** User details in the request body.
+- **Parameters:** 
+    - `city`
+    - `country`
+    - `bloodGroup`
+    - `profile_type`
 
 #### Response
 - **Success (200 OK):**
@@ -259,7 +267,7 @@ I havent done any configurations yet.
 - **Success (200 OK):**
     - Returns a list of blood donation requests.
 
-
+<!-- 
 ### 4. Donation Criteria
 - **Endpoint:** `/api/donation-criteria/` (POST)
 - **Description:** Validates and processes user's donation criteria form.
@@ -283,9 +291,9 @@ I havent done any configurations yet.
 
 #### Response
 - **Success (200 OK):**
-    - Returns a message indicating the rendering of the location map.
+    - Returns a message indicating the rendering of the location map. -->
 
-### 6. Not Eligible
+<!-- ### 6. Not Eligible
 - **Endpoint:** `/api/not-eligible/` (GET)
 - **Description:** Notifies the user of ineligibility.
 - **Permissions:** User must be authenticated.
@@ -293,7 +301,7 @@ I havent done any configurations yet.
 #### Response
 - **Success (200 OK):**
     - Returns a message indicating user ineligibility.
-    
+     -->
 
 ### 7. Hospital Address
 - **Endpoint:** `/api/hospital-address/` (POST)
@@ -302,7 +310,9 @@ I havent done any configurations yet.
 
 #### Request
 - **Method:** POST
-- **Parameters:** Hospital address data in the request body.
+- **Parameters:** 
+    - `name`
+    - `address`
 
 #### Response
 - **Success (200 OK):**

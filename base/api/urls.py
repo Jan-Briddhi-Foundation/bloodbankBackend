@@ -5,15 +5,11 @@ from knox import views as knox_views
 # from yourapp.api.views import LoginView
 
 urlpatterns = [
-    #     path('auth/login/', LoginAPIView.as_view(), name='login_api'),
-    #     path('auth/logout/', LogoutAPIView.as_view(), name='logout_api'),
-    #     path('auth/validate/', userValidateAPI, name='user_validate'),
 
     path('auth/login/', LoginAPIView.as_view(), name='knox_login'),
     path('auth/logout/', knox_views.LogoutView.as_view(), name='knox_logout'),
     path('auth/logoutall/', knox_views.LogoutAllView.as_view(),
          name='knox_logoutall'),
-
 
     path('auth/google/', GoogleLogin.as_view(), name='google_login'),
     path('auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
@@ -22,7 +18,7 @@ urlpatterns = [
 
     path('home/', HomePageAPIView.as_view(), name='home'),
 
-    path('personal-details/', UserDetailsAPIView.as_view(), name='user_details'),
+    path('profile-details/', UserDetailsAPIView.as_view(), name='user_details'),
 
 
     path('donor-home/', DonorHomeAPIView.as_view(), name='donor_home'),

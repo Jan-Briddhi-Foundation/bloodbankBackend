@@ -214,8 +214,8 @@ class HospitalAddress(models.Model):
 
 
 class Donation(models.Model):
-    profile = models.ForeignKey(
-        Profile, null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.SET_NULL)
 
     hospital_address = models.ForeignKey(
         HospitalAddress, on_delete=models.SET_NULL, null=True)
