@@ -123,19 +123,36 @@ class DonorHomeAPIView(APIView):
         return Response({'blood_requests': serializer.data}, status=status.HTTP_200_OK)
 
 
+# def donation_comparison_form(user_form_data):
+#     userChoice = []
+#     needed_values = [False, False, False,
+#                      False, False, False, False, False, False, False, True, True, True, False]
+
+#     for field_value in ['rabis_hepatitis_past_1_year', 'tatoo_surgery_past_6_months', 'donated_blood_past_3_months', 'immunisation_past_1_month', 'anitibiotics_past_48_hrs', 'alcoholic_bevarage_past_24_hrs', 'asprin_dentalwork_past_72_hrs', 'cough_common_presently', 'pregnant_breastFeeding_presently', 'menstration_presently', 'health_check_1', 'health_check_2', 'age_betwn_18_60', 'body_weight_less_45']:
+#         choice = user_form_data.cleaned_data.get(field_value)
+#         userChoice.append(choice)
+
+#     for i in range(len(needed_values)):
+#         if needed_values[i] != userChoice[i]:
+#             return False
+#     return True
+
+
+# def donation_comparison_form(user_form_data):
+#     userChoice = []
+#     needed_values = [True]
+
+#     for field_value in ['qualify']:
+#         choice = user_form_data.cleaned_data.get(field_value)
+#         userChoice.append(choice)
+
+#     for i in range(len(needed_values)):
+#         if needed_values[i] != userChoice[i]:
+#             return False
+#     return True
 def donation_comparison_form(user_form_data):
-    userChoice = []
-    needed_values = [False, False, False,
-                     False, False, False, False, False, False, False, True, True, True, False]
-
-    for field_value in ['rabis_hepatitis_past_1_year', 'tatoo_surgery_past_6_months', 'donated_blood_past_3_months', 'immunisation_past_1_month', 'anitibiotics_past_48_hrs', 'alcoholic_bevarage_past_24_hrs', 'asprin_dentalwork_past_72_hrs', 'cough_common_presently', 'pregnant_breastFeeding_presently', 'menstration_presently', 'health_check_1', 'health_check_2', 'age_betwn_18_60', 'body_weight_less_45']:
-        choice = user_form_data.cleaned_data.get(field_value)
-        userChoice.append(choice)
-
-    for i in range(len(needed_values)):
-        if needed_values[i] != userChoice[i]:
-            return False
-    return True
+    user_choice = [user_form_data.cleaned_data.get('qualify')]
+    return user_choice == [True]
 
 
 class DonationCriteriaAPIView(APIView):

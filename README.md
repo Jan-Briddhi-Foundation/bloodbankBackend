@@ -149,13 +149,13 @@ I havent done any configurations yet.
 - **Response:** Logs out the user and invalidates the token.
 
 
-### 4. User Activation
+<!-- ### 4. User Activation
 - **Endpoint:** `/api/auth/users/activation/` (POST)
 - **Description:** User activation endpoint.
 - **Parameters:**
   - `uid` (user id)
   - `token` (activation token)
-- **Response:** Activates the user account.
+- **Response:** Activates the user account. -->
 
 
 ### 5. User Details
@@ -404,7 +404,7 @@ I havent done any configurations yet.
 - **Success (200 OK):**
     - Returns a message indicating successful blood request submission. -->
 
-### 14. Patient History
+### 14. Patient Blood Request History
 - **Endpoint:** `/api/patient-request-history/` (GET)
 - **Description:** Retrieves the blood donation history for the patient.
 - **Permissions:** User must be authenticated.
