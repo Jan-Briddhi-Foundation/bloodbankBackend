@@ -34,3 +34,5 @@ urllib3==2.1.0
 # Successfully installed rest-social-auth-8.1.0
 
 google-api-python-client
+facebook-sdk
+python-twitter

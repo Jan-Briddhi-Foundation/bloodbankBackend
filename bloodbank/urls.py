@@ -12,7 +12,7 @@ urlpatterns = [
     path('api/login/', include('rest_social_auth.urls_knox')),
 
     path('api/', include('base.api.urls')),
-    path('social/', include('base.social_auth.urls')),
+    path('social_auth/', include('base.social_auth.urls')),
     # path('accounts/', include('allauth.urls')),
     path('auth-token/', include('djoser.urls.authtoken')),
 
