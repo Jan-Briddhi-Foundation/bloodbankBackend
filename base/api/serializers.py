@@ -56,6 +56,8 @@ class BloodRequestSerializer(serializers.ModelSerializer):
 
 
 class DonationCriteriaFormSerializer(serializers.ModelSerializer):
+    qualify = serializers.BooleanField()
+
     class Meta:
         model = Donation_Criteria_Form
         fields = '__all__'

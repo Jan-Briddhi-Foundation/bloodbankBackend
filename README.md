@@ -220,7 +220,7 @@ I havent done any configurations yet.
 ---
 
 
-## iii.) Home Endpoints
+## iii.) Other Endpoints
 
 ### 1. Home Page
 - **Endpoint:** `/api/home/` (GET)
@@ -267,7 +267,6 @@ I havent done any configurations yet.
 - **Success (200 OK):**
     - Returns a list of blood donation requests.
 
-<!-- 
 ### 4. Donation Criteria
 - **Endpoint:** `/api/donation-criteria/` (POST)
 - **Description:** Validates and processes user's donation criteria form.
@@ -275,14 +274,16 @@ I havent done any configurations yet.
 
 #### Request
 - **Method:** POST
-- **Parameters:** Donation criteria form data in the request body.
+- **Parameters:** 
+    - `qualify` (Boolean Value)
 
 #### Response
 - **Success (200 OK):**
-    - Returns a success message if the user is eligible for donation.
+    - Returns a success message if the user is eligible or NOT for donation.
 
 - **Bad Request (400):**
-    - Returns a message indicating ineligibility if the criteria are not met
+    - Returns validation errors if the provided data is invalid.
+<!-- 
 
 ### 5. Location Map
 - **Endpoint:** `/api/location-map/` (GET)
@@ -350,19 +351,19 @@ I havent done any configurations yet.
 - **Success (200 OK):**
     - Returns a message indicating the patient's home page. -->
 
-### 10. Profile
+<!-- ### 10. Profile
 - **Endpoint:** `/api/profile/` (GET)
 - **Description:** Retrieves the user's profile information.
 - **Permissions:** User must be authenticated.
 
 #### Response
 - **Success (200 OK):**
-    - Returns the user's profile information.
+    - Returns the user's profile information. -->
 
-### 11. Edit Profile
-- **Endpoint:** `/api/profile-edit/` 
-    - **GET:** Retrieves user's edit profile forms.
-    - **POST:** Updates user's profile information.
+### 11. Profile
+- **Endpoint:** `/api/profile/` 
+    - **GET:** Retrieves user's profile info.
+    - **POST:** Updates user's profile info.
 - **Description:** Allows users to view and edit their profile details.
 - **Permissions:** User must be authenticated.
 
@@ -376,6 +377,16 @@ I havent done any configurations yet.
 - **Response:**
     - Returns a success message if the profile is updated successfully.
     - Returns an error message if the provided data is invalid.
+- **Parameters:**
+    - `name`
+    - `email`
+    - `phone`
+    - `bloodGroup`
+    - `langauge`
+    - `country`
+    - `city`
+    - `address`
+    - `profile_pic`
 
 ### 12. Request Blood
 - **Endpoint:** `/api/request-blood/` 

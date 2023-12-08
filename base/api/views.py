@@ -137,22 +137,9 @@ class DonorHomeAPIView(APIView):
 #             return False
 #     return True
 
-
-# def donation_comparison_form(user_form_data):
-#     userChoice = []
-#     needed_values = [True]
-
-#     for field_value in ['qualify']:
-#         choice = user_form_data.cleaned_data.get(field_value)
-#         userChoice.append(choice)
-
-#     for i in range(len(needed_values)):
-#         if needed_values[i] != userChoice[i]:
-#             return False
-#     return True
 def donation_comparison_form(user_form_data):
-    user_choice = [user_form_data.cleaned_data.get('qualify')]
-    return user_choice == [True]
+    user_choice = user_form_data.validated_data['qualify']
+    return user_choice == True
 
 
 class DonationCriteriaAPIView(APIView):
@@ -164,9 +151,14 @@ class DonationCriteriaAPIView(APIView):
             instance = serializer.save(profile=request.user.profile)
 
             if donation_comparison_form(serializer):
-                return Response({'message': 'Thank you'}, status=status.HTTP_200_OK)
+                message = 'Eligible to donate Blood'
+                redirect_url = reverse('donation_agreement')
             else:
-                return Response({'message': 'Not eligible'}, status=status.HTTP_400_BAD_REQUEST)
+                message = 'Not Eligible to donate Blood'
+                redirect_url = reverse('user_details')
+
+            return Response({'redirect_url': redirect_url, 'message': message}, status=status.HTTP_200_OK)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -195,17 +187,17 @@ class PatientHomeAPIView(APIView):
         return Response({'message': 'Patient Home page'}, status=status.HTTP_200_OK)
 
 
+# class ProfileAPIView(APIView):
+#     permission_classes = [IsAuthenticated]
+
+#     def get(self, request, *args, **kwargs):
+#         user_profile = request.user.profile
+#         profile = ProfileFormSerializer(instance=user_profile)
+
+#         return Response({'profile': profile.data}, status=status.HTTP_200_OK)
+
+
 class ProfileAPIView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request, *args, **kwargs):
-        user_profile = request.user.profile
-        profile = ProfileFormSerializer(instance=user_profile)
-
-        return Response({'profile': profile.data}, status=status.HTTP_200_OK)
-
-
-class EditProfileAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
