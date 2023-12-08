@@ -246,7 +246,6 @@ I havent done any configurations yet.
 - **Success (200 OK):**
     - Returns a list of blood donation requests.
 
-<!-- 
 ### 2. Profile Details
 - **Endpoint:** `/api/profile-details/` (POST)
 - **Description:** Updates user's profile details.
@@ -268,8 +267,6 @@ I havent done any configurations yet.
     - Returns validation errors if the provided data is invalid.
 
 
-
- -->
  ### 4. Donation Criteria
 - **Endpoint:** `/api/donation-criteria/` (POST)
 - **Description:** Validates and processes user's donation criteria form.

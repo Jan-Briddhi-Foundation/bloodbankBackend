@@ -86,7 +86,7 @@ class UserDetailsAPIView(APIView):
             profile.profile_type = serializer.validated_data['profile_type']
             profile.save()
 
-            return Response({'message': 'Profile details updated successfully'}, status=status.HTTP_200_OK)
+            return Response({'message': 'Profile updated successfully'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

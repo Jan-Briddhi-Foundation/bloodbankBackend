@@ -17,7 +17,7 @@ urlpatterns = [
 
     path('home/', HomePageAPIView.as_view(), name='home'),
 
-    #     path('profile-details/', UserDetailsAPIView.as_view(), name='user_details'),
+    path('profile-details/', UserDetailsAPIView.as_view(), name='user_details'),
 
 
     path('donor-home/', DonorHomeAPIView.as_view(), name='donor_home'),
