@@ -250,7 +250,7 @@ class RequestBloodAPIView(APIView):
                 quantity=serializer.validated_data['quantity'],
                 date_needed=serializer.validated_data['date_needed']
             )
-            return Response({'message': 'Blood request sent successfully'}, status=status.HTTP_200_OK)
+            return Response({'message': 'Blood request success'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -266,10 +266,21 @@ class PatientHistoryAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
+        user_profile = request.user.profile
         history = Blood_Request.objects.filter(profile__user=user)
+        profileForm = ProfileFormSerializer(instance=user_profile)
         serializer = BloodRequestSerializer(history, many=True)
 
-        return Response({'history': serializer.data}, status=status.HTTP_200_OK)
+        return Response({'history': serializer.data, 'profileForm': profileForm.data}, status=status.HTTP_200_OK)
+
+    # def get(self, request, *args, **kwargs):
+    #     user = request.user
+    #     user_profile = user.profile
+
+    #     userForm = EditUserFormSerializer(instance=user)
+    #     profileForm = ProfileFormSerializer(instance=user_profile)
+
+    #     return Response({'userForm': userForm.data, 'profileForm': profileForm.data}, status=status.HTTP_200_OK)
 
 
 class DeletePageAPIView(APIView):
