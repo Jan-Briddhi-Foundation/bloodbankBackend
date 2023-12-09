@@ -64,13 +64,6 @@ class DonationCriteriaFormSerializer(serializers.ModelSerializer):
         # exclude = ['profile']
 
 
-class DonationAgreementSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Donation
-        fields = '__all__'
-        fields = ['hospital_address', 'eligibilityForm']
-
-
 class EditUserFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -116,6 +109,14 @@ class DonorCriteriaFormSubmissionSerializer(serializers.ModelSerializer):
 class DonationsSerializer(serializers.ModelSerializer):
     hospital_address = HospitalAddress()
     eligibilityForm = DonorCriteriaFormSubmissionSerializer()
+
+    class Meta:
+        model = Donation
+        fields = '__all__'
+
+
+class DonationAgreementSerializer(serializers.ModelSerializer):
+    hospital_address = HospitalAddressSerializer()
 
     class Meta:
         model = Donation

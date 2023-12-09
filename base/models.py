@@ -235,14 +235,11 @@ class HospitalAddress(models.Model):
 
 
 class Donation(models.Model):
-    user = models.ForeignKey(
-        User, null=True, blank=True, on_delete=models.SET_NULL)
+    profile = models.ForeignKey(
+        Profile, null=True, blank=True, on_delete=models.SET_NULL)
 
     hospital_address = models.ForeignKey(
         HospitalAddress, on_delete=models.SET_NULL, null=True)
-
-    eligibilityForm = models.ForeignKey(
-        DonorCriteriaFormSubmission, null=True,  on_delete=models.SET_NULL)
 
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_modified = models.DateTimeField(auto_now=True, null=True)

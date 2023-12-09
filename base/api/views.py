@@ -301,10 +301,12 @@ class DonationAgreement(APIView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        user_profile = user.profile
-        form = DonationAgreementSerializer(instance=user)
+        user_profile = request.user.profile
+        donations = Donation.objects.filter(profile__user=user)
+        profileForm = ProfileFormSerializer(instance=user_profile)
+        serializer = DonationAgreementSerializer(donations, many=True)
 
-        return Response({'user': user, 'user_profile': user_profile, 'form': form.data}, status=status.HTTP_200_OK)
+        return Response({'history': serializer.data, 'profileForm': profileForm.data}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
         user = request.user
@@ -316,9 +318,8 @@ class DonationAgreement(APIView):
             donationAgreement = Donation.objects.create(
                 profile=user_profile,
                 hospital_address=serializer.validated_data['hospital_address'],
-                eligibilityForm=serializer.validated_data['eligibilityForm']
             )
-            return Response({'message': 'Request successfully sent'}, status=status.HTTP_200_OK)
+            return Response({'message': 'Successfully sent'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

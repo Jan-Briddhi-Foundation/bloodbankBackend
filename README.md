@@ -267,6 +267,7 @@ I havent done any configurations yet.
     - Returns validation errors if the provided data is invalid.
 
 
+
  ### 4. Donation Criteria
 - **Endpoint:** `/api/donation-criteria/` (POST)
 - **Description:** Validates and processes user's donation criteria form.
@@ -283,6 +284,7 @@ I havent done any configurations yet.
 
 - **Bad Request (400):**
     - Returns validation errors if the provided data is invalid.
+<!--  -->
 
 <!-- 
 
@@ -324,24 +326,28 @@ I havent done any configurations yet.
     - Returns validation errors if the provided data is invalid.
 
 
-### 8. Donation Agreement
+
+ -->
+
+ ### 8. Donation Agreement
 - **Endpoint:** `/api/donation-agreement/` 
-    - **GET:** Retrieves user's donation agreement form.
+    - **GET:** Retrieves user's donation agreement forms.
     - **POST:** Submits a donation agreement request.
 - **Description:** Allows users to view and submit donation agreements.
 - **Permissions:** User must be authenticated.
 
 #### GET Request
 - **Response (200 OK):**
-    - Returns user's donation agreement form.
+    - Returns user's donation agreement forms.
 
 #### POST Request
 - **Request:**
     - Donation agreement data in the request body.
+- **Parameters:** 
+    - `hospital_address`
 - **Response:**
     - Returns a success message if the donation agreement is sent successfully.
     - Returns an error message if the provided data is invalid.
- -->
 
 <!-- ### 9. Patient Home
 - **Endpoint:** `/api/patient-home/` (GET)
