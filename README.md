@@ -375,26 +375,26 @@ I havent done any configurations yet.
 - **Description:** Allows users to view and edit their profile details.
 - **Permissions:** User must be authenticated.
 
-#### GET Request
-- **Response (200 OK):**
-    - Returns user's profile.
+    #### GET Request
+    - **Response (200 OK):**
+        - Returns user's profile.
 
-#### POST Request
-- **Request:**
-    - User and profile data in the request body.
-- **Response:**
-    - Returns a success message if the profile is updated successfully.
-    - Returns an error message if the provided data is invalid.
-- **Parameters:**
-    - `name`
-    - `email`
-    - `phone`
-    - `bloodGroup`
-    - `langauge`
-    - `country`
-    - `city`
-    - `address`
-    - `profile_pic`
+    #### POST Request
+    - **Request:**
+        - User and profile data in the request body.
+    - **Response:**
+        - Returns a success message if the profile is updated successfully.
+        - Returns an error message if the provided data is invalid.
+    - **Parameters:**
+        - `name`
+        - `email`
+        - `phone`
+        - `bloodGroup`
+        - `langauge`
+        - `country`
+        - `city`
+        - `address`
+        - `profile_pic`
 
  ### 12. Request Blood
 - **Endpoint:** `/api/request-blood/` 
@@ -402,15 +402,15 @@ I havent done any configurations yet.
 - **Description:** Allows users to request blood donations.
 - **Permissions:** User must be authenticated.
 
-#### POST Request
-- **Request:**
-    - Blood request data in the request body.
-- **Response:**
-    - Returns a success message if the blood request is sent successfully.
-    - Returns an error message if the provided data is invalid.
-- **Parameters:**
-    - `namquantitye`
-    - `date_needed`
+    #### POST Request
+    - **Request:**
+        - Blood request data in the request body.
+    - **Response:**
+        - Returns a success message if the blood request is sent successfully.
+        - Returns an error message if the provided data is invalid.
+    - **Parameters:**
+        - `namquantitye`
+        - `date_needed`
 <!-- 
 ### 13. Request Sent
 - **Endpoint:** `/api/request-sent/` (GET)
@@ -426,10 +426,10 @@ I havent done any configurations yet.
 - **Description:** Retrieves the blood donation history for the patient and provides the User's profile info.
 - **Permissions:** User must be authenticated.
 
-#### Response
-- **Success (200 OK):**
-    - Returns a list of blood donation history for the patient.
-    - Returns User's profile information.
+    #### Response
+    - **Success (200 OK):**
+        - Returns a list of blood donation history for the patient.
+        - Returns User's profile information.
 
 <!-- ### 15. Delete Page
 - **Endpoint:** `/api/delete-page/<int:pk>/` 
