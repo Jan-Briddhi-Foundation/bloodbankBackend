@@ -227,14 +227,14 @@ I havent done any configurations yet.
 - **Description:** Retrieves user's home page details.
 - **Permissions:** User must be authenticated.
   
-#### Response
-- **Success (200 OK):**
-    - Returns user's home page details.
-        - For donors: Redirects to 'donor_home'.
-        - For patients: Redirects to 'patient_home'.
-        - For other profiles: Redirects to 'user_details'.
-- **User Details Update (200 OK):**
-    - If user's profile doesn't exist, creates a profile, updates user details, and returns a success message.
+    #### Response
+    - **Success (200 OK):**
+        - Returns user's home page details.
+            - For donors: Redirects to 'donor_home'.
+            - For patients: Redirects to 'patient_home'.
+            - For other profiles: Redirects to 'user_details'.
+    - **User Details Update (200 OK):**
+        - If user's profile doesn't exist, creates a profile, updates user details, and returns a success message.
 
 
  ### 3. Donor Home
@@ -242,29 +242,29 @@ I havent done any configurations yet.
 - **Description:** Retrieves blood donation requests for donors.
 - **Permissions:** User must be authenticated.
 
-#### Response
-- **Success (200 OK):**
-    - Returns a list of blood donation requests.
+    #### Response
+    - **Success (200 OK):**
+        - Returns a list of blood donation requests.
 
 ### 2. Profile Details
 - **Endpoint:** `/api/profile-details/` (POST)
 - **Description:** Updates user's profile details.
 - **Permissions:** User must be authenticated.
 
-#### Request
-- **Method:** POST
-- **Parameters:** 
-    - `city`
-    - `country`
-    - `bloodGroup`
-    - `profile_type`
+    #### Request
+    - **Method:** POST
+    - **Parameters:** 
+        - `city`
+        - `country`
+        - `bloodGroup`
+        - `profile_type`
 
-#### Response
-- **Success (200 OK):**
-    - Returns a success message if user details are updated successfully.
+    #### Response
+    - **Success (200 OK):**
+        - Returns a success message if user details are updated successfully.
 
-- **Bad Request (400):**
-    - Returns validation errors if the provided data is invalid.
+    - **Bad Request (400):**
+        - Returns validation errors if the provided data is invalid.
 
 
 
@@ -273,18 +273,17 @@ I havent done any configurations yet.
 - **Description:** Validates and processes user's donation criteria form.
 - **Permissions:** User must be authenticated.
 
-#### Request
-- **Method:** POST
-- **Parameters:** 
-    - `qualify` (Boolean Value)
+    #### Request
+    - **Method:** POST
+    - **Parameters:** 
+        - `qualify` (Boolean Value)
 
-#### Response
-- **Success (200 OK):**
-    - Returns a success message if the user is eligible or NOT for donation.
+    #### Response
+    - **Success (200 OK):**
+        - Returns a success message if the user is eligible or NOT for donation.
 
-- **Bad Request (400):**
-    - Returns validation errors if the provided data is invalid.
-<!--  -->
+    - **Bad Request (400):**
+        - Returns validation errors if the provided data is invalid.
 
 <!-- 
 
@@ -305,27 +304,27 @@ I havent done any configurations yet.
 #### Response
 - **Success (200 OK):**
     - Returns a message indicating user ineligibility.
-     -->
-<!-- 
- -->
+    
+-->
+
 
 ### 7. Hospital Address
 - **Endpoint:** `/api/hospital-address/` (POST)
 - **Description:** Adds a hospital address.
 - **Permissions:** User must be authenticated.
 
-#### Request
-- **Method:** POST
-- **Parameters:** 
-    - `name`
-    - `address`
+    #### Request
+    - **Method:** POST
+    - **Parameters:** 
+        - `name`
+        - `address`
 
-#### Response
-- **Success (200 OK):**
-    - Returns a success message if the hospital is added successfully.
+    #### Response
+    - **Success (200 OK):**
+        - Returns a success message if the hospital is added successfully.
 
-- **Bad Request (400):**
-    - Returns validation errors if the provided data is invalid.
+    - **Bad Request (400):**
+        - Returns validation errors if the provided data is invalid.
 
 
 
@@ -337,18 +336,18 @@ I havent done any configurations yet.
 - **Description:** Allows users to view and submit donation agreements.
 - **Permissions:** User must be authenticated.
 
-#### GET Request
-- **Response (200 OK):**
-    - Returns user's donation agreement forms.
+    #### GET Request
+    - **Response (200 OK):**
+        - Returns user's donation agreement forms.
 
-#### POST Request
-- **Request:**
-    - Donation agreement data in the request body.
-- **Parameters:** 
-    - `hospital_address`
-- **Response:**
-    - Returns a success message if the donation agreement is sent successfully.
-    - Returns an error message if the provided data is invalid.
+    #### POST Request
+    - **Request:**
+        - Donation agreement data in the request body.
+    - **Parameters:** 
+        - `hospital_address`
+    - **Response:**
+        - Returns a success message if the donation agreement is sent successfully.
+        - Returns an error message if the provided data is invalid.
 
 <!-- ### 9. Patient Home
 - **Endpoint:** `/api/patient-home/` (GET)
@@ -468,13 +467,13 @@ I havent done any configurations yet.
 ### 18. Error 404
 - **Endpoint:** `/api/error404/` (GET)
 - **Description:** Retrieves and renders the error 404 page.
-- **Permissions:** User must be authenticated. -->
+- **Permissions:** User must be authenticated. 
 
 #### Response
 - **Success (200 OK):**
     - Returns a message indicating the rendering of the error 404 page.
 
-
+-->
 ## Contributing
 We welcome contributions to improve this blood donation system. If you'd like to contribute, please follow Contribution Guidelines.
 
