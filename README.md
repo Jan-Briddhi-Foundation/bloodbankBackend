@@ -307,6 +307,8 @@ I havent done any configurations yet.
     - Returns a message indicating user ineligibility.
      -->
 <!-- 
+ -->
+
 ### 7. Hospital Address
 - **Endpoint:** `/api/hospital-address/` (POST)
 - **Description:** Adds a hospital address.
@@ -327,7 +329,6 @@ I havent done any configurations yet.
 
 
 
- -->
 
  ### 8. Donation Agreement
 - **Endpoint:** `/api/donation-agreement/` 

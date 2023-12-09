@@ -155,7 +155,6 @@ class DonationCriteriaAPIView(APIView):
                 redirect_url = reverse('donation_agreement')
             else:
                 message = 'Not Eligible to donate Blood'
-                redirect_url = reverse('user_details')
 
             return Response({'redirect_url': redirect_url, 'message': message}, status=status.HTTP_200_OK)
 

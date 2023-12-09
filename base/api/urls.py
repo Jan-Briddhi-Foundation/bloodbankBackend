@@ -30,7 +30,8 @@ urlpatterns = [
 
     path('donation-agreement/', DonationAgreement.as_view(),
          name='donation_agreement'),   # 4
-    #     path('hospital-address/', HospitalAddress.as_view(), name='hospital_address'),
+    path('hospital-address/', HospitalAddress.as_view(),
+         name='hospital_address'),  # 9
 
 
     #     path('patient-home/', PatientHomeAPIView.as_view(), name='patient_home'),
