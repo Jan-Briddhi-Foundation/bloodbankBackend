@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from ..models import (User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form, Donation,
-                      DonorCriteriaFormSubmission, HospitalAddress, DonationCriteriaFormField, DonorCriteriaFormFieldData)
+# from ..models import (User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form, Donation,
+#                       DonorCriteriaFormSubmission, HospitalAddress, DonationCriteriaFormField, DonorCriteriaFormFieldData)
+from ..models import *
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -90,25 +91,25 @@ class DonationCriteriaFormFieldSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class DonorCriteriaFormFieldDataSerializer(serializers.ModelSerializer):
-    field = DonationCriteriaFormFieldSerializer()
+# class DonorCriteriaFormFieldDataSerializer(serializers.ModelSerializer):
+#     field = DonationCriteriaFormFieldSerializer()
 
-    class Meta:
-        model = DonorCriteriaFormFieldData
-        fields = '__all__'
+#     class Meta:
+#         model = DonorCriteriaFormFieldData
+#         fields = '__all__'
 
 
-class DonorCriteriaFormSubmissionSerializer(serializers.ModelSerializer):
-    fields = DonorCriteriaFormFieldDataSerializer(many=True)
+# class DonorCriteriaFormSubmissionSerializer(serializers.ModelSerializer):
+#     fields = DonorCriteriaFormFieldDataSerializer(many=True)
 
-    class Meta:
-        model = DonorCriteriaFormSubmission
-        fields = '__all__'
+#     class Meta:
+#         model = DonorCriteriaFormSubmission
+#         fields = '__all__'
 
 
 class DonationsSerializer(serializers.ModelSerializer):
     hospital_address = HospitalAddress()
-    eligibilityForm = DonorCriteriaFormSubmissionSerializer()
+    # eligibilityForm = DonorCriteriaFormSubmissionSerializer()
 
     class Meta:
         model = Donation

@@ -181,7 +181,7 @@ I havent done any configurations yet.
 - **Response:** Confirms the password change.
 
 ### 8. Password Reset
-- **Endpoint:** `   ` (POST)
+- **Endpoint:** `/api/auth/users/reset_password/` (POST)
 - **Description:** Password reset request endpoint.
 - **Parameters:**
   - `email`
@@ -408,7 +408,7 @@ I havent done any configurations yet.
         - Returns a success message if the blood request is sent successfully.
         - Returns an error message if the provided data is invalid.
     - **Parameters:**
-        - `namquantitye`
+        - `quantity`
         - `date_needed`
 <!-- 
 ### 13. Request Sent
@@ -418,7 +418,8 @@ I havent done any configurations yet.
 
 #### Response
 - **Success (200 OK):**
-    - Returns a message indicating successful blood request submission. -->
+    - Returns a message indicating successful blood request submission. 
+-->
 
 ### 14. Patient Blood Request History
 - **Endpoint:** `/api/patient-request-history/` (GET)
