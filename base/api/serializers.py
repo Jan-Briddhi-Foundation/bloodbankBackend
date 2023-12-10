@@ -90,7 +90,7 @@ class DonationCriteriaQuestionsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DonationCriteriaQuestions
-        fields = ['question']
+        fields = ['id', 'question']
 
 
 # class DonorCriteriaFormFieldDataSerializer(serializers.ModelSerializer):

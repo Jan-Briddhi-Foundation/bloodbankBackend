@@ -289,6 +289,41 @@ I havent done any configurations yet.
     - **Bad Request (400):**
         - Returns validation errors if the provided data is invalid.
 
+ ### 5. Donation Criteria Questions
+- **Endpoint:** `/api/questions/` (POST)
+- **Description:** For adding and retriving questions donation criteria form.
+- **Permissions:** User must be authenticated.
+
+    #### Request
+    - **Method:** POST
+    - **Parameters:** 
+        - `question`
+    - **Permissions:** User must be an admin.
+
+    #### GET Request
+    - **Response (200 OK):**
+    - Returns all questions donation criteria form.
+
+
+    #### Response
+    - **Success (200 OK):**
+        - Returns a success message if the user is eligible or NOT for donation.
+
+    - **Bad Request (400):**
+        - Returns validation errors if the provided data is invalid.
+
+### 6. Question Deletion
+- **Endpoint:** `/api/questions/<int:question_id>/` (DELETE)
+- **Description:** Donation Criteria question deletion endpoint.
+- **Parameters:** None
+- **Response:** Deletes the donation criteria question.
+
+
+### 6. Question Modification
+- **Endpoint:** `/api/questions/<int:question_id>/` (PUT)
+- **Description:** Donation Criteria question update endpoint.
+- **Parameters:** None
+- **Response:** Modifies the donation criteria question.
 <!-- 
 
 ### 5. Location Map

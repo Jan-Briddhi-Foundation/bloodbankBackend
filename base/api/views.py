@@ -338,10 +338,6 @@ class QuestionsAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        questions = DonationCriteriaQuestionsSerializer()
-        return Response({'questions': questions.data}, status=status.HTTP_200_OK)
-
-    def get(self, request, *args, **kwargs):
         criteria_quiz = DonationCriteriaQuestions.objects.all()
         questions = DonationCriteriaQuestionsSerializer(
             criteria_quiz, many=True)
@@ -361,11 +357,30 @@ class QuestionsAPIView(APIView):
             return Response({'message': 'Successfully sent'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        # if serializer.is_valid():
-        #     instance = serializer.save()
-        #     return Response({'message': 'Hopsital added successfully'}, status=status.HTTP_200_OK)
+    def put(self, request, *args, **kwargs):
+        question_id = kwargs.get('question_id')
+        try:
+            question = DonationCriteriaQuestions.objects.get(id=question_id)
+        except DonationCriteriaQuestions.DoesNotExist:
+            return Response({'error': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = DonationCriteriaQuestionsSerializer(
+            question, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Question updated successfully'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, *args, **kwargs):
+        question_id = kwargs.get('question_id')
+        try:
+            question = DonationCriteriaQuestions.objects.get(id=question_id)
+        except DonationCriteriaQuestions.DoesNotExist:
+            return Response({'error': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        question.delete()
+        return Response({'message': 'Question deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
 
 
 class NotificationsAPIView(APIView):
