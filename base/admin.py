@@ -10,7 +10,7 @@ from django.contrib.auth.admin import UserAdmin
 admin.site.register(Profile)
 admin.site.register(Blood_Request)
 admin.site.register(Donation_Criteria_Form)
-admin.site.register(DonationCriteriaFormField)
+admin.site.register(DonationCriteriaQuestions)
 # admin.site.register(DonorCriteriaFormSubmission)
 # admin.site.register(DonorCriteriaFormFieldData)
 admin.site.register(HospitalAddress)

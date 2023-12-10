@@ -33,3 +33,4 @@ urllib3==2.1.0
 google-api-python-client
 facebook-sdk
 python-twitter
+rest_social_auth

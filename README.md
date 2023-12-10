@@ -149,7 +149,8 @@ I havent done any configurations yet.
 - **Response:** Logs out the user and invalidates the token.
 
 
-<!-- ### 4. User Activation
+<!-- 
+### 4. User Activation
 - **Endpoint:** `/api/auth/users/activation/` (POST)
 - **Description:** User activation endpoint.
 - **Parameters:**
@@ -157,12 +158,15 @@ I havent done any configurations yet.
   - `token` (activation token)
 - **Response:** Activates the user account. -->
 
-
+<!-- 
 ### 5. User Details
 - **Endpoint:** `/api/auth/users/me/` (GET, PUT, PATCH)
 - **Description:** User details endpoint.
-- **Parameters:** None (GET), User data (PUT, PATCH)
-- **Response:** Retrieves or updates user details.
+- **Parameters:** None (GET) 
+- **Parameters:** (PUT, PATCH) User data
+  - `email`
+  - `name`
+- **Response:** Retrieves or updates user details. -->
 
 ### 6. User Deletion
 - **Endpoint:** `/api/auth/users/me/` (DELETE)

@@ -148,28 +148,16 @@ class Donation_Criteria_Form(models.Model):
 
     # # Only GET method is expected
 
-class DonationCriteriaFormField(models.Model):
-    QUESTION_TYPES = [
-        ('boolean', 'Boolean'),
-        ('string', 'String'),
-        ('number', 'Number'),
-    ]
-
-    creator = models.ForeignKey(
-        User, null=True, blank=True, on_delete=models.SET_NULL)
+class DonationCriteriaQuestions(models.Model):
+    profile = models.ForeignKey(
+        Profile, on_delete=models.SET_NULL, null=True)
     question = models.CharField(max_length=355)
-    admin_answer = models.CharField(
-        max_length=355)
-    quiz_type = models.CharField(
-        max_length=10, choices=QUESTION_TYPES, default='boolean')
-    is_required = models.BooleanField(default=True)
-    hidden = models.BooleanField(default=False)
 
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_modified = models.DateTimeField(auto_now=True, null=True)
 
     def save(self, *args, **kwargs):
-        if self.admin.is_staff:
+        if self.profile.user.is_staff:
             super().save(*args, **kwargs)
         else:
             raise PermissionError("Only admin users can create questions.")

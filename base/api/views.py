@@ -302,8 +302,8 @@ class DonationAgreement(APIView):
         user = request.user
         user_profile = request.user.profile
         donations = Donation.objects.filter(profile__user=user)
-        profileForm = ProfileFormSerializer(instance=user_profile)
         serializer = DonationAgreementSerializer(donations, many=True)
+        profileForm = ProfileFormSerializer(instance=user_profile)
 
         return Response({'history': serializer.data, 'profileForm': profileForm.data}, status=status.HTTP_200_OK)
 
@@ -332,6 +332,40 @@ class HospitalAddress(APIView):
             return Response({'message': 'Hopsital added successfully'}, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class QuestionsAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        questions = DonationCriteriaQuestionsSerializer()
+        return Response({'questions': questions.data}, status=status.HTTP_200_OK)
+
+    def get(self, request, *args, **kwargs):
+        criteria_quiz = DonationCriteriaQuestions.objects.all()
+        questions = DonationCriteriaQuestionsSerializer(
+            criteria_quiz, many=True)
+        return Response({'questions': questions.data}, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        user_profile = user.profile
+
+        serializer = DonationCriteriaQuestionsSerializer(data=request.data)
+
+        if serializer.is_valid():
+            donationQuestion = DonationCriteriaQuestions.objects.create(
+                profile=user_profile,
+                question=serializer.validated_data['question'],
+            )
+            return Response({'message': 'Successfully sent'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        # if serializer.is_valid():
+        #     instance = serializer.save()
+        #     return Response({'message': 'Hopsital added successfully'}, status=status.HTTP_200_OK)
+
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class NotificationsAPIView(APIView):

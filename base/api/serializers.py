@@ -85,10 +85,12 @@ class HospitalAddressSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class DonationCriteriaFormFieldSerializer(serializers.ModelSerializer):
+class DonationCriteriaQuestionsSerializer(serializers.ModelSerializer):
+    question = serializers.CharField()
+
     class Meta:
-        model = DonationCriteriaFormField
-        fields = '__all__'
+        model = DonationCriteriaQuestions
+        fields = ['question']
 
 
 # class DonorCriteriaFormFieldDataSerializer(serializers.ModelSerializer):

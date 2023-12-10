@@ -24,7 +24,8 @@ urlpatterns = [
     path('donor-home/', DonorHomeAPIView.as_view(), name='donor_home'),   # 5
     path('donation-criteria/', DonationCriteriaAPIView.as_view(),
          name='donation_criteria'),   # 8
-    #     path('location-map/', LocationMapAPIView.as_view(), name='location_map'),
+    path('criteria-questions/', QuestionsAPIView.as_view(),
+         name='criteria_quizes'),
     #     path('not-eligible/', NotEligibleAPIView.as_view(), name='not_eligible'),
 
 
