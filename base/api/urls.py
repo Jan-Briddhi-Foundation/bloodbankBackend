@@ -43,7 +43,7 @@ urlpatterns = [
     path('request-blood/', RequestBloodAPIView.as_view(),
          name='request_blood'),  # 2
     #     path('request-sent/', RequestSentAPIView.as_view(), name='request_sent'),
-    path('patient-request-history/', PatientHistoryAPIView.as_view(),
+    path('patient-history/', PatientHistoryAPIView.as_view(),
          name='patient_history'),  # 1
 
     #     path('delete-page/<int:pk>/',

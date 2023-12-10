@@ -369,7 +369,7 @@ I havent done any configurations yet.
 
 
  ### 9. Donation Agreement
-- **Endpoint:** `/api/donation-agreement/` 
+- **Endpoint:** `/api/donation-agreement/` (POST, GET)
     - **GET:** Retrieves user's donation agreement forms.
     - **POST:** Submits a donation agreement request.
 - **Description:** Allows users to view and submit donation agreements.
@@ -407,7 +407,7 @@ I havent done any configurations yet.
     - Returns the user's profile information. -->
 
 ### 10. Profile
-- **Endpoint:** `/api/profile/` 
+- **Endpoint:** `/api/profile/` (POST, GET)
     - **GET:** Retrieves user's profile info.
     - **POST:** Updates user's profile info.
 - **Description:** Allows users to view and edit their profile details.
@@ -435,7 +435,7 @@ I havent done any configurations yet.
         - `profile_pic`
 
  ### 11. Request Blood
-- **Endpoint:** `/api/request-blood/` 
+- **Endpoint:** `/api/request-blood/` (POST)
     - **POST:** Submits a blood request.
 - **Description:** Allows users to request blood donations.
 - **Permissions:** User must be authenticated.
@@ -461,7 +461,7 @@ I havent done any configurations yet.
 -->
 
 ### 12. Patient Blood Request History
-- **Endpoint:** `/api/patient-request-history/` (GET)
+- **Endpoint:** `/api/patient-history/` (GET)
 - **Description:** Retrieves the blood donation history for the patient and provides the User's profile info.
 - **Permissions:** User must be authenticated.
 
