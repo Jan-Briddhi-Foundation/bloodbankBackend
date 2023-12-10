@@ -336,10 +336,11 @@ class HospitalAddress(APIView):
 
 class QuestionsAPIView(APIView):
     permission_classes = [IsAuthenticated]
+    serializer_class = DonationCriteriaQuestionsSerializer
 
     def get(self, request, *args, **kwargs):
         criteria_quiz = DonationCriteriaQuestions.objects.all()
-        questions = DonationCriteriaQuestionsSerializer(
+        questions = self.serializer_class(
             criteria_quiz, many=True)
         return Response({'questions': questions.data}, status=status.HTTP_200_OK)
 
@@ -347,7 +348,7 @@ class QuestionsAPIView(APIView):
         user = request.user
         user_profile = user.profile
 
-        serializer = DonationCriteriaQuestionsSerializer(data=request.data)
+        serializer = self.serializer_class(data=request.data)
 
         if serializer.is_valid():
             donationQuestion = DonationCriteriaQuestions.objects.create(
