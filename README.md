@@ -240,16 +240,6 @@ I havent done any configurations yet.
     - **User Details Update (200 OK):**
         - If user's profile doesn't exist, creates a profile, updates user details, and returns a success message.
 
-
- ### 3. Donor Home
-- **Endpoint:** `/api/donor-home/` (GET)
-- **Description:** Retrieves blood donation requests for donors.
-- **Permissions:** User must be authenticated.
-
-    #### Response
-    - **Success (200 OK):**
-        - Returns a list of blood donation requests.
-
 ### 2. Profile Details
 - **Endpoint:** `/api/profile-details/` (POST)
 - **Description:** Updates user's profile details.
@@ -269,6 +259,17 @@ I havent done any configurations yet.
 
     - **Bad Request (400):**
         - Returns validation errors if the provided data is invalid.
+
+
+
+ ### 3. Donor Home
+- **Endpoint:** `/api/donor-home/` (GET)
+- **Description:** Retrieves blood donation requests for donors.
+- **Permissions:** User must be authenticated.
+
+    #### Response
+    - **Success (200 OK):**
+        - Returns a list of blood donation requests.
 
 
 
@@ -312,14 +313,14 @@ I havent done any configurations yet.
     - **Bad Request (400):**
         - Returns validation errors if the provided data is invalid.
 
-### 6. Question Deletion
+### 6. Donation Question Deletion
 - **Endpoint:** `/api/questions/<int:question_id>/` (DELETE)
 - **Description:** Donation Criteria question deletion endpoint.
 - **Parameters:** None
 - **Response:** Deletes the donation criteria question.
 
 
-### 6. Question Modification
+### 7. Donation Question Modification
 - **Endpoint:** `/api/questions/<int:question_id>/` (PUT)
 - **Description:** Donation Criteria question update endpoint.
 - **Parameters:** None
@@ -347,7 +348,7 @@ I havent done any configurations yet.
 -->
 
 
-### 7. Hospital Address
+### 8. Hospital Address
 - **Endpoint:** `/api/hospital-address/` (POST)
 - **Description:** Adds a hospital address.
 - **Permissions:** User must be authenticated.
@@ -367,8 +368,7 @@ I havent done any configurations yet.
 
 
 
-
- ### 8. Donation Agreement
+ ### 9. Donation Agreement
 - **Endpoint:** `/api/donation-agreement/` 
     - **GET:** Retrieves user's donation agreement forms.
     - **POST:** Submits a donation agreement request.
@@ -406,7 +406,7 @@ I havent done any configurations yet.
 - **Success (200 OK):**
     - Returns the user's profile information. -->
 
-### 11. Profile
+### 10. Profile
 - **Endpoint:** `/api/profile/` 
     - **GET:** Retrieves user's profile info.
     - **POST:** Updates user's profile info.
@@ -434,7 +434,7 @@ I havent done any configurations yet.
         - `address`
         - `profile_pic`
 
- ### 12. Request Blood
+ ### 11. Request Blood
 - **Endpoint:** `/api/request-blood/` 
     - **POST:** Submits a blood request.
 - **Description:** Allows users to request blood donations.
@@ -460,7 +460,7 @@ I havent done any configurations yet.
     - Returns a message indicating successful blood request submission. 
 -->
 
-### 14. Patient Blood Request History
+### 12. Patient Blood Request History
 - **Endpoint:** `/api/patient-request-history/` (GET)
 - **Description:** Retrieves the blood donation history for the patient and provides the User's profile info.
 - **Permissions:** User must be authenticated.
