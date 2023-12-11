@@ -394,20 +394,25 @@ class NotificationsAPIView(APIView):
         profile = user.profile
         profile_type = profile.profile_type
 
-        requests = Blood_Request.objects.all()
-
         if profile_type == 'patient':
+            requests = Donation_Criteria_Form.objects.all()
+
             filtered_requests = [
-                request for request in requests if request.profile.bloodGroup == profile.bloodGroup]
+                request for request in requests if request.profile.bloodGroup == profile.bloodGroup and request.qualify]
+
+            bloodRequests = DonationCriteriaFormSerializer(
+                filtered_requests, many=True)
 
         else:
+            requests = Blood_Request.objects.all()
+
             filtered_requests = [
                 request for request in requests if request.profile.city == profile.city]
 
-        bloodRequests = BloodRequestSerializer(
-            filtered_requests, many=True)
+            bloodRequests = BloodRequestSerializer(
+                filtered_requests, many=True)
 
-        return Response({'bloodRequests': bloodRequests.data}, status=status.HTTP_200_OK)
+        return Response({'requests': bloodRequests.data}, status=status.HTTP_200_OK)
 
 
 class BloodMatchSuccessAPIView(APIView):
