@@ -48,8 +48,8 @@ urlpatterns = [
 
     #     path('delete-page/<int:pk>/',
     #          DeletePageAPIView.as_view(), name='delete_page'),
-    #     path('notifications/', NotificationsAPIView.as_view(),
-    #          name='notifications'),
+    path('notifications/', NotificationsAPIView.as_view(),
+         name='notifications'),
     #     path('blood-match-success/', BloodMatchSuccessAPIView.as_view(),
     #          name='blood_match_success'),
     #     path('error404/', Error404APIView.as_view(), name='error404'),

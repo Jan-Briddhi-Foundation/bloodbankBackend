@@ -146,7 +146,13 @@ class DonationCriteriaAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
+        user = request.user
+
+        if user.profile.profile_type != 'donor':
+            return Response({'message': 'Only a donor can fill the form'}, status=status.HTTP_200_OK)
+
         serializer = DonationCriteriaFormSerializer(data=request.data)
+
         if serializer.is_valid():
             instance = serializer.save(profile=request.user.profile)
 
@@ -227,19 +233,12 @@ class ProfileAPIView(APIView):
 class RequestBloodAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    # def get(self, request, *args, **kwargs):
-    #     user = request.user
-    #     user_profile = user.profile
-
-    #     blood_requests = Blood_Request.objects.filter(profile=user_profile)
-    #     blood_requests_serializer = BloodRequestSerializer(
-    #         blood_requests, many=True)
-
-    #     return Response({'blood_requests': blood_requests_serializer.data}, status=status.HTTP_200_OK)
-
     def post(self, request, *args, **kwargs):
         user = request.user
         user_profile = user.profile
+
+        if user.profile.profile_type != 'patient':
+            return Response({'message': 'Only a patient can request blood.'}, status=status.HTTP_200_OK)
 
         serializer = BloodRequestSerializer(
             data=request.data, instance=user_profile)
@@ -250,6 +249,7 @@ class RequestBloodAPIView(APIView):
                 date_needed=serializer.validated_data['date_needed']
             )
             return Response({'message': 'Blood request success'}, status=status.HTTP_200_OK)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -388,7 +388,20 @@ class NotificationsAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        return Response({'message': 'Render notifications.html'}, status=status.HTTP_200_OK)
+        user = request.user
+        profile = user.profile
+        profile_type = profile.profile_type
+
+        if profile_type == 'patient':
+
+            print(profile_type)
+            print('Patient Notifications')
+
+        else:
+            print(profile_type)
+            print('Donor Notifications')
+
+        return Response({'message': 'Notifications page'}, status=status.HTTP_200_OK)
 
 
 class BloodMatchSuccessAPIView(APIView):

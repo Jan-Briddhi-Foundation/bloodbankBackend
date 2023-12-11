@@ -92,6 +92,13 @@ class Blood_Request(models.Model):
     date_created = models.DateTimeField(auto_now=True, null=True)
     date_needed = models.DateField(auto_now_add=False, null=True)
 
+    # def save(self, *args, **kwargs):
+    #     if self.profile.profile_type == 'patient':
+    #         super().save(*args, **kwargs)
+    #     else:
+    #         raise PermissionError(
+    #             "Only patients can request blood.")
+
     def __str__(self):
         return self.profile.user.name
 
