@@ -471,14 +471,14 @@ I havent done any configurations yet.
         - Returns User's profile information.
 
 
- ### 3. Donor Home
+ ### 13. Donor Home
 - **Endpoint:** `/api/notifications/` (GET)
-- **Description:** Retrieves blood donation requests for donors.
+- **Description:** Retrieves requests for donors and or patients.
 - **Permissions:** User must be authenticated.
 
     #### Response
     - **Success (200 OK):**
-        - Returns a list of blood donation requests.
+        - Returns a list of requests, use the `date_created` to create notifications.
 
 <!-- ### 15. Delete Page
 - **Endpoint:** `/api/delete-page/<int:pk>/` 
