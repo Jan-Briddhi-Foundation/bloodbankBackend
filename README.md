@@ -460,7 +460,7 @@ I havent done any configurations yet.
     - Returns a message indicating successful blood request submission. 
 -->
 
-### 12. Patient Blood Request History
+### 12. Patient's Request History
 - **Endpoint:** `/api/patient-history/` (GET)
 - **Description:** Retrieves the blood donation history for the patient and provides the User's profile info.
 - **Permissions:** User must be authenticated.
@@ -471,7 +471,7 @@ I havent done any configurations yet.
         - Returns User's profile information.
 
 
- ### 13. Donor Home
+ ### 13. Notifications
 - **Endpoint:** `/api/notifications/` (GET)
 - **Description:** Retrieves requests for donors and or patients.
 - **Permissions:** User must be authenticated.
