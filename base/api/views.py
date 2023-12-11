@@ -1,4 +1,5 @@
 
+from django.utils.timesince import timesince
 from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
 from django.contrib.auth import authenticate
 from django.urls import reverse
@@ -388,20 +389,25 @@ class NotificationsAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
+
         user = request.user
         profile = user.profile
         profile_type = profile.profile_type
 
-        if profile_type == 'patient':
+        requests = Blood_Request.objects.all()
 
-            print(profile_type)
-            print('Patient Notifications')
+        if profile_type == 'patient':
+            filtered_requests = [
+                request for request in requests if request.profile.bloodGroup == profile.bloodGroup]
 
         else:
-            print(profile_type)
-            print('Donor Notifications')
+            filtered_requests = [
+                request for request in requests if request.profile.city == profile.city]
 
-        return Response({'message': 'Notifications page'}, status=status.HTTP_200_OK)
+        bloodRequests = BloodRequestSerializer(
+            filtered_requests, many=True)
+
+        return Response({'bloodRequests': bloodRequests.data}, status=status.HTTP_200_OK)
 
 
 class BloodMatchSuccessAPIView(APIView):

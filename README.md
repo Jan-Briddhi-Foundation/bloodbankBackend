@@ -470,6 +470,16 @@ I havent done any configurations yet.
         - Returns a list of blood donation history for the patient.
         - Returns User's profile information.
 
+
+ ### 3. Donor Home
+- **Endpoint:** `/api/notifications/` (GET)
+- **Description:** Retrieves blood donation requests for donors.
+- **Permissions:** User must be authenticated.
+
+    #### Response
+    - **Success (200 OK):**
+        - Returns a list of blood donation requests.
+
 <!-- ### 15. Delete Page
 - **Endpoint:** `/api/delete-page/<int:pk>/` 
     - **GET:** Retrieves the item to be deleted.
