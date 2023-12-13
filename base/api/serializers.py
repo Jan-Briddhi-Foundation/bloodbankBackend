@@ -53,7 +53,6 @@ class BloodRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blood_Request
         fields = '__all__'
-        # exclude = ['profile']
 
 
 class DonationCriteriaFormSerializer(serializers.ModelSerializer):
@@ -62,7 +61,6 @@ class DonationCriteriaFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Donation_Criteria_Form
         fields = '__all__'
-        # exclude = ['profile']
 
 
 class EditUserFormSerializer(serializers.ModelSerializer):
@@ -111,7 +109,6 @@ class DonationCriteriaQuestionsSerializer(serializers.ModelSerializer):
 
 class DonationsSerializer(serializers.ModelSerializer):
     hospital_address = HospitalAddress()
-    # eligibilityForm = DonorCriteriaFormSubmissionSerializer()
 
     class Meta:
         model = Donation
