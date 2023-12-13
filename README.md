@@ -325,6 +325,7 @@ I havent done any configurations yet.
 - **Description:** Donation Criteria question update endpoint.
 - **Parameters:** None
 - **Response:** Modifies the donation criteria question.
+
 <!-- 
 
 ### 5. Location Map
@@ -397,14 +398,6 @@ I havent done any configurations yet.
 - **Success (200 OK):**
     - Returns a message indicating the patient's home page. -->
 
-<!-- ### 10. Profile
-- **Endpoint:** `/api/profile/` (GET)
-- **Description:** Retrieves the user's profile information.
-- **Permissions:** User must be authenticated.
-
-#### Response
-- **Success (200 OK):**
-    - Returns the user's profile information. -->
 
 ### 10. Profile
 - **Endpoint:** `/api/profile/` (POST, GET)
@@ -449,16 +442,6 @@ I havent done any configurations yet.
     - **Parameters:**
         - `quantity`
         - `date_needed`
-<!-- 
-### 13. Request Sent
-- **Endpoint:** `/api/request-sent/` (GET)
-- **Description:** Notifies the user of a successful blood request submission.
-- **Permissions:** User must be authenticated.
-
-#### Response
-- **Success (200 OK):**
-    - Returns a message indicating successful blood request submission. 
--->
 
 ### 12. Patient's Request History
 - **Endpoint:** `/api/patient-history/` (GET)
