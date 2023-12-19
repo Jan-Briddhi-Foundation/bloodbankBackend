@@ -38,6 +38,11 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
 
+class PasswordResetSerializer(serializers.Serializer):
+    new_password = serializers.CharField()
+    password_confirm = serializers.CharField()
+
+
 class UserDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile

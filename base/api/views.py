@@ -1,4 +1,6 @@
 
+import requests
+from django.contrib.sites.models import Site
 from django.utils.timesince import timesince
 from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
 from django.contrib.auth import authenticate
@@ -89,6 +91,85 @@ class UserDetailsAPIView(APIView):
 
             return Response({'message': 'Profile updated successfully'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ResetUserPasswordView(APIView):
+    permission_classes = [AllowAny]
+
+    # def post(self, request, *args, **kwargs):
+    #     serializer = PasswordResetSerializer(data=request.data)
+
+    #     if serializer.is_valid():
+    #         current_site = Site.objects.get_current()
+
+    #         payload = {
+    #             'uid': kwargs.get('uid'),
+    #             'token': kwargs.get('token'),
+    #             'new_password': serializer.validated_data['new_password'],
+    #             're_new_password': serializer.validated_data['password_confirm']
+
+    #         }
+
+    #         djoser_password_reset_url = 'api/auth/users/reset_password_confirm/'
+
+    #         protocol = 'https'
+    #         headers = {'content-Type': 'application/json'}
+
+    #         if bool(request) and not request.is_secure():
+    #             protocol = 'http'
+
+    #         url = '{0}://{1}/{2}'.format(protocol,
+    #                                      current_site, djoser_password_reset_url)
+    #         response = requests.post(
+    #             url, data=json.dumps(payload), headers=headers)
+
+    #         return Response({'message': 'Password Successfully updated'}, status=status.HTTP_200_OK)
+
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def post(self, request, *args, **kwargs):
+        serializer = PasswordResetSerializer(data=request.data)
+
+        if serializer.is_valid():
+            current_site = Site.objects.get_current()
+            current_site = 'localhost:8000'
+            print(current_site)
+
+            payload = {
+                'uid': kwargs.get('uid'),
+                'token': kwargs.get('token'),
+                'new_password': serializer.validated_data['new_password'],
+                're_new_password': serializer.validated_data['password_confirm']
+            }
+            print(payload)
+
+            djoser_password_reset_url = 'api/auth/users/reset_password_confirm/'
+
+            protocol = 'https'
+            headers = {'content-Type': 'application/json'}
+
+            if not request.is_secure():
+                protocol = 'http'
+
+            url = f'{protocol}://{current_site}/{djoser_password_reset_url}'
+            print(url)
+
+            try:
+                response = requests.post(url, json=payload, headers=headers)
+                print(response)
+
+                if response.status_code == 204:
+                    return Response({'message': 'Password Successfully updated'}, status=status.HTTP_200_OK)
+                else:
+                    response_object = response.json()
+                    response_message = response_object.get(
+                        'error', 'Password reset failed')
+                    return Response({'error': response_message}, status=response.status_code)
+
+            except requests.RequestException as e:
+                return Response({'error': f'Error in making request: {e}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        else:
+            return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # //////////////////////////////////////////////////////////////////

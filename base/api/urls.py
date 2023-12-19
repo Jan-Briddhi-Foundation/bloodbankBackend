@@ -14,6 +14,9 @@ urlpatterns = [
     path('auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
     path('auth/twitter/', TwitterLogin.as_view(), name='twitter_login'),
 
+    path('reset_password_confirm/<str:uid>/<str:token>/',
+         ResetUserPasswordView.as_view(),
+         name='reset_user_password'),
 
     path('home/', HomePageAPIView.as_view(), name='home'),   # 7
 
