@@ -10,5 +10,5 @@ __pycache__/
 local_settings.py
 Lib
 Scripts
-# db.sqlite3
+db.sqlite3
 migrations

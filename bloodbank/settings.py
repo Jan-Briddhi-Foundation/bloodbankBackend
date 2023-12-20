@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from decouple import config
 from pathlib import Path
 
+import dj_database_url
+
 import os
 
 # import myenv.py
@@ -122,6 +124,10 @@ DATABASES = {
     }
 }
 
+
+# DATABASES = {
+#     'default': dj_database_url.parse(config('DATABASE_URL'))
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
