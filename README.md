@@ -191,6 +191,18 @@ I havent done any configurations yet.
   - `email`
 - **Response:** Sends an email with instructions to reset the password.
 
+### 9. Password Reset Confirm
+- **Endpoint:** `/api/auth/users/reset_password_confirm/<str:uid>/<str:token>/` (POST)
+- **Description:** Password reset confirm request endpoint.
+- **Parameters:**
+  - `new_password`
+  - `re_new_password`
+#### Response
+- **Success (200 OK):**
+    - Returns a success message if password is updated successfully.
+
+- **Bad Request (400):**
+    - Returns validation errors if the provided data is invalid.
 
 ---
 
