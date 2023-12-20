@@ -238,15 +238,20 @@ REST_AUTH_SERIALIZERS = {
 
 }
 
+DOMAIN = config('SITE_DOMAIN')
+SITE_NAME = config('SITE_NAME')
+
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'api/reset_password_confirm/{uid}/{token}',
 
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
-    # 'ACTIVATION_URL': 'activate/{uid}/{token}',
+    # 'ACTIVATION_URL': 'api/activate/{uid}/{token}',
 
     # 'SEND_ACTIVATION_EMAIL': True,
     'SEND_CONFIRMATION_EMAIL': True,
     'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+    # PASSWORD_RESET_CONFIRM_RETYPE
     # 'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
 
     'SERIALIZERS': {

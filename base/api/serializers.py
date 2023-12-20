@@ -40,7 +40,7 @@ class LoginSerializer(serializers.Serializer):
 
 class PasswordResetSerializer(serializers.Serializer):
     new_password = serializers.CharField()
-    password_confirm = serializers.CharField()
+    re_new_password = serializers.CharField()
 
 
 class UserDetailsSerializer(serializers.ModelSerializer):

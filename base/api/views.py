@@ -43,7 +43,7 @@ class LoginAPIView(generics.GenericAPIView):
                 "token": create_knox_token(user=user)[1]
             }, status=status.HTTP_201_CREATED)
         else:
-            return Response({"error": "Invalid credentials"},  status=status.HTTP_400_BAD_REQUEST)
+            return Response({"errors": "Invalid credentials"},  status=status.HTTP_400_BAD_REQUEST)
 
 
 class LogoutAPIView(LogoutView):
@@ -133,15 +133,13 @@ class ResetUserPasswordView(APIView):
         if serializer.is_valid():
             current_site = Site.objects.get_current()
             current_site = 'localhost:8000'
-            print(current_site)
 
             payload = {
                 'uid': kwargs.get('uid'),
                 'token': kwargs.get('token'),
                 'new_password': serializer.validated_data['new_password'],
-                're_new_password': serializer.validated_data['password_confirm']
+                're_new_password': serializer.validated_data['re_new_password']
             }
-            print(payload)
 
             djoser_password_reset_url = 'api/auth/users/reset_password_confirm/'
 
@@ -152,22 +150,19 @@ class ResetUserPasswordView(APIView):
                 protocol = 'http'
 
             url = f'{protocol}://{current_site}/{djoser_password_reset_url}'
-            print(url)
 
             try:
                 response = requests.post(url, json=payload, headers=headers)
-                print(response)
 
                 if response.status_code == 204:
                     return Response({'message': 'Password Successfully updated'}, status=status.HTTP_200_OK)
                 else:
                     response_object = response.json()
-                    response_message = response_object.get(
-                        'error', 'Password reset failed')
-                    return Response({'error': response_message}, status=response.status_code)
+
+                    return Response({'errors': response_object}, status=response.status_code)
 
             except requests.RequestException as e:
-                return Response({'error': f'Error in making request: {e}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response({'errors': 'Error in making request'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
             return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -309,7 +304,7 @@ class ProfileAPIView(APIView):
             userForm.save()
             profileForm.save()
             return Response({'message': 'Profile updated successfully'}, status=status.HTTP_200_OK)
-        return Response({'error_message': 'Please upload a PNG file.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'erros': 'Please upload a PNG file.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RequestBloodAPIView(APIView):
@@ -445,7 +440,7 @@ class QuestionsAPIView(APIView):
         try:
             question = DonationCriteriaQuestions.objects.get(id=question_id)
         except DonationCriteriaQuestions.DoesNotExist:
-            return Response({'error': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'errors': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = DonationCriteriaQuestionsSerializer(
             question, data=request.data, partial=True)
@@ -460,7 +455,7 @@ class QuestionsAPIView(APIView):
         try:
             question = DonationCriteriaQuestions.objects.get(id=question_id)
         except DonationCriteriaQuestions.DoesNotExist:
-            return Response({'error': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'errors': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)
 
         question.delete()
         return Response({'message': 'Question deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
