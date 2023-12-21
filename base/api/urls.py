@@ -18,43 +18,34 @@ urlpatterns = [
          ResetUserPasswordView.as_view(),
          name='reset_user_password'),
 
-    path('home/', HomePageAPIView.as_view(), name='home'),   # 7
+    path('home/', HomePageAPIView.as_view(), name='home'),
 
     path('profile-details/', UserDetailsAPIView.as_view(),
-         name='user_details'),   # 6
+         name='user_details'),
 
 
-    path('donor-home/', DonorHomeAPIView.as_view(), name='donor_home'),   # 5
+    path('donor-home/', DonorHomeAPIView.as_view(), name='donor_home'),
     path('donation-criteria/', DonationCriteriaAPIView.as_view(),
-         name='donation_criteria'),   # 8
+         name='donation_criteria'),
     path('questions/', QuestionsAPIView.as_view(),
          name='criteria_quizes'),
     path('questions/<int:question_id>/', QuestionsAPIView.as_view(),
          name='criteria_quizes'),
-    #     path('not-eligible/', NotEligibleAPIView.as_view(), name='not_eligible'),
 
 
     path('donation-agreement/', DonationAgreement.as_view(),
-         name='donation_agreement'),   # 4
+         name='donation_agreement'),
     path('hospital-address/', HospitalAddress.as_view(),
-         name='hospital_address'),  # 9
+         name='hospital_address'),
 
 
-    #     path('patient-home/', PatientHomeAPIView.as_view(), name='patient_home'),
-    path('profile/', ProfileAPIView.as_view(), name='profile'),  # 3
-    #     #     path('profile-edit/', EditProfileAPIView.as_view(), name='edit_profile'),
+    path('profile/', ProfileAPIView.as_view(), name='profile'),
     path('request-blood/', RequestBloodAPIView.as_view(),
-         name='request_blood'),  # 2
-    #     path('request-sent/', RequestSentAPIView.as_view(), name='request_sent'),
+         name='request_blood'),
     path('patient-history/', PatientHistoryAPIView.as_view(),
-         name='patient_history'),  # 1
+         name='patient_history'),
 
-    #     path('delete-page/<int:pk>/',
-    #          DeletePageAPIView.as_view(), name='delete_page'),
     path('notifications/', NotificationsAPIView.as_view(),
          name='notifications'),
-    #     path('blood-match-success/', BloodMatchSuccessAPIView.as_view(),
-    #          name='blood_match_success'),
-    #     path('error404/', Error404APIView.as_view(), name='error404'),
 
 ]
