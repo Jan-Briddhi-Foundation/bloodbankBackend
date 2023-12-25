@@ -1,33 +1,34 @@
-
 import requests
-from django.contrib.sites.models import Site
-from django.utils.timesince import timesince
-from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
-from django.contrib.auth import authenticate
+
 from django.urls import reverse
+from django.contrib.auth import authenticate
+from django.utils.timesince import timesince
+from django.contrib.sites.models import Site
 
 from .serializers import *
+from ..forms import CreateUserForm
+from base.utils import create_knox_token
+from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
+
 from knox.auth import AuthToken
 from knox.views import LoginView, LogoutView
-
-from rest_framework.authentication import BasicAuthentication
 from knox.views import LoginView as KnoxLoginView
 
-from rest_framework import status, generics
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework import status, generics
 from rest_framework.response import Response
+from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from base.utils import create_knox_token
+from rest_framework.decorators import api_view, permission_classes
 
 
 from dj_rest_auth.registration.views import SocialLoginView
 from dj_rest_auth.social_serializers import TwitterLoginSerializer
-from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-from ..forms import CreateUserForm
+
 # Create your views here.
 
 

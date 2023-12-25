@@ -1,5 +1,5 @@
-import twitter
 import os
+import twitter
 from rest_framework import serializers
 
 
