@@ -1,7 +1,7 @@
-from rest_framework import serializers
-from . import google, facebook, twitterhelper
-from .register import register_social_user
 import os
+from rest_framework import serializers
+from .register import register_social_user
+from . import google, facebook, twitterhelper
 from rest_framework.exceptions import AuthenticationFailed
 
 
