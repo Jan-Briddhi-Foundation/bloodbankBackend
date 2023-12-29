@@ -40,25 +40,55 @@ Before getting started, make sure you have the following dependencies installed
 
 3. Create and activate a virtual environment (optional but recommended):
    * `python -m venv venv`
-   * `# For MacOs: source venv/bin/activate`
-   * `# For Windows: venv\Scripts\activate`
+   * # For MacOs  :  `source venv/bin/activate`
+   * # For Windows:  `venv\Scripts\activate`
 
-5. Install project dependecies:
+4. Install project dependecies:
    `pip install -r requirements.txt` or `python -m pip install -r requirements.txt`
 
-6. Run project and check port:
-   * Run command `python manage.py migrate`
-   * Run command `python manage.py runserver`
-   * Check url http://localhost:8000/
 
 ## Configuration
-I havent done any configurations yet.
- * Use `admin@gmail.com` and `#Dot9047` for email and password
+
+1. Create a `.env` file in the project root and set the following environment variables:
+   * 
+   ```
+    SECRET_KEY = YOUR_SECRET_KEY
+
+    DATABASE_URL = YOUR_DATABASE_URL
+
+    SITE_DOMAIN = YOUR_SITE_DOMAIN
+    SITE_NAME = YOUR_SITE_NAME
+
+    EMAIL_USER = YOUR_EMAIL_USER
+    EMAIL_PASSWORD = YOUR_EMAIL_PASSWORD
+
+    SOCIAL_SECRET = YOUR_SOCIAL_SECRET
+
+    GOOGLE_CLIENT_ID = YOUR_GOOGLE_CLIENT_ID
+    GOOGLE_CLIENT_SECRET = YOUR_GOOGLE_CLIENT_SECRET
+
+    FACEBOOK_CLIENT_ID = YOUR_FACEBOOK_CLIENT_ID
+    FACEBOOK_SECRET_KEY = YOUR_FACEBOOK_SECRET_KEY
+
+    TWITTER_CLIENT_ID = YOUR_TWITTER_CLIENT_ID
+    TWITTER_SECRET_KEY = YOUR_TWITTER_SECRET_KEY
+
+2. Run migrations to create the database tables:
+    * Run command `python manage.py makemigrations`
+    * Run command `python manage.py migrate`
+
+4. Start the development server:
+   * Run command `python manage.py runserver 8000`
+
+5. Check port:
+   * Check url http://localhost:8000/
+
 
 ## Usage 
 1. Access the Django admin panel by visiting http://localhost:8000/admin/ the superuser account created earlier.
-2. Use the admin panel to manage users, donors, recipients, appointments, and other data.
-3. To interact with the API, explore the available endpoints (documented below) or use tools like Postman.
+2. To login the admin panel, use `admin@gmail.com` and `#Dot9047` for email and password respectively
+2. Use the admin panel to manage users, donors, patients, blood requests, hospital addresses, and other data.
+3. To interact with the API, explore the available endpoints (documented below) and or use tools like Postman.
 
 
 ## API Endpoints
@@ -124,8 +154,6 @@ I havent done any configurations yet.
 - **Description:** User logout endpoint.
 - **Parameters:** None
 - **Response:** Logs out the user and invalidates the token.
-
-
  
 
 ### 6. User Deletion
