@@ -80,10 +80,13 @@ class ProfileFormSerializer(serializers.ModelSerializer):
 
 
 class HospitalAddressSerializer(serializers.ModelSerializer):
+    name = serializers.CharField()
+    address = serializers.CharField()
+    email = serializers.EmailField()
 
     class Meta:
         model = HospitalAddress
-        fields = '__all__'
+        fields = ['id', 'name', 'address', 'email']
 
 
 class DonationCriteriaQuestionsSerializer(serializers.ModelSerializer):
@@ -103,7 +106,6 @@ class DonationsSerializer(serializers.ModelSerializer):
 
 
 class DonationAgreementSerializer(serializers.ModelSerializer):
-    hospital_address = HospitalAddressSerializer()
 
     class Meta:
         model = Donation

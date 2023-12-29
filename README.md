@@ -291,17 +291,18 @@ Before getting started, make sure you have the following dependencies installed
         - Returns validation errors if the provided data is invalid.
 
  ### 5. Donation Criteria Questions
-- **Endpoint:** `/api/questions/` (POST)
+- **Endpoint:** `/api/questions/` (POST, GET)
 - **Description:** For adding and retriving questions donation criteria form.
-- **Permissions:** User must be authenticated.
+- **Permissions:** User must be authenticated and be an admin.
 
     #### Request
-    - **Method:** POST
+    - **Method:** (POST)
     - **Parameters:** 
         - `question`
     - **Permissions:** User must be an admin.
 
-    #### GET Request
+    #### Request
+    - **Method:** (GET)
     - **Response (200 OK):**
     - Returns all questions donation criteria form.
 
@@ -316,6 +317,7 @@ Before getting started, make sure you have the following dependencies installed
 ### 6. Donation Question Deletion
 - **Endpoint:** `/api/questions/<int:question_id>/` (DELETE)
 - **Description:** Donation Criteria question deletion endpoint.
+- **Permissions:** User must be an admin.
 - **Parameters:** None
 - **Response:** Deletes the donation criteria question.
 
@@ -323,6 +325,7 @@ Before getting started, make sure you have the following dependencies installed
 ### 7. Donation Question Modification
 - **Endpoint:** `/api/questions/<int:question_id>/` (PUT)
 - **Description:** Donation Criteria question update endpoint.
+- **Permissions:** User must be an admin.
 - **Parameters:** None
 - **Response:** Modifies the donation criteria question.
 
@@ -338,6 +341,7 @@ Before getting started, make sure you have the following dependencies installed
     - **Parameters:** 
         - `name`
         - `address`
+        - `email`
 
     #### Response
     - **Success (200 OK):**
@@ -357,7 +361,7 @@ Before getting started, make sure you have the following dependencies installed
 
     #### GET Request
     - **Response (200 OK):**
-        - Returns user's donation agreement forms.
+        - Returns a list of user's donation agreements.
 
     #### POST Request
     - **Request:**
