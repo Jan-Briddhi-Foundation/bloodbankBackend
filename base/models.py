@@ -115,12 +115,6 @@ class DonationCriteriaQuestions(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_modified = models.DateTimeField(auto_now=True, null=True)
 
-    def save(self, *args, **kwargs):
-        if self.profile.user.is_staff:
-            super().save(*args, **kwargs)
-        else:
-            raise PermissionError("Only admin users can create questions.")
-
     def __str__(self) -> str:
         return self.question
 

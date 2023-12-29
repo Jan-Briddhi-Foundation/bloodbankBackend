@@ -35,7 +35,7 @@ urlpatterns = [
 
     path('donation-agreement/', DonationAgreement.as_view(),
          name='donation_agreement'),
-    path('hospital-address/', HospitalAddress.as_view(),
+    path('hospital-address/', HospitalAddresses.as_view(),
          name='hospital_address'),
 
 

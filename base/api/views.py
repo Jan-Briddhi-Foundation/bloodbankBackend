@@ -6,9 +6,9 @@ from django.utils.timesince import timesince
 from django.contrib.sites.models import Site
 
 from .serializers import *
-from ..forms import CreateUserForm
 from base.utils import create_knox_token
 from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
+
 
 from knox.auth import AuthToken
 from knox.views import LoginView, LogoutView
@@ -200,13 +200,6 @@ class DonationCriteriaAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class LocationMapAPIView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request, *args, **kwargs):
-        return Response({'message': 'Location_map render'}, status=status.HTTP_200_OK)
-
-
 # //////////////////////////////////////////////////////////////////
 # 3. PATIENTS PAGES
 # //////////////////////////////////////////////////////////////////
@@ -276,6 +269,23 @@ class PatientHistoryAPIView(APIView):
         return Response({'history': serializer.data, 'profileForm': profileForm.data}, status=status.HTTP_200_OK)
 
 
+class HospitalAddresses(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        hospital_address = HospitalAddress.objects.all()
+        hospitals = HospitalAddressSerializer(hospital_address, many=True)
+        return Response({'hospitals': hospitals.data}, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        serializer = HospitalAddressSerializer(data=request.data)
+        if serializer.is_valid():
+            instance = serializer.save()
+            return Response({'message': 'Hopsital added successfully'}, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class DonationAgreement(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -294,24 +304,14 @@ class DonationAgreement(APIView):
 
         serializer = DonationAgreementSerializer(
             data=request.data, instance=user_profile)
+
         if serializer.is_valid():
             donationAgreement = Donation.objects.create(
                 profile=user_profile,
                 hospital_address=serializer.validated_data['hospital_address'],
+
             )
             return Response({'message': 'Successfully sent'}, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class HospitalAddress(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request, *args, **kwargs):
-        serializer = HospitalAddressSerializer(data=request.data)
-        if serializer.is_valid():
-            instance = serializer.save()
-            return Response({'message': 'Hopsital added successfully'}, status=status.HTTP_200_OK)
-
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -321,13 +321,15 @@ class QuestionsAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
         criteria_quiz = DonationCriteriaQuestions.objects.all()
-        questions = self.serializer_class(
-            criteria_quiz, many=True)
+        questions = self.serializer_class(criteria_quiz, many=True)
         return Response({'questions': questions.data}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
         user = request.user
         user_profile = user.profile
+
+        if not user.is_staff:
+            return Response({'errors': 'Only admin users can create questions.'}, status=status.HTTP_403_FORBIDDEN)
 
         serializer = self.serializer_class(data=request.data)
 
@@ -340,6 +342,10 @@ class QuestionsAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, *args, **kwargs):
+
+        if not request.user.is_staff:
+            return Response({'errors': 'Only admin users can update questions.'}, status=status.HTTP_403_FORBIDDEN)
+
         question_id = kwargs.get('question_id')
         try:
             question = DonationCriteriaQuestions.objects.get(id=question_id)
@@ -355,6 +361,10 @@ class QuestionsAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, *args, **kwargs):
+
+        if not request.user.is_staff:
+            return Response({'errors': 'Only admin users can delete questions.'}, status=status.HTTP_403_FORBIDDEN)
+
         question_id = kwargs.get('question_id')
         try:
             question = DonationCriteriaQuestions.objects.get(id=question_id)
