@@ -39,9 +39,9 @@ Before getting started, make sure you have the following dependencies installed
    * `cd bloodbankBackend`
 
 3. Create and activate a virtual environment (optional but recommended):
-   * `python -m venv venv`
-   * For MacOs  :  `source venv/bin/activate`
-   * For Windows:  `venv\Scripts\activate`
+   * `python -m venv env`
+   * For MacOs  :  `source env/bin/activate`
+   * For Windows:  `env\Scripts\activate`
 
 4. Install project dependecies:
    `pip install -r requirements.txt` or `python -m pip install -r requirements.txt`
