@@ -5,7 +5,9 @@ from django.contrib.auth import authenticate
 from django.utils.timesince import timesince
 from django.contrib.sites.models import Site
 
-from .serializers import *
+from .serializers import UserSerializer, LoginSerializer, PasswordResetSerializer, UserDetailsSerializer, BloodRequestSerializer, DonationCriteriaFormSerializer, EditUserFormSerializer, ProfileFormSerializer, HospitalAddressSerializer, DonationCriteriaQuestionsSerializer, DonationAgreementSerializer
+
+
 from base.utils import create_knox_token
 from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form
 

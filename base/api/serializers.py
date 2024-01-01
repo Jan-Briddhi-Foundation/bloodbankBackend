@@ -1,4 +1,5 @@
-from ..models import *
+from ..models import User, BloodGroup, Profile, Blood_Request, Donation_Criteria_Form, DonationCriteriaQuestions, HospitalAddress, Donation
+
 from rest_framework import serializers
 
 
