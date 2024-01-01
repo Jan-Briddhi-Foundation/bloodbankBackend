@@ -1,6 +1,7 @@
 from django.urls import path
 
-from .views import *
+from .views import LoginAPIView, GoogleLogin, FacebookLogin, TwitterLogin, ResetUserPasswordView, HomePageAPIView, UserDetailsAPIView, DonorHomeAPIView, DonationCriteriaAPIView, QuestionsAPIView, DonationAgreement, HospitalAddresses, ProfileAPIView, RequestBloodAPIView, PatientHistoryAPIView, NotificationsAPIView
+
 from knox import views as knox_views
 
 urlpatterns = [
