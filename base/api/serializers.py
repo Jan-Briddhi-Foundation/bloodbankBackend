@@ -98,15 +98,8 @@ class DonationCriteriaQuestionsSerializer(serializers.ModelSerializer):
         fields = ['id', 'question']
 
 
-class DonationsSerializer(serializers.ModelSerializer):
-    hospital_address = HospitalAddress()
-
-    class Meta:
-        model = Donation
-        fields = '__all__'
-
-
 class DonationAgreementSerializer(serializers.ModelSerializer):
+    hospital_address = HospitalAddress()
 
     class Meta:
         model = Donation
