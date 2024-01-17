@@ -243,7 +243,7 @@ DOMAIN = config('SITE_DOMAIN')
 SITE_NAME = config('SITE_NAME')
 
 DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': 'api/reset_password_confirm/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'api/reset_password_confirm/{uid}/{token}/',
 
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
 
@@ -267,8 +267,9 @@ EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "bloodbak.onrender.com"
+    "http://127.0.0.1:3000"
+    # ,
+    # "https://bloodbak.onrender.com"
 ]
 
 
