@@ -239,8 +239,12 @@ REST_AUTH_SERIALIZERS = {
 
 }
 
-DOMAIN = config('SITE_DOMAIN')
+
+DOMAIN = config('DOMAIN')
 SITE_NAME = config('SITE_NAME')
+
+protocol = config('protocal')
+
 
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'api/reset_password_confirm/{uid}/{token}/',
