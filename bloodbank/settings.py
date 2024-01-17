@@ -30,11 +30,11 @@ SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-# DEBUG = True
-# ALLOWED_HOSTS = ['localhost', "127.0.0.1"]
+DEBUG = True
+ALLOWED_HOSTS = ['localhost', "127.0.0.1"]
 
-DEBUG = False
-ALLOWED_HOSTS = ['*']
+# DEBUG = False
+# ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -239,8 +239,12 @@ REST_AUTH_SERIALIZERS = {
 
 }
 
-DOMAIN = config('SITE_DOMAIN')
+
+DOMAIN = config('DOMAIN')
 SITE_NAME = config('SITE_NAME')
+
+protocol = config('protocal')
+
 
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'api/reset_password_confirm/{uid}/{token}/',
