@@ -104,6 +104,7 @@ class ResetUserPasswordView(APIView):
 
         if serializer.is_valid():
             current_site = Site.objects.get_current()
+            current_site = 'bloodbak.onrender.com'
 
             payload = {
                 'uid': kwargs.get('uid'),
@@ -133,7 +134,7 @@ class ResetUserPasswordView(APIView):
                     return Response({'errors': response_object}, status=response.status_code)
 
             except requests.RequestException as e:
-                return Response({'errors': 'Error in making request'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response({'errors': f'Error in making request {e}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
             return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
