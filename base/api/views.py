@@ -104,7 +104,6 @@ class ResetUserPasswordView(APIView):
 
         if serializer.is_valid():
             current_site = Site.objects.get_current()
-            current_site = 'localhost:8000'
 
             payload = {
                 'uid': kwargs.get('uid'),
