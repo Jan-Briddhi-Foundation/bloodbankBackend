@@ -269,12 +269,13 @@ EMAIL_HOST_USER = config('EMAIL_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "https://bloodbak.onrender.com"
-]
+CORS_ALLOW_ALL_ORIGINS: True
 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+#     "https://bloodbak.onrender.com"
+# ]
 
 # LAST SECURITY SECTION
 SOCIAL_AUTH_FACEBOOK_KEY = config('FACEBOOK_CLIENT_ID')
