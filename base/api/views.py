@@ -310,9 +310,9 @@ class DonationAgreement(APIView):
             donationAgreement = Donation.objects.create(
                 profile=user_profile,
                 hospital_address=serializer.validated_data['hospital_address'],
-
             )
             return Response({'message': 'Successfully sent'}, status=status.HTTP_200_OK)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
