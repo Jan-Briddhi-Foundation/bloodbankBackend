@@ -9,7 +9,7 @@ from .serializers import UserSerializer, LoginSerializer, PasswordResetSerialize
 
 
 from base.utils import create_knox_token
-from ..models import User, BloodGroup, Profile, Blood_Request, Donation, HospitalAddress, Donation_Criteria_Form
+from ..models import User, BloodGroup, Profile, Blood_Request, Donation, HospitalAddress, Donation_Criteria_Form, DonationCriteriaQuestions
 
 
 from knox.auth import AuthToken
