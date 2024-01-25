@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from datetime import timedelta
+
 from decouple import config
 from pathlib import Path
 
@@ -260,6 +262,10 @@ DJOSER = {
     }
 }
 
+REST_KNOX = {
+    'TOKEN_TTL': timedelta(hours=5000),
+}
+
 # SMTP/ EMAIL Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -270,12 +276,20 @@ EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
     "https://bloodbak.onrender.com",
     "https://bloodbank-frontend-two.vercel.app",
     "https://floatingbloodbank.com"
 ]
+
+if DEBUG:
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "https://bloodbak.onrender.com",
+        "https://bloodbank-frontend-two.vercel.app",
+        "https://floatingbloodbank.com"
+    ]
+
 
 # LAST SECURITY SECTION
 SOCIAL_AUTH_FACEBOOK_KEY = config('FACEBOOK_CLIENT_ID')
