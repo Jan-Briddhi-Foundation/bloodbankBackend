@@ -441,5 +441,5 @@ Before getting started, make sure you have the following dependencies installed
 ## Contributing
 We welcome contributions to improve this blood donation system. If you'd like to contribute, please follow Contribution Guidelines.
 
-## Lincense
+## License
 This project is not licensed yet
