@@ -42,7 +42,8 @@ class LoginAPIView(generics.GenericAPIView):
         user = authenticate(email=email, password=password)
         if user is not None:
             return Response({
-                "user": UserSerializer(user).data,
+                # "user": UserSerializer(user).data,
+                "message": "Log in successful",
                 "token": create_knox_token(user=user)[1]
             }, status=status.HTTP_201_CREATED)
 
@@ -51,27 +52,6 @@ class LoginAPIView(generics.GenericAPIView):
                 return Response({"errors": "Invalid email or password"},  status=status.HTTP_400_BAD_REQUEST)
             else:
                 return Response({"errors": "Account does not exist. Please register."}, status=status.HTTP_404_NOT_FOUND)
-        # else:
-        #     return Response({"errors": "Invalid email or password"},  status=status.HTTP_400_BAD_REQUEST)
-
-# class LoginAPIView(KnoxLoginView):
-#     def post(self, request, *args, **kwargs):
-#         email = request.data.get("email")
-#         password = request.data.get("password")
-#         user = authenticate(email=email, password=password)
-
-#         if user is not None:
-#             token = create_knox_token(user=user)[1]
-#             return Response({
-#                 "message": "Log in successful",
-#                 "user": UserSerializer(user).data,
-#                 "token": token
-#             }, status=status.HTTP_201_CREATED)
-#         else:
-#             if User.objects.filter(email=email).exists():
-#                 return Response({"errors": "Invalid email or password"},  status=status.HTTP_400_BAD_REQUEST)
-#             else:
-#                 return Response({"errors": "Account does not exist. Please register."}, status=status.HTTP_404_NOT_FOUND)
 
 
 class LogoutAPIView(LogoutView):
