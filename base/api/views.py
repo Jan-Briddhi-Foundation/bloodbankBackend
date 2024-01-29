@@ -42,7 +42,7 @@ class LoginAPIView(generics.GenericAPIView):
         user = authenticate(email=email, password=password)
         if user is not None:
             return Response({
-                "user": UserSerializer(user),
+                "user": UserSerializer(user).data,
                 "message": "Log in successful",
                 "token": create_knox_token(user=user)[1]
             }, status=status.HTTP_201_CREATED)
