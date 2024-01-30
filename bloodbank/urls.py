@@ -10,6 +10,6 @@ urlpatterns = [
     path('api/', include('base.api.urls')),
     path('social_auth/', include('base.social_auth.urls')),
     path('auth-token/', include('djoser.urls.authtoken')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
