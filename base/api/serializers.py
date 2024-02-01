@@ -53,6 +53,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 class BloodRequestSerializer(serializers.ModelSerializer):
     quantity = serializers.FloatField()
     date_needed = serializers.DateField()
+    profile = ProfileSerializer()
 
     class Meta:
         model = Blood_Request
