@@ -77,8 +77,7 @@ class EditUserFormSerializer(serializers.ModelSerializer):
 class ProfileFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        exclude = ['id', 'user', 'profile_type',
-                   'date_created', 'date_modified']
+        exclude = ['id', 'user', 'date_created', 'date_modified']
 
 
 class HospitalAddressSerializer(serializers.ModelSerializer):
