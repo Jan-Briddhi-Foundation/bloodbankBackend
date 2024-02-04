@@ -317,7 +317,7 @@ class DonationAgreement(APIView):
                 hospital_address=serializer.validated_data['hospital_address'],
             )
             return Response({'message': 'Successfully sent'}, status=status.HTTP_200_OK)
-        
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -391,7 +391,8 @@ class NotificationsAPIView(APIView):
         profile_type = profile.profile_type
 
         if profile_type == 'patient':
-            requests = Donation_Criteria_Form.objects.all()
+            # requests = Donation_Criteria_Form.objects.all()
+            requests = Donation_Criteria_Form.objects.all().order_by('-date_created')
 
             filtered_requests = [
                 request for request in requests if request.profile.bloodGroup == profile.bloodGroup and request.qualify]
@@ -400,7 +401,8 @@ class NotificationsAPIView(APIView):
                 filtered_requests, many=True)
 
         else:
-            requests = Blood_Request.objects.all()
+            # requests = Blood_Request.objects.all()
+            requests = Blood_Request.objects.all().order_by('-date_created')
 
             filtered_requests = [
                 request for request in requests if request.profile.city == profile.city]
