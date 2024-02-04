@@ -391,7 +391,6 @@ class NotificationsAPIView(APIView):
         profile_type = profile.profile_type
 
         if profile_type == 'patient':
-            # requests = Donation_Criteria_Form.objects.all()
             requests = Donation_Criteria_Form.objects.all().order_by('-date_created')
 
             filtered_requests = [
@@ -401,7 +400,6 @@ class NotificationsAPIView(APIView):
                 filtered_requests, many=True)
 
         else:
-            # requests = Blood_Request.objects.all()
             requests = Blood_Request.objects.all().order_by('-date_created')
 
             filtered_requests = [
