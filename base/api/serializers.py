@@ -60,6 +60,15 @@ class BloodRequestSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class BloodRequestSerializerpro(serializers.ModelSerializer):
+    quantity = serializers.FloatField()
+    date_needed = serializers.DateField()
+
+    class Meta:
+        model = Blood_Request
+        fields = '__all__'
+
+
 class DonationCriteriaFormSerializer(serializers.ModelSerializer):
     qualify = serializers.BooleanField()
 

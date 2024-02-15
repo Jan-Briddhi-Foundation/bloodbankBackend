@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate
 from django.utils.timesince import timesince
 from django.contrib.sites.models import Site
 
-from .serializers import UserSerializer, LoginSerializer, PasswordResetSerializer, UserDetailsSerializer, BloodRequestSerializer, DonationCriteriaFormSerializer, EditUserFormSerializer, ProfileFormSerializer, HospitalAddressSerializer, DonationCriteriaQuestionsSerializer, DonationAgreementSerializer
+from .serializers import UserSerializer, LoginSerializer, PasswordResetSerializer, UserDetailsSerializer, BloodRequestSerializer, BloodRequestSerializerpro, DonationCriteriaFormSerializer, EditUserFormSerializer, ProfileFormSerializer, HospitalAddressSerializer, DonationCriteriaQuestionsSerializer, DonationAgreementSerializer
 
 
 from base.utils import create_knox_token
@@ -249,7 +249,7 @@ class RequestBloodAPIView(APIView):
         if user.profile.profile_type != 'patient':
             return Response({'message': 'Only a patient can request blood.'}, status=status.HTTP_200_OK)
 
-        serializer = BloodRequestSerializer(
+        serializer = BloodRequestSerializerpro(
             data=request.data, instance=user_profile)
         if serializer.is_valid():
             blood_request = Blood_Request.objects.create(
