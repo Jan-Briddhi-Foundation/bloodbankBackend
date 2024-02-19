@@ -168,7 +168,7 @@ class TwitterLogin(SocialLoginView):
 
 
 class DonorHomeAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         blood_requests = Blood_Request.objects.all()
