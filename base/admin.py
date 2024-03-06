@@ -10,6 +10,10 @@ admin.site.register(DonationCriteriaQuestions)
 admin.site.register(HospitalAddress)
 admin.site.register(Donation)
 
+admin.site.index_title = "The Floating Bloodbank"
+admin.site.site_header = "The Bloodbank Admin"
+admin.site.site_title = "The Bloodbank"
+
 
 class CustomUserAdmin(UserAdmin):
     add_form = User
